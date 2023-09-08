@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/flutter_UI/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_UI/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_UI/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_tomato/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_tomato/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_tomato/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mission1/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/mission1/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/mission1/build" />
+      <excludeFolder url="file://$MODULE_DIR$/mission2/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/mission2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/mission2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/movieflix/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/movieflix/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/movieflix/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pomodoro/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pomodoro/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pomodoro/build" />
+      <excludeFolder url="file://$MODULE_DIR$/splash/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/splash/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/splash/build" />
+      <excludeFolder url="file://$MODULE_DIR$/stateful/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/stateful/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/stateful/build" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflex/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflex/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflex/build" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflix/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflix/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/toonflix/build" />
+      <excludeFolder url="file://$MODULE_DIR$/wetoonapp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/wetoonapp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/wetoonapp/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>
