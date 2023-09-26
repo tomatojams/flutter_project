@@ -36,6 +36,9 @@
       <excludeFolder url="file://$MODULE_DIR$/wetoonapp/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/wetoonapp/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/wetoonapp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
