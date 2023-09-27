@@ -39,6 +39,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/blog_web_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/blog_web_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/blog_web_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/image_carousel/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/image_carousel/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/image_carousel/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
