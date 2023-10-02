@@ -16,16 +16,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    Timer.periodic(const Duration(seconds: 3), (timer) {
-      int? nextPage = pageController.page?.toInt(); 
-      //  현재 페이지를 정수로 변환하여 nextPage에 저장 
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      int? nextPage = pageController.page?.toInt();
+      //  현재 페이지를 정수로 변환하여 nextPage에 저장
       // 페이지가 전환중일때는 double 형태로 반환되므로 정수로 변환해야 함
 
       if (nextPage == null) {
         return;
       }
 
-      if (nextPage == 4) {
+      if (nextPage == 10) {
         nextPage = 0;
       } else {
         nextPage++;
@@ -46,10 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: PageView(
         controller: pageController, // 페이지 컨트롤러를 PageView에 연결
-        children: const [1, 2, 3, 4, 5] // 리스트를 이미지와 매핑한 후에 리스트로 변환
-            .map((number) => Image.asset(
+        children: const [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ] // 리스트를 이미지와 매핑한 후에 리스트로 변환
+            .map((number) => Image.network(
                   // Image.asset: 이미지를 불러오고 표시하는  위젯
-                  'asset/img/image_$number.jpeg',
+                  'https://picsum.photos/id/$number/400/1000',
                   fit: BoxFit.cover,
                 ))
             // BoxFit.cover: 이미지가 최대한 전체화면을 차지하도록 늘어남
