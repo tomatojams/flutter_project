@@ -27,7 +27,7 @@ class Joy extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
