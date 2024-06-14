@@ -19,34 +19,34 @@ class App extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0),
             child: Column(
-                  children: [
-            SizedBox(
-              height: 100,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [Text(
-                  'Hey, Selena',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                SizedBox(
+                  height: 100,
                 ),
-                Text(
-                  'Welcome,Back',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                )],
-                  
-                )
-                
-              ],
-            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Hey, Selena',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Welcome,Back',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
+              ],
+            ),
           )),
     );
   }
