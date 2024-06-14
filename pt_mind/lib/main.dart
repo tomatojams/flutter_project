@@ -17,6 +17,7 @@ class App extends StatelessWidget {
         home: Scaffold(
             body: SafeArea(
               top: true,
+              bottom: true,
               child: Column(
                 children: [
                   Container(

@@ -29,7 +29,7 @@ class BNBar extends StatelessWidget {
         ),
         // BottomNavigationBarItem(
         //   icon: SvgPicture.asset('assets/My.svg'),
-        //   label: 'My',
+        //   label: '마이',
         // )
       ],
     );
