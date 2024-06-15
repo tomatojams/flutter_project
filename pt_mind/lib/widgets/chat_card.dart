@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatCard extends StatelessWidget {
-  final String icon;
+  final String profile;
   final String imageExt;
   final String titleName;
   final String name;
-  final String description;
+  final String lastMessage;
   final String beforeTime;
 
   const ChatCard(
       {super.key,
-      required this.icon,
+      required this.profile,
       required this.imageExt,
       required this.titleName,
       required this.name,
-      required this.description,
+      required this.lastMessage,
       required this.beforeTime});
 
   @override
@@ -34,9 +34,9 @@ class ChatCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             imageExt == 'svg'
-                ? SvgPicture.asset(icon)
+                ? SvgPicture.asset(profile)
                 : Image.asset(
-                    icon,
+                    profile,
                     width: 60.0,
                     height: 60.0,
                     scale: 0.25,
@@ -79,7 +79,7 @@ class ChatCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10.0),
                   Text(
-                    description,
+                    lastMessage,
                     style: const TextStyle(
                       color: Color(0xFF696767),
                       fontSize: 12.0,

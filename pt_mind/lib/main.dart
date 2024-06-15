@@ -23,6 +23,7 @@ class App extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: SvgPicture.asset(
                 'assets/ptmind-logo.svg',
+                // height: 25.0,
               ),
             ),
           ),
