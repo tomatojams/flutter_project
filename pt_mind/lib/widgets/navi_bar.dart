@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomNavi extends StatelessWidget {
-  final double naviHeight = 90.0;
+  final double naviHeight = 60.0;
   const BottomNavi({
     super.key,
   });
@@ -11,14 +11,17 @@ class BottomNavi extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationBarTheme(
       data: NavigationBarThemeData(
+          elevation: -10,
           labelTextStyle: MaterialStateProperty.all(
-        const TextStyle(
-          color: Colors.white,
-          fontSize: 11.0,
-        ),
-      )),
+            const TextStyle(
+              color: Colors.white,
+              fontSize: 11.0,
+            ),
+          )),
       child: NavigationBar(
-        height: 60,
+        elevation: 10.0,
+        shadowColor: Colors.black,
+        height: naviHeight,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         surfaceTintColor: Colors.black,
         backgroundColor: const Color(0xFF7877ED),

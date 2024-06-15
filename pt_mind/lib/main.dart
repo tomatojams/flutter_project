@@ -16,31 +16,17 @@ class App extends StatelessWidget {
         theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFF8F2F5)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: SafeArea(
-            top: true,
-            bottom: true,
-            child: Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(color: Color(0xFF807FFF)),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 15.0,
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/ptmind-logo.svg',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const ChatScreen()
-              ],
+          appBar: AppBar(
+            elevation: 2,
+            backgroundColor: const Color(0xFF807FFF),
+            title: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SvgPicture.asset(
+                'assets/ptmind-logo.svg',
+              ),
             ),
           ),
+          body: const ChatScreen(),
           bottomNavigationBar: const BottomNavi(),
         ));
   }
