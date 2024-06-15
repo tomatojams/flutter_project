@@ -24,7 +24,7 @@ class BottomNavi extends StatelessWidget {
         height: naviHeight,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         surfaceTintColor: Colors.black,
-        backgroundColor: const Color(0xFF7877ED),
+        backgroundColor: Theme.of(context).primaryColor,
         onDestinationSelected: (int index) {},
         indicatorColor: Colors.transparent,
         // selectedIndex: currentPageIndex,

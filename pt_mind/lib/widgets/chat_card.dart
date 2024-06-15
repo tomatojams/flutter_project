@@ -9,6 +9,7 @@ class ChatCard extends StatefulWidget {
   final String name;
   final String lastMessage;
   final String beforeTime;
+  final int? badge;
 
   const ChatCard(
       {super.key,
@@ -17,14 +18,14 @@ class ChatCard extends StatefulWidget {
       required this.titleName,
       required this.name,
       required this.lastMessage,
-      required this.beforeTime});
+      required this.beforeTime,
+      this.badge});
 
   @override
   State<ChatCard> createState() => _ChatCardState();
 }
 
 class _ChatCardState extends State<ChatCard> {
-  Color bgcolor = Colors.white;
   bool toggle = false;
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,8 @@ class _ChatCardState extends State<ChatCard> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: const Color(0xFF4645A9).withOpacity(0.8),
-          textColor: Colors.white,
+          backgroundColor: Theme.of(context).dialogBackgroundColor,
+          textColor: Theme.of(context).scaffoldBackgroundColor,
           fontSize: 14.0,
         );
         // setState(() {
@@ -44,75 +45,95 @@ class _ChatCardState extends State<ChatCard> {
         //   toggle = !toggle;
         // });
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: bgcolor,
-          borderRadius: BorderRadius.circular(10.0),
+      child: Badge(
+        largeSize: 15,
+        offset: const Offset(-1, -5),
+        backgroundColor: widget.badge == null
+            ? Colors.transparent
+            : Theme.of(context).focusColor,
+        label: widget.badge == null ? null : Text(widget.badge.toString()),
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 12.0,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 15.0,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              widget.imageExt == 'svg'
-                  ? SvgPicture.asset(widget.profile)
-                  : Image.asset(
-                      widget.profile,
-                      width: 60.0,
-                      height: 60.0,
-                      scale: 0.25,
-                    ),
-              const SizedBox(width: 25.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              widget.titleName,
-                              style: const TextStyle(
-                                  color: Color(0xFF7D3596),
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(width: 3.0),
-                            Text(
-                              widget.name,
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          widget.beforeTime,
-                          style: const TextStyle(
-                            color: Color(0xFF696767),
-                            fontSize: 11.0,
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                    Text(
-                      widget.lastMessage,
-                      style: const TextStyle(
-                        color: Color(0xFF696767),
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).shadowColor,
+                spreadRadius: 0.5,
+                blurRadius: 3,
+                offset: const Offset(0, 0),
               ),
             ],
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 15.0,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                widget.imageExt == 'svg'
+                    ? SvgPicture.asset(widget.profile)
+                    : Image.asset(
+                        widget.profile,
+                        width: 60.0,
+                        height: 60.0,
+                        scale: 0.25,
+                      ),
+                const SizedBox(width: 25.0),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                widget.titleName,
+                                style: TextStyle(
+                                    color: Theme.of(context).focusColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(width: 3.0),
+                              Text(
+                                widget.name,
+                                style: TextStyle(
+                                    color: Theme.of(context).indicatorColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            widget.beforeTime,
+                            style: TextStyle(
+                              color: Theme.of(context).hintColor,
+                              fontSize: 12.0,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        widget.lastMessage,
+                        style: TextStyle(
+                          color: Theme.of(context).hintColor,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

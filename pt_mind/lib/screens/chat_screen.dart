@@ -10,7 +10,8 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-          decoration: const BoxDecoration(color: Color(0xFFF8F2F5)),
+          decoration:
+              BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
           child: const Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 20.0,
@@ -25,6 +26,7 @@ class ChatScreen extends StatelessWidget {
                   imageExt: 'svg',
                   profile: 'assets/PT-profile.svg',
                   beforeTime: '10분전',
+                  badge: 1,
                 ),
                 SizedBox(
                   height: 15.0,
@@ -36,6 +38,19 @@ class ChatScreen extends StatelessWidget {
                   imageExt: 'png',
                   profile: 'assets/Namisun-profile.png',
                   beforeTime: '3시간전',
+                  badge: null,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                ChatCard(
+                  name: '이다민',
+                  titleName: '틴에이저 트레이너',
+                  lastMessage: '오늘도 화이팅!',
+                  imageExt: 'png',
+                  profile: 'assets/Damin-profile.png',
+                  beforeTime: '2주전',
+                  badge: null,
                 ),
                 SizedBox(
                   height: 15.0,
@@ -47,6 +62,7 @@ class ChatScreen extends StatelessWidget {
                   imageExt: 'svg',
                   profile: 'assets/manager-profile.svg',
                   beforeTime: '1일전',
+                  badge: null,
                 ),
                 SizedBox(
                   height: 15.0,

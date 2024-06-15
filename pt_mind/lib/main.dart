@@ -13,7 +13,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFF8F2F5)),
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFF8F2F5),
+          primaryColor: const Color(0xFF807FFF),
+          primaryColorDark: const Color(0xFF4645A9),
+          primaryColorLight: const Color(0xFFB7B1DF),
+          shadowColor: Colors.grey.withOpacity(0.2),
+          focusColor: const Color(0xFF7D3596),
+          indicatorColor: const Color(0xFF594D5D),
+          hintColor: const Color(0xFF696767),
+          dialogBackgroundColor: const Color(0xFF4645A9).withOpacity(0.8),
+          cardColor: Colors.white,
+        ),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
@@ -23,7 +34,7 @@ class App extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: SvgPicture.asset(
                 'assets/ptmind-logo.svg',
-                // height: 25.0,
+                height: 28.0,
               ),
             ),
           ),
