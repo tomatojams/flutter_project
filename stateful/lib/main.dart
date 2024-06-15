@@ -47,92 +47,94 @@ class _JoyState extends State<Joy> {
       ),
       home: Scaffold(
         backgroundColor: const Color(0xFFF4EDDB),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              children: [
-                Container(
-                  color: Colors.amber[100],
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Click Count',
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            Text(
-                              '$counter',
-                              style: const TextStyle(fontSize: 30),
-                            ),
-                            IconButton(
-                              iconSize: 40,
-                              onPressed: onClicked,
-                              icon: const Icon(Icons.add_box_rounded),
-                            ),
-                          ],
-                        ),
-                      ],
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.amber[100],
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Click Count',
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              Text(
+                                '$counter',
+                                style: const TextStyle(fontSize: 30),
+                              ),
+                              IconButton(
+                                iconSize: 40,
+                                onPressed: onClicked,
+                                icon: const Icon(Icons.add_box_rounded),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  color: Colors.amber[200],
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Click Count',
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            for (var n in numbers) Text('$n'),
-                            IconButton(
-                              iconSize: 40,
-                              onPressed: onClicked2,
-                              icon: const Icon(Icons.add_box_rounded),
-                            ),
-                          ],
-                        ),
-                      ],
+                  Container(
+                    color: Colors.amber[200],
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Click Count',
+                                style: TextStyle(fontSize: 30),
+                              ),
+                              for (var n in numbers) Text('$n'),
+                              IconButton(
+                                iconSize: 40,
+                                onPressed: onClicked2,
+                                icon: const Icon(Icons.add_box_rounded),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  color: Colors.amber[300],
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            showTitle
-                                ? const MyLargeTitle()
-                                : const Text('nothing'),
-                            IconButton(
-                              onPressed: toggleTitle,
-                              icon: const Icon(Icons.remove_red_eye),
-                            ),
-                          ],
-                        ),
-                      ],
+                  Container(
+                    color: Colors.amber[300],
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              showTitle
+                                  ? const MyLargeTitle()
+                                  : const Text('nothing'),
+                              IconButton(
+                                onPressed: toggleTitle,
+                                icon: const Icon(Icons.remove_red_eye),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
