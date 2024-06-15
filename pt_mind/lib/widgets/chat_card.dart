@@ -31,7 +31,14 @@ class ChatCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            imageExt == 'svg' ? SvgPicture.asset(icon) : Image.asset(icon),
+            imageExt == 'svg'
+                ? SvgPicture.asset(icon)
+                : Image.asset(
+                    icon,
+                    width: 60.0,
+                    height: 60.0,
+                    scale: 0.25,
+                  ),
             const SizedBox(width: 25.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

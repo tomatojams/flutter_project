@@ -13,6 +13,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFF8F2F5)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: SafeArea(
@@ -36,9 +37,7 @@ class App extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: ChatScreen(),
-                )
+                const ChatScreen()
               ],
             ),
           ),
