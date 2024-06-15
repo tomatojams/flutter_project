@@ -56,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
-    //print(duration.toString().split("."));
-    //print(duration.toString().split(".").first);
-    //print(duration.toString().split(".").first.substring(2, 7));
+    // print(duration.toString().split("."));
+    // print(duration.toString().split(".").first);
+    // print(duration.toString().split(".").first.substring(2, 7));
     return duration.toString().split(".").first.substring(2, 7);
   }
 
