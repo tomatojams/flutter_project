@@ -8,25 +8,27 @@ class TraingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-                child: SvgPicture.asset(
-              'assets/game2.svg',
-              fit: BoxFit.fitWidth,
-            )),
-          ],
-        ),
-        Center(
-          child: Image.asset(
-            'assets/program/판단력.png',
-            height: 70,
-            scale: 0.25,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: SvgPicture.asset(
+                'assets/game2.svg',
+                fit: BoxFit.fitWidth,
+              )),
+            ],
           ),
-        )
-      ],
+          Center(
+            child: Image.asset(
+              'assets/program/판단력.png',
+              height: 70,
+              scale: 0.25,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

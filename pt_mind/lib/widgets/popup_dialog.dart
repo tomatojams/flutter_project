@@ -23,8 +23,8 @@ void popupDialog(context) {
                   padding: const EdgeInsets.only(
                     top: 20.0,
                     bottom: 0.0,
-                    left: 20,
-                    right: 20,
+                    left: 10,
+                    right: 10,
                   ),
                   child: Column(
                     children: [
@@ -89,7 +89,7 @@ void popupDialog(context) {
                               ],
                             ),
                             SvgPicture.asset(
-                              'assets/heartOff.svg',
+                              'assets/icon/heartOff.svg',
                             ),
                           ],
                         ),
@@ -158,7 +158,7 @@ void popupDialog(context) {
                 ),
               ),
               SvgPicture.asset(
-                'assets/hLine.svg',
+                'assets/line/hLine.svg',
                 width: 303,
               ),
               Row(
@@ -183,7 +183,7 @@ void popupDialog(context) {
                     ),
                   ),
                   SvgPicture.asset(
-                    'assets/vLine.svg',
+                    'assets/line/vLine.svg',
                     height: 67,
                   ),
                   Expanded(

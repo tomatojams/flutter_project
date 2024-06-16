@@ -27,11 +27,11 @@ class _PTstateState extends State<PTstate> {
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
-        backgroundColor: const Color(0xFF807FFF),
+        backgroundColor:Theme.of(context).primaryColor,
         title: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SvgPicture.asset(
-            'assets/ptmind-logo.svg',
+            'assets/logo/ptmind-logo.svg',
             height: 28.0,
           ),
         ),
@@ -40,15 +40,15 @@ class _PTstateState extends State<PTstate> {
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
             labelTextStyle: MaterialStateProperty.all(
-          const TextStyle(
-            color: Colors.white,
+          TextStyle(
+            color:  Theme.of(context).cardColor,
             fontSize: 11.0,
           ),
         )),
         child: NavigationBar(
           height: 60.0,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          backgroundColor: const Color(0xFF807FFF),
+          backgroundColor: Theme.of(context).primaryColor,
           onDestinationSelected: (int index) {
             setState(() {
               currentPageIndex = index;
@@ -59,12 +59,12 @@ class _PTstateState extends State<PTstate> {
           destinations: <Widget>[
             NavigationDestination(
               selectedIcon: Badge(
-                  textColor: Colors.white,
+                  textColor: Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('1'),
                   child: SvgPicture.asset('assets/menu/chatButtonOn.svg')),
               icon: Badge(
-                  textColor: Colors.white,
+                  textColor:  Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('1'),
                   child: SvgPicture.asset('assets/menu/chatButtonUn.svg')),
@@ -72,12 +72,12 @@ class _PTstateState extends State<PTstate> {
             ),
             NavigationDestination(
               selectedIcon: Badge(
-                  textColor: Colors.white,
+                  textColor:  Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
                   child: SvgPicture.asset('assets/menu/favoriteOn.svg')),
               icon: Badge(
-                  textColor: Colors.white,
+                  textColor:  Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
                   child: SvgPicture.asset('assets/menu/favoriteUn.svg')),

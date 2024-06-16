@@ -55,8 +55,8 @@ class ChatCard extends StatelessWidget {
             ? Colors.transparent
             : Theme.of(context).focusColor,
         label: badge == null ? null : Text(badge.toString()),
-        textStyle: const TextStyle(
-          color: Colors.white,
+        textStyle: TextStyle(
+          color:  Theme.of(context).cardColor,
           fontSize: 12.0,
         ),
         child: Container(

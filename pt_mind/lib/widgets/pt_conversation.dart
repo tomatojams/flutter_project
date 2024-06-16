@@ -14,7 +14,7 @@ class PTconv extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SvgPicture.asset(
-          'assets/PT-profile-chat.svg',
+          'assets/profile/PT-profile-chat.svg',
         ),
         const SizedBox(
           width: 10.0,

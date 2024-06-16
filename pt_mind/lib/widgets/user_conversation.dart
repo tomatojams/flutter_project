@@ -28,8 +28,8 @@ class UserConv extends StatelessWidget {
               ),
               child: Text(
                 conv,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color:  Theme.of(context).cardColor,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500,
                 ),
