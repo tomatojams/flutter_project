@@ -3,21 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/pt_conversation.dart';
 import 'package:pt_mind/widgets/user_conversation.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
 
-class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: SvgPicture.asset(
-            'assets/backButton.svg',
+            'assets/icon/backButton.svg',
             height: 20,
           ),
           onPressed: () {
@@ -29,7 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Padding(
           padding: const EdgeInsets.only(left: 100.0),
           child: SvgPicture.asset(
-            'assets/PTlogo-small.svg',
+            'assets/logo/PTlogo-small.svg',
             height: 25.0,
           ),
         ),
@@ -92,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
               hintText: '메시지를 입력하세요',
               suffixIcon: IconButton(
                 icon: SvgPicture.asset(
-                  'assets/sendIcon.svg',
+                  'assets/icon/sendIcon.svg',
                   height: 30,
                 ),
                 onPressed: () {},

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pt_mind/widgets/popup_dialog.dart';
+import 'package:simple_shadow/simple_shadow.dart';
+
 class FavoriteCard extends StatelessWidget {
   final String profile;
   final String titleName;
@@ -45,11 +47,16 @@ class FavoriteCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                profile,
-                width: 70.0,
-                height: 70.0,
-                scale: 0.5,
+              SimpleShadow(
+                opacity: 0.4, // Default: 0.5 // Default: Black
+                offset: const Offset(1, 1), // Default: Offset(2, 2)
+                sigma: 3,
+                child: Image.asset(
+                  profile,
+                  width: 70.0,
+                  height: 70.0,
+                  scale: 0.5,
+                ),
               ),
               const SizedBox(width: 25.0),
               Expanded(
@@ -144,4 +151,3 @@ class FavoriteCard extends StatelessWidget {
     );
   }
 }
-

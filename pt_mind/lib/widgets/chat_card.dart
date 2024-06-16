@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/screens/chat_screen.dart';
 
-class ChatCard extends StatefulWidget {
+class ChatCard extends StatelessWidget {
   final String profile;
   final String imageExt;
   final String titleName;
@@ -21,12 +21,7 @@ class ChatCard extends StatefulWidget {
       required this.beforeTime,
       this.badge});
 
-  @override
-  State<ChatCard> createState() => _ChatCardState();
-}
-
-class _ChatCardState extends State<ChatCard> {
-  Color bgcolor = Colors.white;
+  // Color bgcolor = Colors.white;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -56,10 +51,10 @@ class _ChatCardState extends State<ChatCard> {
       child: Badge(
         largeSize: 15,
         offset: const Offset(-1, -5),
-        backgroundColor: widget.badge == null
+        backgroundColor: badge == null
             ? Colors.transparent
             : Theme.of(context).focusColor,
-        label: widget.badge == null ? null : Text(widget.badge.toString()),
+        label: badge == null ? null : Text(badge.toString()),
         textStyle: const TextStyle(
           color: Colors.white,
           fontSize: 12.0,
@@ -74,7 +69,7 @@ class _ChatCardState extends State<ChatCard> {
                 offset: const Offset(0, 0),
               ),
             ],
-            color: bgcolor,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Padding(
@@ -85,10 +80,10 @@ class _ChatCardState extends State<ChatCard> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.imageExt == 'svg'
-                    ? SvgPicture.asset(widget.profile)
+                imageExt == 'svg'
+                    ? SvgPicture.asset(profile)
                     : Image.asset(
-                        widget.profile,
+                        profile,
                         width: 60.0,
                         height: 60.0,
                         scale: 0.25,
@@ -104,7 +99,7 @@ class _ChatCardState extends State<ChatCard> {
                           Row(
                             children: [
                               Text(
-                                widget.titleName,
+                                titleName,
                                 style: TextStyle(
                                     color: Theme.of(context).focusColor,
                                     fontSize: 13.0,
@@ -112,7 +107,7 @@ class _ChatCardState extends State<ChatCard> {
                               ),
                               const SizedBox(width: 3.0),
                               Text(
-                                widget.name,
+                                name,
                                 style: TextStyle(
                                     color: Theme.of(context).indicatorColor,
                                     fontSize: 13.0,
@@ -121,7 +116,7 @@ class _ChatCardState extends State<ChatCard> {
                             ],
                           ),
                           Text(
-                            widget.beforeTime,
+                            beforeTime,
                             style: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontSize: 12.0,
@@ -131,7 +126,7 @@ class _ChatCardState extends State<ChatCard> {
                       ),
                       const SizedBox(height: 10.0),
                       Text(
-                        widget.lastMessage,
+                        lastMessage,
                         style: TextStyle(
                           color: Theme.of(context).hintColor,
                           fontSize: 12.0,

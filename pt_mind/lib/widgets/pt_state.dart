@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/screens/chatroom_screen.dart';
 import 'package:pt_mind/screens/favorite_screen.dart';
+import 'package:pt_mind/screens/training_screen.dart';
+import 'package:pt_mind/screens/personal_screen.dart';
 
 class PTstate extends StatefulWidget {
   const PTstate({
@@ -17,6 +19,8 @@ class _PTstateState extends State<PTstate> {
   final List<Widget> _navIndex = [
     const ChatRoomScreen(),
     const FavoriteScreen(),
+    const TraingScreen(),
+    const PersonalScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -58,12 +62,12 @@ class _PTstateState extends State<PTstate> {
                   textColor: Colors.white,
                   backgroundColor: Colors.transparent,
                   label: const Text('1'),
-                  child: SvgPicture.asset('assets/chatButtonOn.svg')),
+                  child: SvgPicture.asset('assets/menu/chatButtonOn.svg')),
               icon: Badge(
                   textColor: Colors.white,
                   backgroundColor: Colors.transparent,
                   label: const Text('1'),
-                  child: SvgPicture.asset('assets/chatButtonUn.svg')),
+                  child: SvgPicture.asset('assets/menu/chatButtonUn.svg')),
               label: '채팅',
             ),
             NavigationDestination(
@@ -71,22 +75,22 @@ class _PTstateState extends State<PTstate> {
                   textColor: Colors.white,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
-                  child: SvgPicture.asset('assets/favoriteOn.svg')),
+                  child: SvgPicture.asset('assets/menu/favoriteOn.svg')),
               icon: Badge(
                   textColor: Colors.white,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
-                  child: SvgPicture.asset('assets/favoriteUn.svg')),
+                  child: SvgPicture.asset('assets/menu/favoriteUn.svg')),
               label: '즐겨찾기',
             ),
             NavigationDestination(
-              selectedIcon: SvgPicture.asset('assets/PTOn.svg'),
-              icon: SvgPicture.asset('assets/PTUn.svg'),
+              selectedIcon: SvgPicture.asset('assets/menu/PTOn.svg'),
+              icon: SvgPicture.asset('assets/menu/PTUn.svg'),
               label: '트레이닝',
             ),
             NavigationDestination(
-              selectedIcon: SvgPicture.asset('assets/MyOn.svg'),
-              icon: SvgPicture.asset('assets/MyUn.svg'),
+              selectedIcon: SvgPicture.asset('assets/menu/MyOn.svg'),
+              icon: SvgPicture.asset('assets/menu/MyUn.svg'),
               label: 'My',
             ),
           ],

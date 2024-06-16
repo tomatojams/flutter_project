@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pt_mind/widgets/chat_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/favorite_card.dart';
 
@@ -31,7 +30,7 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                   ),
                   SvgPicture.asset(
-                    'assets/underline.svg',
+                    'assets/icon/underline.svg',
                   ),
                 ],
               ),
@@ -64,7 +63,7 @@ class FavoriteScreen extends StatelessWidget {
                       name: '박진주',
                       titleName: '소울힐러',
                       slogan: '마음의 H.P를 꽉꽉 채워드립니다.',
-                      profile: 'assets/Parkjinju-profile.png',
+                      profile: 'assets/profile/Parkjinju-profile.png',
                       description1: '심리상담사 2급',
                       description2: '3년차 상담사',
                     ),
@@ -75,7 +74,7 @@ class FavoriteScreen extends StatelessWidget {
                       name: '나미선',
                       titleName: '해피매직',
                       slogan: '행복의 기적을 찾아갑니다.',
-                      profile: 'assets/Namisun-profile.png',
+                      profile: 'assets/profile/Namisun-profile.png',
                       description1: '심리상담사 1급',
                       description2: '15년차 베테랑',
                     ),
@@ -86,7 +85,7 @@ class FavoriteScreen extends StatelessWidget {
                       name: '이다민',
                       titleName: '틴에이지 트레이너',
                       slogan: '험란한 인생게임을 즐겁게',
-                      profile: 'assets/Damin-profile.png',
+                      profile: 'assets/profile/Damin-profile.png',
                       description1: '청소년상담사 2급',
                       description2: '5년차 상담사',
                     ),
