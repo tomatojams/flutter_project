@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pt_mind/screens/chat_screen.dart';
 
 class ChatCard extends StatefulWidget {
   final String profile;
@@ -26,23 +26,31 @@ class ChatCard extends StatefulWidget {
 }
 
 class _ChatCardState extends State<ChatCard> {
-  bool toggle = false;
+  Color bgcolor = Colors.white;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Fluttertoast.showToast(
-          msg: '${widget.name} 카드 클릭 ',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Theme.of(context).dialogBackgroundColor,
-          textColor: Theme.of(context).scaffoldBackgroundColor,
-          fontSize: 14.0,
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ChatScreen(),
+          ),
         );
+
+        // Fluttertoast.showToast(
+        //   msg: '${widget.name} 카드 클릭 ',
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.CENTER,
+        //   timeInSecForIosWeb: 1,
+        //   backgroundColor: Theme.of(context).dialogBackgroundColor,
+        //   textColor: Theme.of(context).scaffoldBackgroundColor,
+        //   fontSize: 14.0,
+        // );
         // setState(() {
-        //   bgcolor = toggle ? Colors.white : const Color(0xFFB7B1DF);
-        //   toggle = !toggle;
+        //   bgcolor = const Color(0xFFB7B1DF);
+        //   sleep(const Duration(milliseconds: 100));
+        //   bgcolor = Colors.white;
         // });
       },
       child: Badge(
@@ -66,8 +74,8 @@ class _ChatCardState extends State<ChatCard> {
                 offset: const Offset(0, 0),
               ),
             ],
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(15.0),
+            color: bgcolor,
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
