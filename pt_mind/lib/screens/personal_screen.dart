@@ -22,13 +22,13 @@ class PersonalScreen extends StatelessWidget {
         const SizedBox(
           height: 10.0,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
+        Padding(
+          padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
           ),
           child: Column(
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ProgrmaIcon(
@@ -49,10 +49,10 @@ class PersonalScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ProgrmaIcon(
@@ -71,6 +71,28 @@ class PersonalScreen extends StatelessWidget {
                     icon: null,
                     title: null,
                   )
+                ],
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset(
+                    'assets/logo/facebook.png',
+                    width: 21,
+                  ),
+                  const SizedBox(
+                    width: 5.0,
+                  ),
+                  Image.asset(
+                    'assets/logo/insta.png',
+                    width: 22,
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
                 ],
               ),
             ],

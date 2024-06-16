@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/popup_dialog.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -85,6 +86,9 @@ class FavoriteCard extends StatelessWidget {
                             ),
                           ],
                         ),
+                        SvgPicture.asset(
+                          'assets/icon/favoriteMenu2.svg',
+                        )
                       ],
                     ),
                     const SizedBox(height: 10.0),
