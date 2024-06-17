@@ -9,7 +9,6 @@ class ChatScreen extends StatelessWidget {
 
   final Future<String> chat = ApiService().getChat();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +80,9 @@ class ChatScreen extends StatelessWidget {
                               conv: snapshot.data!,
                             );
                           } else {
-                            return const CircularProgressIndicator();
+                            return CircularProgressIndicator(
+                              color: Theme.of(context).primaryColorLight,
+                            );
                           }
                         },
                       ),
