@@ -1,11 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/program_icon.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class PersonalScreen extends StatelessWidget {
+class PersonalScreen extends StatefulWidget {
   const PersonalScreen({
     super.key,
   });
+
+  @override
+  State<PersonalScreen> createState() => _PersonalScreenState();
+}
+
+class _PersonalScreenState extends State<PersonalScreen> {
+  String word = 'Not yet';
+
+
+  Future<void> onPressed() async {
+    const String baseUrl = "http://10.0.2.2:8000";
+    const String getstate = "state";
+    var url = Uri.parse('$baseUrl/$getstate'); // parse는 새로운  uri 객체를 만듬
+
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> item = jsonDecode(response.body);
+      setState(() {
+        word = item['state'];
+      });
+    } else {
+      throw Error();
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    onPressed();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +132,14 @@ class PersonalScreen extends StatelessWidget {
               ],
             ),
           ),
+          
+          IconButton(
+              onPressed: onPressed,
+              icon: Image.asset(
+                'assets/icon/server-test.png',
+                width: 30,
+              )),
+          Text(word)
         ],
       ),
     );

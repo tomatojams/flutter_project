@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: snapshot.data!.length, // 길이를  화면에 필요한 만큼만 인덱스를 가져옴
       itemBuilder: (context, index) {
-        print(index);
+        // print(index);
         var webtoon = snapshot.data![index];
         return Webtoon(
           thumb: webtoon.thumb,

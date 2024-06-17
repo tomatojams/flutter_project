@@ -37,7 +37,7 @@ class FavoriteCard extends StatelessWidget {
               offset: const Offset(0, 0),
             ),
           ],
-          color: const Color(0xFFFCFBFE),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Padding(
