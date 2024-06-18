@@ -1,23 +1,39 @@
-
 import 'package:http/http.dart' as http;
+import 'package:pt_mind/models/chat_model.dart';
 import 'dart:convert';
 
-
 class ApiService {
-  Future<String> getChat() async {
-    const String baseUrl = "http://10.0.2.2:8000";
-    const String chatpt = "chat/pt";
-    var url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
+  static const String baseUrl = "http://10.0.2.2:8000";
+  static const String chatpt = "chat/pt";
+  static const String chatptAll = "chat/pt/";
 
-    var response = await http.get(url);
+  static Future<String> getChat() async {
+    final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
+
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final chatString = utf8.decode(response.bodyBytes);
-      // 한글이 깨지지 않게 하기 위해 utf8.decode를 사용
+      // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
+      // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
+      //jsonDecode(utf8.decode(response.bodyBytes));
       return chatString;
     } else {
       throw Error();
     }
   }
 
+  static Future<String> getChatAll() async {
+    ChatModel chatModel;
+    final url = Uri.parse('$baseUrl/$chatptAll'); // parse는 새로운  uri 객체를 만듬
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final chatObject = jsonDecode(utf8.decode(response.bodyBytes));
+      chatModel = ChatModel.fromJson(chatObject);
+      return chatModel.outText;
+    } else {
+      throw Error();
+    }
+  }
 }

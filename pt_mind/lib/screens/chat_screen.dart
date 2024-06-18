@@ -7,7 +7,8 @@ import 'package:pt_mind/services/api_service.dart';
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
 
-  final Future<String> chat = ApiService().getChat();
+  // final Future<String> chat = ApiService.getChat();
+  final Future<String> chat = ApiService.getChatAll();
 
   @override
   Widget build(BuildContext context) {

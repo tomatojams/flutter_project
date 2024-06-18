@@ -21,7 +21,9 @@ class ApiService {
           jsonDecode(
               response.body); //response.body형은 String형이므로 그걸 json형식으로 디코딩한다
       // dynamic형 리스트로 변환 그러나 dynamic 하나하나의 요소는 Map형
+
       for (var webtoon in webtoons) {
+        //print(webtoon);
         webtoonInstances.add(WebtoonModel.fromJson(
             webtoon)); // dynamic형 리스트를 인스턴스(클래스)형 리스트로 변환해서 접근성을 좋게 만듬
       }
