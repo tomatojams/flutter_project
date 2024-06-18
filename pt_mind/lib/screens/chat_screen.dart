@@ -4,11 +4,47 @@ import 'package:pt_mind/widgets/pt_conversation.dart';
 import 'package:pt_mind/widgets/user_conversation.dart';
 import 'package:pt_mind/services/api_service.dart';
 
-class ChatScreen extends StatelessWidget {
-  ChatScreen({super.key});
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
 
-  // final Future<String> chat = ApiService.getChat();
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final userId = 'a1234';
+  final ScrollController _scrollController = ScrollController();
+  List<Map<String, String>> chatdata = [
+
+
+  ];
   final Future<String> chat = ApiService.getChatAll();
+
+  final TextEditingController _textController = TextEditingController();
+
+  void moveScroll(value) {
+    _scrollController.animateTo(value.toDouble() + 100,
+        duration: const Duration(milliseconds: 100), curve: Curves.ease);
+  }
+
+  void _submitText() async {
+    final text = _textController.text;
+    if (text.isEmpty) {
+      return;
+    }
+    chatdata.add({"user": text});
+    _textController.clear();
+    setState(() {});
+    moveScroll(_scrollController.position.maxScrollExtent);
+    String answer = await ApiService.postChat(userId, text);
+
+    chatdata.add({"pt": answer.toString()});
+
+    setState(() {});
+    moveScroll(_scrollController.position.maxScrollExtent);
+
+    _textController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,75 +72,86 @@ class ChatScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 15.0,
-                  ),
-                  child: Column(
-                    children: [
-                      const PTconv(
-                        conv: '안녕하세요. P.T입니다.\n오늘은 비가 오고있지 않나요? 수빈님의 마음은 어떠세요?',
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      const UserConv(
-                        conv:
-                            '네 정말 오늘은 비가 오고 있네요. 마음이 우울해서 대화하고싶었어요. 어떻게 해야할까요?',
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      const PTconv(
-                        conv: '어떤일로 우울하신지 자세히 알려주실 수 있을까요?',
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      const UserConv(
-                        conv:
-                            '애인과 싸웠어요. 잊고싶은 일인데 계속해서 머릭에 떠올라요. 어리다고 저를 무시했어요.',
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      FutureBuilder(
-                        future: chat,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return PTconv(
-                              conv: snapshot.data!,
-                            );
-                          } else {
-                            return CircularProgressIndicator(
-                              color: Theme.of(context).primaryColorLight,
-                            );
-                          }
-                        },
-                      ),
-                    ],
+            child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus(); // 키보드 내리기
+              },
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 15.0,
+                    ),
+                    child: Column(
+                      children: [
+                        FutureBuilder(
+                          future: chat,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return PTconv(
+                                conv: snapshot.data!,
+                              );
+                            } else {
+                              return CircularProgressIndicator(
+                                color: Theme.of(context).primaryColorLight,
+                              );
+                            }
+                          },
+                        ),
+                        for (var i = 0; i < chatdata.length; i++)
+                          if (chatdata[i].containsKey("user"))
+                            UserConv(
+                              conv: chatdata[i]["user"]!,
+                            )
+                          else
+                            PTconv(
+                              conv: chatdata[i]["pt"]!,
+                            )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          TextField(
-            decoration: InputDecoration(
-              iconColor: Theme.of(context).cardColor,
-              fillColor: Theme.of(context).cardColor,
-              border: const OutlineInputBorder(),
-              hintText: '메시지를 입력하세요',
-              suffixIcon: IconButton(
-                icon: SvgPicture.asset(
-                  'assets/icon/sendIcon.svg',
-                  height: 30,
+          GestureDetector(
+            onTap: () {},
+            child: TextField(
+              controller: _textController,
+              onChanged: (text) {
+                _scrollController.animateTo(
+                    _scrollController.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.ease);
+              },
+              onSubmitted: (text) {
+                moveScroll(_scrollController.position.maxScrollExtent);
+              },
+              decoration: InputDecoration(
+                iconColor: Theme.of(context).cardColor,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                 ),
-                onPressed: () {},
+                fillColor: Theme.of(context).cardColor,
+                border: const OutlineInputBorder(),
+                hintText: '메시지를 입력하세요',
+                suffixIcon: IconButton(
+                  icon: SvgPicture.asset(
+                    'assets/icon/sendIcon.svg',
+                    height: 30,
+                  ),
+                  onPressed: () {
+                    _submitText();
+                  },
+                ),
               ),
             ),
           ),

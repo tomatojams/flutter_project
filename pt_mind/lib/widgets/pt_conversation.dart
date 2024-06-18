@@ -10,34 +10,44 @@ class PTconv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        SvgPicture.asset(
-          'assets/profile/PT-profile-chat.svg',
-        ),
-        const SizedBox(
-          width: 10.0,
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(5.0),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SvgPicture.asset(
+              'assets/profile/PT-profile-chat.svg',
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                conv,
-                style: TextStyle(
-                  color: Theme.of(context).indicatorColor,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
+            const SizedBox(
+              width: 10.0,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                  ),
+                  child: Text(
+                    conv,
+                    style: TextStyle(
+                      color: Theme.of(context).indicatorColor,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        )
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 15.0,
+        ),
       ],
     );
   }

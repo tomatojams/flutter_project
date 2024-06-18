@@ -29,7 +29,7 @@ class ChatCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatScreen(),
+            builder: (context) => const ChatScreen(),
           ),
         );
 
@@ -51,12 +51,11 @@ class ChatCard extends StatelessWidget {
       child: Badge(
         largeSize: 15,
         offset: const Offset(-1, -5),
-        backgroundColor: badge == null
-            ? Colors.transparent
-            : Theme.of(context).focusColor,
+        backgroundColor:
+            badge == null ? Colors.transparent : Theme.of(context).focusColor,
         label: badge == null ? null : Text(badge.toString()),
         textStyle: TextStyle(
-          color:  Theme.of(context).cardColor,
+          color: Theme.of(context).cardColor,
           fontSize: 12.0,
         ),
         child: Container(

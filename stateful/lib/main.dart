@@ -95,7 +95,7 @@ class _JoyState extends State<Joy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                'Click Count',
+                                'Click Count2',
                                 style: TextStyle(fontSize: 30),
                               ),
                               for (var n in numbers) Text('$n'),
