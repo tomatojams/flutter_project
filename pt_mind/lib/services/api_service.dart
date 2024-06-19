@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:pt_mind/models/chat_model.dart';
+import 'package:pt_mind/models/chat_room_model.dart';
 import 'dart:convert';
 
 class ApiService {
@@ -7,6 +8,7 @@ class ApiService {
   static const String chatpt = "chat/pt";
   static const String chatptAll = "chat/pt/";
   static const String chatptPost = "chat/user/";
+  static const String chatptRoom = "chatroom/";
 
   static Future<String> getChat() async {
     final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
@@ -33,6 +35,29 @@ class ApiService {
       final chatObject = jsonDecode(utf8.decode(response.bodyBytes));
       chatModel = ChatModel.fromJson(chatObject);
       return chatModel.outText;
+    } else {
+      throw Error();
+    }
+  }
+
+  static Future<List<ChatRoomModel>> getChatRoomList() async {
+    List<ChatRoomModel> chatRoomLists = [];
+    final url = Uri.parse('$baseUrl/$chatptRoom'); // parse는 새로운  uri 객체를 만듬
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> chatRooms =
+          jsonDecode(utf8.decode(response.bodyBytes));
+      // print(chatRooms);
+      // final List<dynamic> chatRooms = // json은 List<dynamci>형으로 구성된다.
+      //     jsonDecode(response.body);
+      //json은 List<dynamci>형으로 구성된다.
+      for (var chatRoom in chatRooms) {
+        chatRoomLists.add(ChatRoomModel.fromJson(chatRoom));
+        // print(chatRoomLists);
+      }
+
+      return chatRoomLists;
     } else {
       throw Error();
     }

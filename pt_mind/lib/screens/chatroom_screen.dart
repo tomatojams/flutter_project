@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pt_mind/models/chat_room_model.dart';
 import 'package:pt_mind/widgets/chat_card.dart';
+import 'package:pt_mind/services/api_service.dart';
 
 class ChatRoomScreen extends StatelessWidget {
-  const ChatRoomScreen({
+  final Future<List<ChatRoomModel>> chat = ApiService.getChatRoomList();
+  // 비동기 Future로 데이타를 못받아와도 다음코드 실행가능
+  // final로 재할당 되지 않음. 코드의 안정성을 높임.
+  ChatRoomScreen({
     super.key,
   });
 
@@ -12,14 +17,14 @@ class ChatRoomScreen extends StatelessWidget {
       child: Container(
           decoration:
               BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
               vertical: 15.0,
             ),
             child: Column(
               children: [
-                ChatCard(
+                const ChatCard(
                   name: 'P.T',
                   titleName: '뉴럴.안내',
                   lastMessage: '당신에게 알맞은 상담사를 찾아드려요.',
@@ -28,45 +33,28 @@ class ChatRoomScreen extends StatelessWidget {
                   beforeTime: '10분전',
                   badge: 1,
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                ChatCard(
-                  name: '나미선',
-                  titleName: '해피매직',
-                  lastMessage: '다음에 뵙겠습니다. 감사했어요',
-                  imageExt: 'png',
-                  profile: 'assets/profile/Namisun-profile.png',
-                  beforeTime: '3시간전',
-                  badge: null,
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                ChatCard(
-                  name: '이다민',
-                  titleName: '틴에이저 트레이너',
-                  lastMessage: '오늘도 화이팅!',
-                  imageExt: 'png',
-                  profile: 'assets/profile/Damin-profile.png',
-                  beforeTime: '2주전',
-                  badge: null,
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                ChatCard(
-                  name: '매니저',
-                  titleName: 'P.Tmind',
-                  lastMessage: '신청하신 상담을 안내해 드립니다.',
-                  imageExt: 'svg',
-                  profile: 'assets/profile/manager-profile.svg',
-                  beforeTime: '1일전',
-                  badge: null,
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
+                FutureBuilder(future: chat, builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        for (var chatRoom in snapshot.data!)
+                          ChatCard(
+                            name: chatRoom.name,
+                            titleName: chatRoom.titleName,
+                            lastMessage: chatRoom.lastMessage,
+                            imageExt: chatRoom.imageExt,
+                            profile: chatRoom.profile,
+                            beforeTime: chatRoom.beforeTime,
+                            badge: chatRoom.badge,
+                          )
+                      ],
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                
+                })
               ],
             ),
           )),

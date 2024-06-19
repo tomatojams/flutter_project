@@ -17,7 +17,7 @@ class PTstate extends StatefulWidget {
 class _PTstateState extends State<PTstate> {
   int currentPageIndex = 0;
   final List<Widget> _navIndex = [
-    const ChatRoomScreen(),
+    ChatRoomScreen(),
     const FavoriteScreen(),
     const TraingScreen(),
     const PersonalScreen(),
@@ -27,7 +27,7 @@ class _PTstateState extends State<PTstate> {
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
-        backgroundColor:Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SvgPicture.asset(
@@ -41,7 +41,7 @@ class _PTstateState extends State<PTstate> {
         data: NavigationBarThemeData(
             labelTextStyle: MaterialStateProperty.all(
           TextStyle(
-            color:  Theme.of(context).cardColor,
+            color: Theme.of(context).cardColor,
             fontSize: 11.0,
           ),
         )),
@@ -64,7 +64,7 @@ class _PTstateState extends State<PTstate> {
                   label: const Text('1'),
                   child: SvgPicture.asset('assets/menu/chatButtonOn.svg')),
               icon: Badge(
-                  textColor:  Theme.of(context).cardColor,
+                  textColor: Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('1'),
                   child: SvgPicture.asset('assets/menu/chatButtonUn.svg')),
@@ -72,12 +72,12 @@ class _PTstateState extends State<PTstate> {
             ),
             NavigationDestination(
               selectedIcon: Badge(
-                  textColor:  Theme.of(context).cardColor,
+                  textColor: Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
                   child: SvgPicture.asset('assets/menu/favoriteOn.svg')),
               icon: Badge(
-                  textColor:  Theme.of(context).cardColor,
+                  textColor: Theme.of(context).cardColor,
                   backgroundColor: Colors.transparent,
                   label: const Text('2'),
                   child: SvgPicture.asset('assets/menu/favoriteUn.svg')),

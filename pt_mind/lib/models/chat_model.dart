@@ -2,7 +2,7 @@ class ChatModel {
   final String userMessage;
   final String input;
   final String outText;
-  final Map<String,dynamic> tag;
+  final Map<String, dynamic> tag;
 
   ChatModel.fromJson(Map<String, dynamic> json)
       : userMessage = json['user_message'],
@@ -10,3 +10,4 @@ class ChatModel {
         outText = json['out_text'],
         tag = json['text'];
 }
+
