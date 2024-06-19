@@ -38,6 +38,8 @@ dependencies:
   fluttertoast: ^8.2.5
   http: ^1.1.0
   simple_shadow: ^0.3.1
+  mqtt_client: ^10.2.1
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

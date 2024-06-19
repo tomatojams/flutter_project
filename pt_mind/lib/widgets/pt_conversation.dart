@@ -29,6 +29,7 @@ class PTconv extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: ConstrainedBox(
+                  // 동적 조정하는 바로 위에 지정해야만 함
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.7,
                   ),
