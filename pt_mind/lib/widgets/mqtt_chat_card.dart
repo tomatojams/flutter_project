@@ -59,6 +59,8 @@ class _MqttChatCardState extends State<MqttChatCard> {
     widget.userProvider.setUserNickName(userId);
     print("before move check");
     print(widget.userProvider.userNickName);
+    widget.chatProvider.sendChat(
+        nickName: (widget.userProvider.userNickName), chat: 'before message');
     Navigator.of(context).pushNamed(MqttChatScreen.path);
   }
 
