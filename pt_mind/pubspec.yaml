@@ -40,6 +40,9 @@ dependencies:
   simple_shadow: ^0.3.1
   mqtt_client: ^10.2.1
   provider: ^6.1.2
+  pull_to_refresh: ^2.0.0
+
+
 
 dev_dependencies:
   flutter_test:

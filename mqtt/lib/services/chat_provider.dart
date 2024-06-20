@@ -21,13 +21,16 @@ class ChatProvider with ChangeNotifier {
   final List<ChatModel> _chat = [];
   List<ChatModel> get chat => [..._chat];
 
-  void sendChat({required String nickName, required String chat}) =>
-      mqttService.client.publishMessage(
-          "CHAT",
-          MqttQos.atMostOnce,
-          MqttClientPayloadBuilder()
-              .addString(json.encode({"userNickName": nickName, "chat": chat}))
-              .payload!);
+  void sendChat({required String nickName, required String chat}) {
+    print(nickName);
+    print(chat);
+    mqttService.client.publishMessage(
+        "CHAT",
+        MqttQos.atMostOnce,
+        MqttClientPayloadBuilder()
+            .addString(json.encode({"userNickName": nickName, "chat": chat}))
+            .payload!);
+  }
 
   final String TOPIC_CHAT_JOIN = "CHAT_LIST_JOIN";
   final String TOPIC_CHAT = "CHAT";

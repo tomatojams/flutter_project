@@ -25,6 +25,45 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  Future<void> _move(BuildContext context) async {
+    if (_controller.text.isEmpty) {
+      await showDialog<void>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: const Text("닉네임을 입력해주세요"),
+                actions: [
+                  TextButton(
+                    child: const Text("닫기"),
+                    onPressed: () => Navigator.of(context).pop(null),
+                  )
+                ],
+              ));
+      return;
+    }
+    final bool connectCheck =
+        await widget.chatProvider.join(nickName: _controller.text);
+    if (!connectCheck) {
+      await showDialog<void>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: const Text("연결 오류"),
+                actions: [
+                  TextButton(
+                    child: const Text("닫기"),
+                    onPressed: () => Navigator.of(context).pop(null),
+                  )
+                ],
+              ));
+      return;
+    }
+
+    widget.userProvider.setUserNickName(_controller.text);
+    print(_controller.text);
+    print(_controller.text);
+    print(UserProvider().userNickName);
+    Navigator.of(context).pushNamed(ChatRoom.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,40 +105,5 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
-  }
-
-  Future<void> _move(BuildContext context) async {
-    if (_controller.text.isEmpty) {
-      await showDialog<void>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-                title: const Text("닉네임을 입력해주세요"),
-                actions: [
-                  TextButton(
-                    child: const Text("닫기"),
-                    onPressed: () => Navigator.of(context).pop(null),
-                  )
-                ],
-              ));
-      return;
-    }
-    final bool connectCheck =
-        await widget.chatProvider.join(nickName: _controller.text);
-    if (!connectCheck) {
-      await showDialog<void>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-                title: const Text("연결 오류"),
-                actions: [
-                  TextButton(
-                    child: const Text("닫기"),
-                    onPressed: () => Navigator.of(context).pop(null),
-                  )
-                ],
-              ));
-      return;
-    }
-    widget.userProvider.setUserNickName(_controller.text);
-    Navigator.of(context).pushNamed(ChatRoom.path);
   }
 }

@@ -30,6 +30,8 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
+    print("providercheck");
+    print(widget.userProvider.userNickName);
     return Scaffold(
       appBar: AppBar(
         title: const Text("채팅"),
@@ -182,6 +184,8 @@ class _ChatRoomState extends State<ChatRoom> {
   void _send() {
     _fn.unfocus();
     if (_tc.text.isEmpty) return;
+    print(widget.userProvider.userNickName);
+    print(_tc.text);
     widget.chatProvider
         .sendChat(nickName: (widget.userProvider.userNickName), chat: _tc.text);
     _tc.clear();

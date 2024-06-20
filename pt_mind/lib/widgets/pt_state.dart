@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/chatroom_screen.dart';
+import 'package:pt_mind/screens/chat_lobby_screen.dart';
 import 'package:pt_mind/screens/favorite_screen.dart';
 import 'package:pt_mind/screens/training_screen.dart';
 import 'package:pt_mind/screens/personal_screen.dart';
+import 'package:pt_mind/services/mqtt_chat_provider.dart';
+import 'package:pt_mind/services/mqtt_user_provider.dart';
 
 class PTstate extends StatefulWidget {
   const PTstate({
@@ -17,7 +19,8 @@ class PTstate extends StatefulWidget {
 class _PTstateState extends State<PTstate> {
   int currentPageIndex = 0;
   final List<Widget> _navIndex = [
-    ChatRoomScreen(),
+    ChatLobbyScreen(// ChatLobbyScreen
+        ),
     const FavoriteScreen(),
     const TraingScreen(),
     const PersonalScreen(),
