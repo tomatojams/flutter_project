@@ -29,8 +29,7 @@ class App extends StatelessWidget {
       MaterialApp(
         onGenerateRoute: (RouteSettings route) {
           {
-            // print(route.name);
-            // print(MqttChatScreen.path);
+  
             if (route.name == MqttChatScreen.path) {
               return MaterialPageRoute(
                   settings: const RouteSettings(name: MqttChatScreen.path),

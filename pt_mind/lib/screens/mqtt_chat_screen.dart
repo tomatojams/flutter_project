@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/pt_conversation.dart';
@@ -5,7 +7,7 @@ import 'package:pt_mind/widgets/user_conversation.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
-
+import 'dart:convert';
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
   final ChatProvider chatProvider;
@@ -60,15 +62,15 @@ class _ChatScreenState extends State<MqttChatScreen>
     });
   }
 
-// http 용 수정해야함
   void _send() {
     final text = _textController.text;
     if (text.isEmpty) {
       return;
     }
-    print(widget.userProvider.userNickName);
-    print(text);
+    // print(widget.userProvider.userNickName);
+    // print(text);
 
+    // Uint8List payLoad = utf8.encode(text);
     widget.chatProvider
         .sendChat(nickName: (widget.userProvider.userNickName), chat: text);
 
@@ -79,8 +81,8 @@ class _ChatScreenState extends State<MqttChatScreen>
   @override
   Widget build(BuildContext context) {
     // 최초 채팅방 입장시에만 호출되도록 수정(최초 채팅방 입장시에만 호출되도록 수정)
-    print("after providercheck");
-    print(widget.userProvider.userNickName);
+    // print("after providercheck");
+    // print(widget.userProvider.userNickName);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -109,47 +111,32 @@ class _ChatScreenState extends State<MqttChatScreen>
               onTap: () {
                 FocusScope.of(context).unfocus(); // 본문 스크롤을 탭하면 키보드 내리기
               },
-              child: SingleChildScrollView(
-                controller: _scrollController, // 컨트롤러 설치
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 15.0,
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          child: widget.chatProvider.chat.isEmpty
-                              ? Container()
-                              : ListView.builder(
-                                  controller: _scrollController,
-                                  reverse: true,
-                                  itemCount: widget.chatProvider.chat.length,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0,
-                                    vertical: 10.0,
-                                  ),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final MqttChatModel mqttchatModel =
-                                        widget.chatProvider.chat[index];
-                                    final String userNickName =
-                                        widget.userProvider.userNickName;
-                                    if (mqttchatModel.userNickName !=
-                                        userNickName) {
-                                      return PTconv(conv: mqttchatModel.chat);
-                                    }
-                                    return UserConv(conv: mqttchatModel.chat);
-                                  },
-                                ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor),
+                child: widget.chatProvider.chat.isEmpty
+                    ? const SizedBox(
+                        height: 30,
+                      )
+                    : ListView.builder(
+                        controller: _scrollController,
+                        reverse: true,
+                        itemCount: widget.chatProvider.chat.length,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10.0,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          final MqttChatModel mqttchatModel =
+                              widget.chatProvider.chat[index];
+                          final String userNickName =
+                              widget.userProvider.userNickName;
+                          if (mqttchatModel.userNickName != userNickName) {
+                            return PTconv(conv: mqttchatModel.chat);
+                          }
+                          return UserConv(conv: mqttchatModel.chat);
+                        },
+                      ),
               ),
             ),
           ),
@@ -193,7 +180,7 @@ class _ChatScreenState extends State<MqttChatScreen>
                   height: 30,
                 ),
                 onPressed: () {
-                  _send(); // 아이콘 클릭시에도 전송이 되게
+                  // _send(); // 아이콘 클릭시에도 전송이 되게
                 },
               ),
             ),
