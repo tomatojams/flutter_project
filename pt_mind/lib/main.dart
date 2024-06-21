@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/screens/pt_state.dart';
+import 'package:pt_mind/screens/mainscreen/pt_state.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
-import 'package:pt_mind/screens/mqtt_chat_screen.dart';
+import 'package:pt_mind/screens/chatting/mqtt/mqtt_chat_screen.dart';
 
 void main() {
   runApp(const App());

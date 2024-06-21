@@ -6,7 +6,7 @@ import 'package:pt_mind/services/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
-import 'package:pt_mind/widgets/mqtt_chat_card.dart';
+import 'package:pt_mind/screens/chatting/mqtt/mqtt_chat_card.dart';
 
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/mqtt_chat_screen.dart';
+import 'package:pt_mind/screens/chatting/mqtt/mqtt_chat_screen.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -34,7 +34,7 @@ class MqttChatCard extends StatefulWidget {
 }
 
 class _MqttChatCardState extends State<MqttChatCard> {
-  final String userId = '토마토';
+  final String userId = 'tomato';
   // utf8.encode(userId);
   //  final utf8Id = utf8.encode('토마토');
   // Color bgcolor = Colors.white;

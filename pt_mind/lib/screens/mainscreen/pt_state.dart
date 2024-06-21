@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/chat_lobby_screen.dart';
-import 'package:pt_mind/screens/favorite_screen.dart';
-import 'package:pt_mind/screens/training_screen.dart';
-import 'package:pt_mind/screens/personal_screen.dart';
+import 'package:pt_mind/screens/chatting/chat_lobby_screen.dart';
+import 'package:pt_mind/screens/favorite/favorite_screen.dart';
+import 'package:pt_mind/screens/training/training_screen.dart';
+import 'package:pt_mind/screens/personal/personal_screen.dart';
 class PTstate extends StatefulWidget {
   const PTstate({
     super.key,
