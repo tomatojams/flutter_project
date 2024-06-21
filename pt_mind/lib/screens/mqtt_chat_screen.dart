@@ -95,12 +95,20 @@ class _ChatScreenState extends State<MqttChatScreen>
         ),
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 100.0),
-          child: SvgPicture.asset(
-            'assets/logo/PTlogo-small.svg',
-            height: 25.0,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            SvgPicture.asset(
+              'assets/logo/PTlogo-small.svg',
+              height: 25.0,
+            ),
+            const SizedBox(
+              width: 70,
+            ),
+          ],
         ),
       ),
       body: Column(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/ai_chat_screen.dart';
+import 'package:pt_mind/screens/pt_chat_screen.dart';
 
 
 class ChatCard extends StatelessWidget {
@@ -78,7 +78,7 @@ class ChatCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
+                  horizontal: 12.0,
                   vertical: 15.0,
                 ),
                 child: Row(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/pt_conversation.dart';
 import 'package:pt_mind/widgets/user_conversation.dart';
-import 'package:pt_mind/services/http_api_service.dart';
+import 'package:pt_mind/services/api_service.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -117,12 +117,20 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         ),
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 100.0),
-          child: SvgPicture.asset(
-            'assets/logo/PTlogo-small.svg',
-            height: 25.0,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            SvgPicture.asset(
+              'assets/logo/PTlogo-small.svg',
+              height: 25.0,
+            ),
+            const SizedBox(
+              width: 70,
+            ),
+          ],
         ),
       ),
       body: Column(
@@ -139,7 +147,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                       color: Theme.of(context).scaffoldBackgroundColor),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
+                      horizontal: 10.0,
                       vertical: 15.0,
                     ),
                     child: Column(
