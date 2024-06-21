@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/ai_chat_screen.dart';
 import 'package:pt_mind/screens/mqtt_chat_screen.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";
@@ -34,31 +34,28 @@ class MqttChatCard extends StatefulWidget {
 }
 
 class _MqttChatCardState extends State<MqttChatCard> {
-  final userId = 'a1234'; //http용 수정해야함
-
+  final userId = 'a1234 '; //http용 수정해야함
   // Color bgcolor = Colors.white;
 
   Future<void> _move(BuildContext context) async {
     final bool connectCheck = await widget.chatProvider.join(nickName: userId);
-    print(connectCheck);
+    // print(connectCheck);
     if (!connectCheck) {
-      await showDialog<void>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-                title: const Text("연결 오류"),
-                actions: [
-                  TextButton(
-                    child: const Text("닫기"),
-                    onPressed: () => Navigator.of(context).pop(null),
-                  )
-                ],
-              ));
-      return;
+      await Fluttertoast.showToast(
+        msg: '${widget.name}님과의 연결이 원활화지 않습니다. ',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
+        textColor: Theme.of(context).scaffoldBackgroundColor,
+        fontSize: 14.0,
+      );
     }
-    print('mqtt chat card move');
+    // print('mqtt chat card move');
+
     widget.userProvider.setUserNickName(userId);
-    print("before move check");
-    print(widget.userProvider.userNickName);
+    // print("before move check");
+    // print(widget.userProvider.userNickName);
     widget.chatProvider.sendChat(
         nickName: (widget.userProvider.userNickName), chat: 'before message');
     Navigator.of(context).pushNamed(MqttChatScreen.path);

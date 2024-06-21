@@ -22,8 +22,8 @@ class ChatProvider with ChangeNotifier {
   List<ChatModel> get chat => [..._chat];
 
   void sendChat({required String nickName, required String chat}) {
-    print(nickName);
-    print(chat);
+    // print(nickName);
+    // print(chat);
     mqttService.client.publishMessage(
         "CHAT",
         MqttQos.atMostOnce,

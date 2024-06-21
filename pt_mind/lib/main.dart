@@ -4,9 +4,7 @@ import 'package:pt_mind/widgets/pt_state.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:pt_mind/screens/mqtt_chat_screen.dart';
-import 'package:pt_mind/widgets/mqtt_chat_card.dart';
-import 'package:pt_mind/screens/chat_lobby_screen.dart';
-import 'package:pt_mind/screens/login.dart';
+
 
 void main() {
   runApp(const App());
@@ -44,19 +42,6 @@ class App extends StatelessWidget {
                     );
                   });
             }
-
-            // return MaterialPageRoute(
-            //     settings: const RouteSettings(name: ChatLobbyScreen.path),
-            //     builder: (BuildContext context) {
-            //       ChatProvider chatProvider =
-            //           Provider.of<ChatProvider>(context);
-            //       UserProvider userProvider =
-            //           Provider.of<UserProvider>(context);
-            //       return ChatLobbyScreen(
-            //           chatProvider: chatProvider, userProvider: userProvider
-
-            //       );
-            //     });
           }
           return null;
         },

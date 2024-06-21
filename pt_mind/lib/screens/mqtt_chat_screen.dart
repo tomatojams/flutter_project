@@ -7,7 +7,6 @@ import 'package:pt_mind/widgets/user_conversation.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
-import 'dart:convert';
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
   final ChatProvider chatProvider;

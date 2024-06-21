@@ -4,8 +4,6 @@ import 'package:pt_mind/screens/chat_lobby_screen.dart';
 import 'package:pt_mind/screens/favorite_screen.dart';
 import 'package:pt_mind/screens/training_screen.dart';
 import 'package:pt_mind/screens/personal_screen.dart';
-import 'package:pt_mind/services/mqtt_chat_provider.dart';
-import 'package:pt_mind/services/mqtt_user_provider.dart';
 
 class PTstate extends StatefulWidget {
   const PTstate({
@@ -42,7 +40,7 @@ class _PTstateState extends State<PTstate> {
       body: _navIndex[currentPageIndex],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-            labelTextStyle: MaterialStateProperty.all(
+            labelTextStyle: WidgetStateProperty.all(
           TextStyle(
             color: Theme.of(context).cardColor,
             fontSize: 11.0,

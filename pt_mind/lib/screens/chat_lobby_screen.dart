@@ -6,20 +6,15 @@ import 'package:pt_mind/services/http_api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
-import 'package:pt_mind/screens/mqtt_chat_screen.dart';
 import 'package:pt_mind/widgets/mqtt_chat_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";
-  // final ChatProvider chatProvider;
-  // final UserProvider userProvider;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   ChatLobbyScreen({
     super.key,
-    // required this.chatProvider,
-    // required this.userProvider,
   });
 
   @override
@@ -29,8 +24,6 @@ class ChatLobbyScreen extends StatefulWidget {
 class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
   Future<List<ChatLobbyModel>>? chat = ApiService.getChatRoomList();
   final userId = 'a1234'; //http용 수정해야함
-
-  // Color bgcolor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -87,15 +80,6 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                                     badge: chatRoom.badge,
                                     chatProvider: chatProvider,
                                     userProvider: userProvider),
-                              // ChatCard(
-                              //   name: chatRoom.name,
-                              //   titleName: chatRoom.titleName,
-                              //   lastMessage: chatRoom.lastMessage,
-                              //   imageExt: chatRoom.imageExt,
-                              //   profile: chatRoom.profile,
-                              //   beforeTime: chatRoom.beforeTime,
-                              //   badge: chatRoom.badge,
-                              // )
                             ],
                           );
                         }
