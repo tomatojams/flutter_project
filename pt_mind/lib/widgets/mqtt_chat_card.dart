@@ -4,7 +4,6 @@ import 'package:pt_mind/screens/mqtt_chat_screen.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'dart:convert';
 
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";

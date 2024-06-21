@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import '../models/chat_model.dart';
 import '../services/chat_provider.dart';
 import '../services/user_provider.dart';
@@ -31,8 +30,8 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
-    print("providercheck");
-    print(widget.userProvider.userNickName);
+    // print("providercheck");
+    // print(widget.userProvider.userNickName);
     return Scaffold(
       appBar: AppBar(
         title: const Text("채팅"),
@@ -54,7 +53,7 @@ class _ChatRoomState extends State<ChatRoom> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         itemBuilder: (BuildContext context, int index) {
-                          final Size size = MediaQuery.of(context).size;
+                          // final Size size = MediaQuery.of(context).size;
                           final ChatModel chatModel =
                               widget.chatProvider.chat[index];
                           final String userNickName =
@@ -187,8 +186,8 @@ class _ChatRoomState extends State<ChatRoom> {
   void _send() {
     _fn.unfocus();
     if (_tc.text.isEmpty) return;
-    print(widget.userProvider.userNickName);
-    print(_tc.text);
+    // print(widget.userProvider.userNickName);
+    // print(_tc.text);
     widget.chatProvider
         .sendChat(nickName: (widget.userProvider.userNickName), chat: _tc.text);
     _tc.clear();
