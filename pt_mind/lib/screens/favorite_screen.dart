@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/favorite_card.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({
@@ -14,9 +15,9 @@ class FavoriteScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(
-              left: 20.0,
-              top: 15.0,
-              bottom: 5.0,
+              left: 20,
+              top: 14,
+              bottom: 5,
             ),
             child: Row(
               children: [
@@ -25,7 +26,7 @@ class FavoriteScreen extends StatelessWidget {
                     Text(
                       '트레이너',
                       style: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 14,
                         color: Theme.of(context).focusColor,
                         fontWeight: FontWeight.w600,
                       ),
@@ -35,9 +36,7 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                Gaps.h10,
                 Text(
                   '프로그램',
                   style: TextStyle(
@@ -68,9 +67,7 @@ class FavoriteScreen extends StatelessWidget {
                         description1: '심리상담사 2급',
                         description2: '3년차 상담사',
                       ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
+                      Gaps.v14,
                       FavoriteCard(
                         name: '나미선',
                         titleName: '해피매직',
@@ -79,9 +76,7 @@ class FavoriteScreen extends StatelessWidget {
                         description1: '심리상담사 1급',
                         description2: '15년차 베테랑',
                       ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
+                      Gaps.v14,
                       FavoriteCard(
                         name: '이다민',
                         titleName: '틴에이지 트레이너',

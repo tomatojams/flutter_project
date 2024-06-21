@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/program_icon.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pt_mind/constants/gaps.dart';
 
 class PersonalScreen extends StatefulWidget {
   const PersonalScreen({
@@ -15,7 +16,6 @@ class PersonalScreen extends StatefulWidget {
 
 class _PersonalScreenState extends State<PersonalScreen> {
   String word = 'Not yet';
-
 
   Future<void> onPressed() async {
     const String baseUrl = "http://10.0.2.2:8000";
@@ -33,6 +33,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
       throw Error();
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -53,9 +54,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
               )),
             ],
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
+          Gaps.v10,
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
@@ -83,9 +82,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
+                Gaps.v20,
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -107,9 +104,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 30.0,
-                ),
+                Gaps.v28,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -117,22 +112,17 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       'assets/logo/facebook.png',
                       width: 21,
                     ),
-                    const SizedBox(
-                      width: 5.0,
-                    ),
+                    Gaps.h5,
                     Image.asset(
                       'assets/logo/insta.png',
                       width: 22,
                     ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
+                    Gaps.h10
                   ],
                 ),
               ],
             ),
           ),
-          
           IconButton(
               onPressed: onPressed,
               icon: Image.asset(

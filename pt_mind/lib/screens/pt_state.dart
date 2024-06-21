@@ -4,7 +4,6 @@ import 'package:pt_mind/screens/chat_lobby_screen.dart';
 import 'package:pt_mind/screens/favorite_screen.dart';
 import 'package:pt_mind/screens/training_screen.dart';
 import 'package:pt_mind/screens/personal_screen.dart';
-
 class PTstate extends StatefulWidget {
   const PTstate({
     super.key,

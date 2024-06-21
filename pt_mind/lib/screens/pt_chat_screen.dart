@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/pt_conv_cart.dart';
 import 'package:pt_mind/widgets/user_conv_card.dart';
 import 'package:pt_mind/services/api_service.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -66,7 +67,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   }
   // void jumpScroll() {
 
-  
   //   WidgetsBinding.instance.addPostFrameCallback((_) {
   //     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   //   });
@@ -122,16 +122,12 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(
-              width: 20,
-            ),
+            Gaps.h20,
             SvgPicture.asset(
               'assets/logo/PTlogo-small.svg',
               height: 25.0,
             ),
-            const SizedBox(
-              width: 70,
-            ),
+            Gaps.h64,
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class UserProvider with ChangeNotifier {
   String _userNickName = "";
   String get userNickName => _userNickName;

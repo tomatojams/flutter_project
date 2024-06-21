@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 class TraingScreen extends StatelessWidget {
   const TraingScreen({
     super.key,

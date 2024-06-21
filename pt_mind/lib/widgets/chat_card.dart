@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/screens/pt_chat_screen.dart';
 
-
 class ChatCard extends StatelessWidget {
   final String profile;
   final String imageExt;

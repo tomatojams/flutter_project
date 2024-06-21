@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 class ProgrmaIcon extends StatelessWidget {
   final String? icon;
@@ -24,9 +25,7 @@ class ProgrmaIcon extends StatelessWidget {
               : const SizedBox(
                   height: 60,
                 ),
-          const SizedBox(
-            height: 2.0,
-          ),
+          Gaps.h2,
           title != null
               ? Text(
                   title!,
@@ -36,9 +35,7 @@ class ProgrmaIcon extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 )
-              : const SizedBox(
-                  height: 14.0,
-                ),
+              : Gaps.v14,
         ],
       ),
     );

@@ -8,7 +8,6 @@ import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:pt_mind/widgets/mqtt_chat_card.dart';
 
-
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";
   final RefreshController _refreshController =
@@ -49,8 +48,8 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                 BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 15.0,
+                horizontal: 20,
+                vertical: 16,
               ),
               child: Column(
                 children: [
@@ -84,7 +83,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                           );
                         }
                         return const SizedBox(
-                          height: 30,
+                          height: 28,
                         );
                       }),
                 ],

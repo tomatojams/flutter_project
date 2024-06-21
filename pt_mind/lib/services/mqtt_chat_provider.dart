@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
-
 class ChatProvider with ChangeNotifier {
   // 함수 리스트
   // 1. _update

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/widgets/popup_dialog.dart';
 import 'package:simple_shadow/simple_shadow.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 class FavoriteCard extends StatelessWidget {
   final String profile;
@@ -59,7 +60,7 @@ class FavoriteCard extends StatelessWidget {
                   scale: 0.5,
                 ),
               ),
-              const SizedBox(width: 25.0),
+              Gaps.h24,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +92,7 @@ class FavoriteCard extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(height: 10.0),
+                    Gaps.v10,
                     Text(
                       slogan,
                       style: TextStyle(
@@ -99,7 +100,7 @@ class FavoriteCard extends StatelessWidget {
                         fontSize: 12.0,
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+                    Gaps.v10,
                     Row(
                       children: [
                         Container(
@@ -122,7 +123,7 @@ class FavoriteCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10.0),
+                        Gaps.h10,
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(

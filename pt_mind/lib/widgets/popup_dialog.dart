@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_shadow/simple_shadow.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 void popupDialog(context) {
   showDialog(
@@ -32,9 +33,7 @@ void popupDialog(context) {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            width: 40,
-                          ),
+                          Gaps.h40,
                           SimpleShadow(
                             opacity: 0.4, // Default: 0.5 // Default: Black
                             offset: const Offset(0, 0), // Default: Offset(2, 2)
@@ -52,9 +51,7 @@ void popupDialog(context) {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      Gaps.v20,
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,
@@ -62,9 +59,7 @@ void popupDialog(context) {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
+                            Gaps.h20,
                             Row(
                               children: [
                                 Text(
@@ -75,9 +70,7 @@ void popupDialog(context) {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
+                                Gaps.h5,
                                 Text(
                                   '나미선',
                                   style: TextStyle(
@@ -94,9 +87,7 @@ void popupDialog(context) {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      Gaps.v32,
                       SizedBox(
                         height: 80,
                         child: Text(
@@ -130,7 +121,7 @@ void popupDialog(context) {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10.0),
+                          Gaps.h10,
                           Container(
                             decoration: BoxDecoration(
                               border: Border.all(

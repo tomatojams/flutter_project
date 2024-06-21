@@ -6,6 +6,7 @@ import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:pt_mind/utiliy/utf8.dart';
+import 'package:pt_mind/constants/gaps.dart';
 
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
@@ -79,7 +80,6 @@ class _ChatScreenState extends State<MqttChatScreen>
 
   @override
   Widget build(BuildContext context) {
- 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -96,16 +96,12 @@ class _ChatScreenState extends State<MqttChatScreen>
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(
-              width: 20,
-            ),
+            Gaps.v20,
             SvgPicture.asset(
               'assets/logo/PTlogo-small.svg',
               height: 25.0,
             ),
-            const SizedBox(
-              width: 70,
-            ),
+            Gaps.h64,
           ],
         ),
       ),
@@ -120,9 +116,7 @@ class _ChatScreenState extends State<MqttChatScreen>
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor),
                 child: widget.chatProvider.chat.isEmpty
-                    ? const SizedBox(
-                        height: 30,
-                      )
+                    ? Gaps.v28 // 30보다 커지면 에러
                     : ListView.builder(
                         controller: _scrollController,
                         reverse: true,
@@ -141,10 +135,8 @@ class _ChatScreenState extends State<MqttChatScreen>
                             // print(mqttchatModel.chat);
                             return PTconv(conv: utf8Sample(mqttchatModel.chat));
                             // return PTconv(conv: utf8.decode( utf8.encode(mqttchatModel.chat)));
-
                           }
                           return UserConv(conv: utf8Sample(mqttchatModel.chat));
-                    
                         },
                       ),
               ),
