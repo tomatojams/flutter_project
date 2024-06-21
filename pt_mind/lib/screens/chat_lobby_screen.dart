@@ -23,7 +23,7 @@ class ChatLobbyScreen extends StatefulWidget {
 
 class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
   Future<List<ChatLobbyModel>>? chat = ApiService.getChatRoomList();
-  final userId = 'a1234'; //http용 수정해야함
+  final userId = 'tomato';
 
   @override
   Widget build(BuildContext context) {

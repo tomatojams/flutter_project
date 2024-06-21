@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/widgets/pt_state.dart';
+import 'package:pt_mind/screens/pt_state.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:pt_mind/screens/mqtt_chat_screen.dart';
-
+import 'package:pt_mind/utiliy/utf8.dart';
 
 void main() {
   runApp(const App());
@@ -15,19 +15,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-     MultiProvider(
+
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider<ChatProvider>(
             create: (BuildContext _) => ChatProvider()),
         ChangeNotifierProvider<UserProvider>(
             create: (BuildContext _) => UserProvider())
       ],
-      child: 
-      MaterialApp(
+      child: MaterialApp(
         onGenerateRoute: (RouteSettings route) {
           {
-  
             if (route.name == MqttChatScreen.path) {
               return MaterialPageRoute(
                   settings: const RouteSettings(name: MqttChatScreen.path),

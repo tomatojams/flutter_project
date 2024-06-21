@@ -33,13 +33,29 @@ class ChatProvider with ChangeNotifier {
   void sendChat({required String nickName, required String chat}) {
     // print(nickName);
     // print(chat);
+    final chatUtf8 = utf8.encode(chat);
+    // print(chatUtf8);
+    // print(utf8.runtimeType);
     mqttService.client.publishMessage(
         "CHAT",
         MqttQos.atMostOnce,
         MqttClientPayloadBuilder()
-            .addString(json.encode({"userNickName": nickName, "chat": chat}))
+            .addString(
+                json.encode({"userNickName": nickName, "chat": chatUtf8}))
             .payload!);
   }
+
+  // void sendChat({required String nickName, required String chat}) {
+  //   // print(nickName);
+  //   // print(chat);
+  //   // final chatUtf8 = utf8.encode(chat);
+  //   mqttService.client.publishMessage(
+  //       "CHAT",
+  //       MqttQos.atMostOnce,
+  //       MqttClientPayloadBuilder()
+  //           .addString(json.encode({"userNickName": nickName, "chat": chat}))
+  //           .payload!);
+  // }
 
   final String TOPIC_CHAT_JOIN = "CHAT_LIST_JOIN";
   final String TOPIC_CHAT = "CHAT";
@@ -119,4 +135,3 @@ class MqttRepo {
     return MqttPublishPayload.bytesToStringAsString(msg.payload.message);
   }
 }
-

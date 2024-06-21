@@ -1,10 +1,10 @@
 class ChatLobbyModel {
   final String name;
   final String titleName;
-  final String lastMessage;
+  String? lastMessage;
   final String imageExt;
   final String profile;
-  final String beforeTime;
+  String? beforeTime;
   int? badge;
 
   ChatLobbyModel.fromJson(Map<String, dynamic> json)

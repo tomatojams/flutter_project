@@ -1,16 +1,9 @@
 # pt_mind
 
-A new Flutter project.
+1. MQTT 통신에서 메세지 문장의 utf8 문제를 해결했지만
+   네임의 인코딩 문제는 약간 다름
 
-## Getting Started
+2. MQTT에서 메세지 버퍼가 비었을때 화면렌더링 에러가 나고있음
+   눈에 보이지는 않음
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. 메세지 포맷이 문제일때도 scrollcontroller 문제라는 메세지가 자꾸뜸

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/widgets/pt_conversation.dart';
-import 'package:pt_mind/widgets/user_conversation.dart';
+import 'package:pt_mind/widgets/pt_conv_cart.dart';
+import 'package:pt_mind/widgets/user_conv_card.dart';
 import 'package:pt_mind/services/api_service.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -65,6 +65,8 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     }
   }
   // void jumpScroll() {
+
+  
   //   WidgetsBinding.instance.addPostFrameCallback((_) {
   //     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   //   });

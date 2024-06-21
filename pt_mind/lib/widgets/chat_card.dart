@@ -33,24 +33,8 @@ class ChatCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(),
-                // builder: (context) => const MqttChatScreen(mqtt_chat_provider: , userProvider: userProvider),
               ),
             );
-
-            // Fluttertoast.showToast(
-            //   msg: '${widget.name} 카드 클릭 ',
-            //   toastLength: Toast.LENGTH_SHORT,
-            //   gravity: ToastGravity.CENTER,
-            //   timeInSecForIosWeb: 1,
-            //   backgroundColor: Theme.of(context).dialogBackgroundColor,
-            //   textColor: Theme.of(context).scaffoldBackgroundColor,
-            //   fontSize: 14.0,
-            // );
-            // setState(() {
-            //   bgcolor = const Color(0xFFB7B1DF);
-            //   sleep(const Duration(milliseconds: 100));
-            //   bgcolor = Colors.white;
-            // });
           },
           child: Badge(
             largeSize: 15,

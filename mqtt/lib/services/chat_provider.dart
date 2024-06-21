@@ -24,11 +24,12 @@ class ChatProvider with ChangeNotifier {
   void sendChat({required String nickName, required String chat}) {
     // print(nickName);
     // print(chat);
+        final chatUtf8 = utf8.encode(chat);
     mqttService.client.publishMessage(
         "CHAT",
         MqttQos.atMostOnce,
         MqttClientPayloadBuilder()
-            .addString(json.encode({"userNickName": nickName, "chat": chat}))
+            .addString(json.encode({"userNickName": nickName, "chat": chatUtf8}))
             .payload!);
   }
 

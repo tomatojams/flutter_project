@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 import '../models/chat_model.dart';
 import '../services/chat_provider.dart';
 import '../services/user_provider.dart';
+import 'package:mqtt/services/utf8.dart';
 
 class ChatRoom extends StatefulWidget {
   static const String path = "/chat/room";
@@ -81,7 +82,9 @@ class _ChatRoomState extends State<ChatRoom> {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                              TextSpan(text: chatModel.chat)
+                                              TextSpan(
+                                                  text: utf8Sample(
+                                                      chatModel.chat))
                                             ]),
                                           )),
                                     ),
@@ -101,7 +104,7 @@ class _ChatRoomState extends State<ChatRoom> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 20.0, horizontal: 20.0),
                                     alignment: Alignment.centerLeft,
-                                    child: Text(chatModel.chat),
+                                    child: Text(utf8Sample(chatModel.chat)),
                                   ),
                                 ),
                               ],

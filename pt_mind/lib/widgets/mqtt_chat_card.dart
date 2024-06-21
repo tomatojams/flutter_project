@@ -4,6 +4,7 @@ import 'package:pt_mind/screens/mqtt_chat_screen.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
 
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";
@@ -13,8 +14,8 @@ class MqttChatCard extends StatefulWidget {
   final String imageExt;
   final String titleName;
   final String name;
-  final String lastMessage;
-  final String beforeTime;
+  final String? lastMessage;
+  final String? beforeTime;
   final int? badge;
 
   const MqttChatCard(
@@ -23,8 +24,8 @@ class MqttChatCard extends StatefulWidget {
       required this.imageExt,
       required this.titleName,
       required this.name,
-      required this.lastMessage,
-      required this.beforeTime,
+      this.lastMessage,
+      this.beforeTime,
       this.badge,
       required this.chatProvider,
       required this.userProvider});
@@ -34,7 +35,9 @@ class MqttChatCard extends StatefulWidget {
 }
 
 class _MqttChatCardState extends State<MqttChatCard> {
-  final userId = 'a1234 '; //http용 수정해야함
+  final String userId = '토마토';
+  // utf8.encode(userId);
+  //  final utf8Id = utf8.encode('토마토');
   // Color bgcolor = Colors.white;
 
   Future<void> _move(BuildContext context) async {
@@ -51,13 +54,15 @@ class _MqttChatCardState extends State<MqttChatCard> {
         fontSize: 14.0,
       );
     }
-    // print('mqtt chat card move');
 
     widget.userProvider.setUserNickName(userId);
     // print("before move check");
     // print(widget.userProvider.userNickName);
     widget.chatProvider.sendChat(
         nickName: (widget.userProvider.userNickName), chat: 'before message');
+
+
+    // 메세지 버퍼가 없을때 에러가 나고있음.    
     Navigator.of(context).pushNamed(MqttChatScreen.path);
   }
 
@@ -136,23 +141,31 @@ class _MqttChatCardState extends State<MqttChatCard> {
                                   ),
                                 ],
                               ),
-                              Text(
-                                widget.beforeTime,
-                                style: TextStyle(
-                                  color: Theme.of(context).hintColor,
-                                  fontSize: 12.0,
-                                ),
-                              )
+                              widget.beforeTime == null
+                                  ? const SizedBox(
+                                      height: 10,
+                                    )
+                                  : Text(
+                                      widget.beforeTime!,
+                                      style: TextStyle(
+                                        color: Theme.of(context).hintColor,
+                                        fontSize: 12.0,
+                                      ),
+                                    )
                             ],
                           ),
                           const SizedBox(height: 10.0),
-                          Text(
-                            widget.lastMessage,
-                            style: TextStyle(
-                              color: Theme.of(context).hintColor,
-                              fontSize: 12.0,
-                            ),
-                          ),
+                          widget.lastMessage == null
+                              ? const SizedBox(
+                                  height: 10,
+                                )
+                              : Text(
+                                  widget.lastMessage!,
+                                  style: TextStyle(
+                                    color: Theme.of(context).hintColor,
+                                    fontSize: 12.0,
+                                  ),
+                                )
                         ],
                       ),
                     ),

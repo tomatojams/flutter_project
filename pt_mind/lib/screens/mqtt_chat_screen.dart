@@ -1,12 +1,12 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/widgets/pt_conversation.dart';
-import 'package:pt_mind/widgets/user_conversation.dart';
+import 'package:pt_mind/widgets/pt_conv_cart.dart';
+import 'package:pt_mind/widgets/user_conv_card.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
+import 'package:pt_mind/utiliy/utf8.dart';
+
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
   final ChatProvider chatProvider;
@@ -32,6 +32,7 @@ class _ChatScreenState extends State<MqttChatScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    moveScroll();
   }
 
   @override
@@ -56,7 +57,7 @@ class _ChatScreenState extends State<MqttChatScreen>
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
+        curve: Curves.easeInQuad,
       );
     });
   }
@@ -66,22 +67,19 @@ class _ChatScreenState extends State<MqttChatScreen>
     if (text.isEmpty) {
       return;
     }
-    // print(widget.userProvider.userNickName);
-    // print(text);
 
-    // Uint8List payLoad = utf8.encode(text);
     widget.chatProvider
         .sendChat(nickName: (widget.userProvider.userNickName), chat: text);
 
     _textController.clear();
-    moveScroll();
+    setState(() {
+      moveScroll(); // 초기화후 스크롤이 맨 아래로 가게 추가
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // 최초 채팅방 입장시에만 호출되도록 수정(최초 채팅방 입장시에만 호출되도록 수정)
-    // print("after providercheck");
-    // print(widget.userProvider.userNickName);
+ 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -139,9 +137,14 @@ class _ChatScreenState extends State<MqttChatScreen>
                           final String userNickName =
                               widget.userProvider.userNickName;
                           if (mqttchatModel.userNickName != userNickName) {
-                            return PTconv(conv: mqttchatModel.chat);
+                            // print("mqttchatModel.chat");
+                            // print(mqttchatModel.chat);
+                            return PTconv(conv: utf8Sample(mqttchatModel.chat));
+                            // return PTconv(conv: utf8.decode( utf8.encode(mqttchatModel.chat)));
+
                           }
-                          return UserConv(conv: mqttchatModel.chat);
+                          return UserConv(conv: utf8Sample(mqttchatModel.chat));
+                    
                         },
                       ),
               ),
