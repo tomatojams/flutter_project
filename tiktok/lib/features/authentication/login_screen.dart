@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok/constants/gaps.dart';
-import 'package:tiktok/features/authentication/sign_up_screen.dart';
+import 'package:tiktok/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  void onSignUpTap(BuildContext context) {
+  void _onSignUpTap(BuildContext context) {
     Navigator.of(context).pop();
   }
 
@@ -14,37 +14,52 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 40,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Gaps.v80,
-              Text(
-                'Login TikTok',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w700,
+        child: FractionallySizedBox(
+          widthFactor: 1,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 40,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Gaps.v80,
+                Text(
+                  'TikTok 로그인',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              Gaps.v20,
-              Text(
-                '자신만의 계정을 만들고, TikTok을 시작하세요.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
+                Gaps.v20,
+                Text(
+                  '지금 바로, TikTok을 시작하세요.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                Gaps.v40,
+                AuthButton(
+                    icon: FaIcon(FontAwesomeIcons.user),
+                    text: "Email과 Password로 로그인"),
+                Gaps.v10,
+                AuthButton(
+                    icon: FaIcon(FontAwesomeIcons.instagram),
+                    text: "Instagram으로 계속하기"),
+                Gaps.v10,
+                AuthButton(
+                    icon: FaIcon(FontAwesomeIcons.apple), text: "Apple로 계속하기"),
+              ],
+            ),
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
           // color: Colors.grey.shade100,
-          elevation: 10,
+          elevation: 1,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 3,
@@ -61,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Gaps.h3,
                 GestureDetector(
-                  onTap: () => onSignUpTap(context),
+                  onTap: () => _onSignUpTap(context),
                   child: Text(
                     '계정만들기',
                     style: TextStyle(

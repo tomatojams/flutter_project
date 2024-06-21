@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
-import 'package:pt_mind/features/chatting/widgets/chat_card.dart';
+import 'package:pt_mind/features/chatting/widgets/chat_room_card.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
