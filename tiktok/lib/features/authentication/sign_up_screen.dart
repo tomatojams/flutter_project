@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tiktok/constants/gaps.dart';
+import 'package:tiktok/features/authentication/login_screen.dart';
+import 'package:tiktok/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
+  void onLoginTap(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,10 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              Gaps.v40,
+              AuthButton(text: "Use Phone / Email / Username"),
+              Gaps.v10,
+              AuthButton(text: "Continue with Instagram"),
             ],
           ),
         ),
@@ -55,10 +64,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Gaps.h3,
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/sign_in');
-                  },
+                GestureDetector(
+                  onTap: () => onLoginTap(context),
                   child: Text(
                     '로그인',
                     style: TextStyle(

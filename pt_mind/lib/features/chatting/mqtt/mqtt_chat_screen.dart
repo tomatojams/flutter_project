@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/widgets/pt_conv_cart.dart';
-import 'package:pt_mind/widgets/user_conv_card.dart';
+import 'package:pt_mind/features/chatting/widgets/pt_conv_cart.dart';
+import 'package:pt_mind/features/chatting/widgets/user_conv_card.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/services/mqtt_chat_provider.dart';
 import 'package:pt_mind/services/mqtt_user_provider.dart';
@@ -56,7 +56,7 @@ class _ChatScreenState extends State<MqttChatScreen>
   void moveScroll() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
-        _scrollController.position.minScrollExtent,
+        _scrollController.position.minScrollExtent, // 스크롤 최하단이 LivtWiew에서는 min값. 중요
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
       );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/screens/chatting/http/pt_chat_screen.dart';
+import 'package:pt_mind/features/chatting/http/pt_chat_screen.dart';
 
 class ChatCard extends StatelessWidget {
   final String profile;
