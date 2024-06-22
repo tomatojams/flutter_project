@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/features/authentication/password_screen.dart';
@@ -48,15 +47,20 @@ class _EmailScreenState extends State<EmailScreen> {
     FocusScope.of(context).unfocus();
   }
 
+  // void _onSubmit() {
+  //   if (_email.isEmpty || _isEmailValid() != null) return;
+
+  //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //     return const PasswordScreen();
+  //   }));
+
+  // 디버깅용 위의 코드가 진짜
   void _onSubmit() {
-    if (_email.isEmpty || _isEmailValid() != null) return;
+    // if (_email.isEmpty || _isEmailValid() != null) return;
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return const PasswordScreen();
     }));
-    // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    //   return const EmailScreen();
-    // }));
   }
 
   @override
@@ -91,7 +95,7 @@ class _EmailScreenState extends State<EmailScreen> {
               ),
               Gaps.v16,
               TextField(
-                keyboardType: TextInputType.emailAddress,// 키보드 타입 지정
+                keyboardType: TextInputType.emailAddress, // 키보드 타입 지정
                 autocorrect: false,
                 controller: _tec,
                 onEditingComplete: _onSubmit,
