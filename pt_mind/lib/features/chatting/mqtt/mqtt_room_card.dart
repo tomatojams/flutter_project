@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/chatting/mqtt/mqtt_chat_screen.dart';
-import 'package:pt_mind/services/mqtt_chat_provider.dart';
-import 'package:pt_mind/services/mqtt_user_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:math';
 
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";
@@ -34,13 +35,24 @@ class MqttChatCard extends StatefulWidget {
 }
 
 class _MqttChatCardState extends State<MqttChatCard> {
-  final String userId = 'tomato';
+  String userId = 'tomato' + Random().nextInt(100).toString();
+  // String? userId;
+  // String checkUser() {
+  //   if (widget.userProvider.userNickName == null) {
+  //     userId = 'tomato' + Random().nextInt(100).toString();
+  //     return userId!;
+  //   } else {
+  //     return widget.userProvider.userNickName;
+  //   }
+  // }
+
   // utf8.encode(userId);
   //  final utf8Id = utf8.encode('토마토');
   // Color bgcolor = Colors.white;
 
   Future<void> _move(BuildContext context) async {
-    final bool connectCheck = await widget.chatProvider.join(nickName: userId);
+    // userId  = checkUser();
+    final bool connectCheck = await widget.chatProvider.join(nickName: userId!);
     // print(connectCheck);
     if (!connectCheck) {
       await Fluttertoast.showToast(
@@ -54,14 +66,13 @@ class _MqttChatCardState extends State<MqttChatCard> {
       );
     }
 
-    widget.userProvider.setUserNickName(userId);
+    widget.userProvider.setUserNickName(userId!);
     // print("before move check");
     // print(widget.userProvider.userNickName);
-    widget.chatProvider.sendChat(
-        nickName: (widget.userProvider.userNickName), chat: 'before message');
+    // widget.chatProvider.sendChat(
+    //     nickName: (widget.userProvider.userNickName), chat: 'before message');
+    // 메세지 버퍼가 없을때 에러가 나고있음.
 
-
-    // 메세지 버퍼가 없을때 에러가 나고있음.    
     Navigator.of(context).pushNamed(MqttChatScreen.path);
   }
 

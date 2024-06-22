@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/chatting/widgets/pt_conv_cart.dart';
-import 'package:pt_mind/features/chatting/widgets/user_conv_card.dart';
+import 'package:pt_mind/features/chatting/widgets/pt_conv_widget.dart';
+import 'package:pt_mind/features/chatting/widgets/user_conv_widget.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
-import 'package:pt_mind/services/mqtt_chat_provider.dart';
-import 'package:pt_mind/services/mqtt_user_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
 import 'package:pt_mind/utiliy/utf8.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
@@ -32,7 +32,7 @@ class _ChatScreenState extends State<MqttChatScreen>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    // WidgetsBinding.instance.addObserver(this);
     // moveScroll();
   }
 
@@ -55,11 +55,14 @@ class _ChatScreenState extends State<MqttChatScreen>
 
   void moveScroll() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-        _scrollController.position.minScrollExtent, // 스크롤 최하단이 LivtWiew에서는 min값. 중요
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-      );
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController
+              .position.minScrollExtent, // 스크롤 최하단이 LivtWiew에서는 min값. 중요
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+        );
+      }
     });
   }
 
@@ -80,38 +83,38 @@ class _ChatScreenState extends State<MqttChatScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icon/backButton.svg',
-            height: 20,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Gaps.v20,
-            SvgPicture.asset(
-              'assets/logo/PTlogo-small.svg',
-              height: 25.0,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: SvgPicture.asset(
+              'assets/icon/backButton.svg',
+              height: 20,
             ),
-            Gaps.h64,
-          ],
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          elevation: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Gaps.v20,
+              SvgPicture.asset(
+                'assets/logo/PTlogo-small.svg',
+                height: 25.0,
+              ),
+              Gaps.h64,
+            ],
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus(); // 본문 스크롤을 탭하면 키보드 내리기
-              },
+        body: Column(
+          children: [
+            Expanded(
               child: Container(
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor),
@@ -141,56 +144,56 @@ class _ChatScreenState extends State<MqttChatScreen>
                       ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(10),
-            child: TextField(
-              controller: _textController, // 내부 텍스트를 추출하기 위한 컨트롤러
-              focusNode: _focusNode, // 포커스를 유지해서 전송되어도, 키보드가 내려가지 않게 추가
-              // textInputAction: TextInputAction.done, // 완료액션 설정
-              textInputAction: TextInputAction.send, // 전송액션 설정
-              // onChanged: (text) { // 텍스트가 변경될때마다
-              // },
-              onSubmitted: (text) {
-                // 엔터를 누르면 호출되고 그 다음에 onEditingComplete가 호출됨
-                _send();
-              },
-              onEditingComplete: () {
-                //  포커스를 잃을때 호출되므로 다시 포커스를 요청
-                _focusNode.requestFocus(); //
-              },
-              decoration: InputDecoration(
-                iconColor: Theme.of(context).cardColor,
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).primaryColorLight,
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: TextField(
+                controller: _textController, // 내부 텍스트를 추출하기 위한 컨트롤러
+                focusNode: _focusNode, // 포커스를 유지해서 전송되어도, 키보드가 내려가지 않게 추가
+                // textInputAction: TextInputAction.done, // 완료액션 설정
+                textInputAction: TextInputAction.send, // 전송액션 설정
+                // onChanged: (text) { // 텍스트가 변경될때마다
+                // },
+                onSubmitted: (text) {
+                  // 엔터를 누르면 호출되고 그 다음에 onEditingComplete가 호출됨
+                  _send();
+                },
+                onEditingComplete: () {
+                  //  포커스를 잃을때 호출되므로 다시 포커스를 요청
+                  _focusNode.requestFocus(); //
+                },
+                decoration: InputDecoration(
+                  iconColor: Theme.of(context).cardColor,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColorLight,
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  borderSide: BorderSide(
-                    color: Theme.of(context)
-                        .primaryColor, // 포커스가 되었을 때의 borderSide 색상 설정
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    borderSide: BorderSide(
+                      color: Theme.of(context)
+                          .primaryColor, // 포커스가 되었을 때의 borderSide 색상 설정
+                    ),
                   ),
-                ),
-                fillColor: Theme.of(context).cardColor,
-                border: const OutlineInputBorder(),
-                hintText: '메시지를 입력하세요',
-                suffixIcon: IconButton(
-                  icon: SvgPicture.asset(
-                    'assets/icon/sendIcon.svg',
-                    height: 30,
+                  fillColor: Theme.of(context).cardColor,
+                  border: const OutlineInputBorder(),
+                  hintText: '메시지를 입력하세요',
+                  suffixIcon: IconButton(
+                    icon: SvgPicture.asset(
+                      'assets/icon/sendIcon.svg',
+                      height: 30,
+                    ),
+                    onPressed: () {
+                      // _send(); // 아이콘 클릭시에도 전송이 되게
+                    },
                   ),
-                  onPressed: () {
-                    // _send(); // 아이콘 클릭시에도 전송이 되게
-                  },
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

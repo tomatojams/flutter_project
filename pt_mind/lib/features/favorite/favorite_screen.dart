@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/widgets/favorite_card.dart';
+import 'package:pt_mind/features/favorite/widgets/favorite_card.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
 class FavoriteScreen extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/widgets/program_icon.dart';
+import 'package:pt_mind/features/personal/widgets/program_icon.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pt_mind/constants/gaps.dart';

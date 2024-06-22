@@ -4,14 +4,14 @@ import 'package:tiktok/features/authentication/email_screen.dart';
 
 import 'widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class NicknameScreen extends StatefulWidget {
+  const NicknameScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<NicknameScreen> createState() => _UsernameScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
+class _UsernameScreenState extends State<NicknameScreen> {
   final TextEditingController _tc = TextEditingController();
 
   String _userNickName = "";
@@ -40,15 +40,15 @@ class _UsernameScreenState extends State<UsernameScreen> {
     }));
   }
 
-void _onScaffoldTap() {
+  void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
-        
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/chatting/http/pt_chat_screen.dart';
 
-class ChatCard extends StatelessWidget {
+class PtRoomCard extends StatelessWidget {
   final String profile;
   final String imageExt;
   final String titleName;
@@ -11,7 +11,7 @@ class ChatCard extends StatelessWidget {
   final String beforeTime;
   final int? badge;
 
-  const ChatCard(
+  const PtRoomCard(
       {super.key,
       required this.profile,
       required this.imageExt,
@@ -31,7 +31,7 @@ class ChatCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ChatScreen(),
+                builder: (context) => const PtChatScreen(),
               ),
             );
           },

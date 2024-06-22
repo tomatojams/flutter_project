@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/features/mainscreen/pt_state.dart';
-import 'package:pt_mind/services/mqtt_chat_provider.dart';
-import 'package:pt_mind/services/mqtt_user_provider.dart';
+import 'package:pt_mind/features/navigator/pt_state.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
 import 'package:pt_mind/features/chatting/mqtt/mqtt_chat_screen.dart';
 
 void main() {

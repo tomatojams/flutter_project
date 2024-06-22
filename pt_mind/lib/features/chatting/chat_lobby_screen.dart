@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
-import 'package:pt_mind/features/chatting/widgets/chat_room_card.dart';
+import 'package:pt_mind/features/chatting/http/pt_room_card.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:pt_mind/services/mqtt_chat_provider.dart';
-import 'package:pt_mind/services/mqtt_user_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/mqtt_chat_card.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
+import 'package:pt_mind/features/chatting/mqtt/mqtt_room_card.dart';
 
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";
@@ -23,6 +23,12 @@ class ChatLobbyScreen extends StatefulWidget {
 class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
   Future<List<ChatLobbyModel>>? chat = ApiService.getChatRoomList();
   final userId = 'tomato';
+
+// @override
+//   void dispose() {
+//    widget._refreshController.dispose();
+//     super.dispose();
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
               ),
               child: Column(
                 children: [
-                  const ChatCard(
+                  const PtRoomCard(
                     name: 'P.T',
                     titleName: '뉴럴.안내',
                     lastMessage: '당신에게 알맞은 상담사를 찾아드려요.',

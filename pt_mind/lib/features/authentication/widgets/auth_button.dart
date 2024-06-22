@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tiktok/features/authentication/nickname_screen.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
@@ -11,8 +10,8 @@ class AuthButton extends StatelessWidget {
     required this.icon,
   });
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const NicknameScreen()));
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (context) => const NicknameScreen()));
   }
 
   @override
