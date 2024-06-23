@@ -2,12 +2,16 @@ import 'package:http/http.dart' as http;
 import 'package:pt_mind/models/chat_model.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
 import 'dart:convert';
+
+import '../models/ramdom_chat_room.dart';
+
 class ApiService {
   static const String baseUrl = "http://10.0.2.2:8000";
   static const String chatpt = "chat/pt";
   static const String chatptAll = "chat/pt/";
   static const String chatptPost = "chat/user/";
   static const String chatptRoom = "chatroom/";
+  static const String randomChatRoom = "chatroom/random";
 
   static Future<String> getChat() async {
     final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
@@ -57,6 +61,19 @@ class ApiService {
       }
 
       return chatRoomLists;
+    } else {
+      throw Error();
+    }
+  }
+
+  static Future<RandomChatRoom> getRandomChatRoom() async {
+    final url = Uri.parse('$baseUrl/$randomChatRoom'); // parse는 새로운  uri 객체를 만듬
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final dynamic chatRooms = jsonDecode(utf8.decode(response.bodyBytes));
+      print(chatRooms);
+      return RandomChatRoom.fromJson(chatRooms);
     } else {
       throw Error();
     }

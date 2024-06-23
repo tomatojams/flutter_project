@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants/gaps.dart';
 
-import 'widgets/form_button.dart';
+import '../onboarding/interests_screen.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -34,11 +34,12 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
+    print('next');
     // 온보딩으로
     // stateful widget에서는 context를 인자로 받지 않아도 됨
-    // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    //   return const InterestsScreen();
-    // }));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return const InterestsScreen();
+    }));
   }
 
   void _onScaffoldTap() {
@@ -104,7 +105,7 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
                   ),
                   Gaps.h28,
                   Image.asset(
-                    'assets/icon/happy-birthday.png',
+                    'assets/icon/birthday-cake.png',
                     width: 60,
                   ),
                 ],
@@ -135,12 +136,23 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
                 ),
               ),
               Gaps.v20,
-              GestureDetector(
-                child: const FormButton(disabled: false),
-                onTap: () {
-                  _onNextTap;
-                },
-              ),
+              CupertinoButton(
+                alignment: Alignment.center,
+                color: Theme.of(context).primaryColor,
+                onPressed: _onNextTap,
+                child: const FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Text(
+                    'Next',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),

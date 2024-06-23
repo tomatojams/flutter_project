@@ -1,4 +1,3 @@
-
 class Sizes {
   static const size1 = 1.0;
   static const size2 = 2.0;
@@ -13,6 +12,7 @@ class Sizes {
   static const size11 = 11.0;
   static const size12 = 12.0;
   static const size14 = 14.0;
+  static const size15 = 15.0;
   static const size16 = 16.0;
   static const size20 = 20.0;
   static const size24 = 24.0;

@@ -103,12 +103,25 @@ class _EmailScreenState extends State<EmailScreen> {
                 onEditingComplete: _onSubmit,
                 cursorColor: Theme.of(context).primaryColor,
                 decoration: InputDecoration(
+                  errorStyle: const TextStyle(
+                    color: Colors.pink,
+                  ),
                   errorText: _isEmailValid(),
                   hintText: 'Email',
                   hintStyle: const TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
+                  ),
+                  errorBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black54,
+                    ),
+                  ),
+                  focusedErrorBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black87,
+                    ),
                   ),
                   enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(

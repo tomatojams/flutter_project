@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/gaps.dart';
+import '../navigator/pt_state.dart';
 
 class InterestsScreen extends StatefulWidget {
   const InterestsScreen({super.key});
@@ -40,6 +41,14 @@ class _InterestsScreenState extends State<InterestsScreen> {
     setState(() {
       _bgtoggle[index] = !_bgtoggle[index];
     });
+  }
+
+  void _onSubmitTap() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const PTstate()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -143,7 +152,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
               child: CupertinoButton(
                 // Next 버튼
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: _onSubmitTap,
                 child: const Text(
                   'Next',
                   textAlign: TextAlign.center,

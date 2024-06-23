@@ -37,19 +37,20 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Gaps.v80,
-                const Text(
+                Text(
                   'P.Tmind에 가입하세요.',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
+                    color: Theme.of(context).dialogBackgroundColor,
                   ),
                 ),
                 Gaps.v20,
-                const Text(
+                Text(
                   '자신만의 계정을 만들고, P.Tmind를 시작하세요.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black54,
+                    color: Theme.of(context).indicatorColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -58,19 +59,31 @@ class SignUpScreen extends StatelessWidget {
                   onTap: () =>
                       _onEmailTap(context), // stateless라서 context를 넘겨줘야함
                   child: const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.user),
+                      // icon: FaIcon(
+                      //   FontAwesomeIcons.user,
+                      //   color: Colors.black54,
+                      // ),
                       text: "Email과 Password로 로그인"),
                 ),
-                Gaps.v10,
+                Gaps.v15,
                 GestureDetector(
-                  child: const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.instagram),
-                      text: "Instagram으로 계속하기"),
+                  child: AuthButton(
+                      image: Image.asset('assets/icon/kakao.png',
+                          color: Colors.black54, width: 23),
+                      text: "kakao로 계속하기"),
                 ),
-                Gaps.v10,
+                Gaps.v15,
                 GestureDetector(
                   child: const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.apple),
+                      icon: FaIcon(FontAwesomeIcons.facebook,
+                          color: Colors.black54),
+                      text: "facebook으로 계속하기"),
+                ),
+                Gaps.v15,
+                GestureDetector(
+                  child: const AuthButton(
+                      icon:
+                          FaIcon(FontAwesomeIcons.apple, color: Colors.black54),
                       text: "Apple로 계속하기"),
                 ),
               ],

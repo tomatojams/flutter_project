@@ -111,7 +111,6 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                           height: 28,
                         );
                       }),
-                
                   FutureBuilder(
                       future: randomChat,
                       builder: (context, snapshot) {

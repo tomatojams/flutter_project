@@ -12,10 +12,11 @@ class LoginScreen extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-
   void onEmailLoginTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginFormScreen()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const LoginFormScreen()));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,18 +50,35 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Gaps.v40,
                 GestureDetector(
-                  onTap: ()=>onEmailLoginTap(context),
+                  onTap: () => onEmailLoginTap(context),
                   child: const AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.user),
+                      // icon: FaIcon(
+                      //   FontAwesomeIcons.user,
+                      //   color: Colors.black54,
+                      // ),
                       text: "Email과 Password로 로그인"),
                 ),
-                Gaps.v10,
-                const AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.instagram),
-                    text: "Instagram으로 계속하기"),
-                Gaps.v10,
-                const AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.apple), text: "Apple로 계속하기"),
+                Gaps.v15,
+                GestureDetector(
+                  child: AuthButton(
+                      image: Image.asset('assets/icon/kakao.png',
+                          color: Colors.black54, width: 23),
+                      text: "kakao로 계속하기"),
+                ),
+                Gaps.v15,
+                GestureDetector(
+                  child: const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.facebook,
+                          color: Colors.black54),
+                      text: "facebook으로 계속하기"),
+                ),
+                Gaps.v15,
+                GestureDetector(
+                  child: const AuthButton(
+                      icon:
+                          FaIcon(FontAwesomeIcons.apple, color: Colors.black54),
+                      text: "Apple로 계속하기"),
+                ),
               ],
             ),
           ),

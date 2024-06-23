@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
-import '../chatting/chat_lobby_screen.dart';
-import '../navigator/pt_state.dart';
+import '../onboarding/interests_screen.dart';
 import 'widgets/form_button.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -35,11 +34,16 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const PTstate()),
-        (Route<dynamic> route) => false,
-      );
+
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return const InterestsScreen();
+      }));
+
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const PTstate()),
+      //   (Route<dynamic> route) => false,
+      // );
     }
 
     // print(_formData.values); // 이메일, 패스워드 출력
@@ -97,7 +101,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
               children: [
                 TextFormField(
                   // 이메일 입력
-
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) => _isEmailValid(value), // 유효성 검사 문장을 리턴
                   onSaved: (newValue) {
                     if (newValue != null) {
@@ -105,6 +109,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     }
                   }, // 이메일 전달
                   decoration: const InputDecoration(
+                    errorStyle: TextStyle(
+                      color: Colors.pink,
+                    ),
                     enabledBorder: UnderlineInputBorder(
                       // 입력창 밑줄 비활성화 상태
                       borderSide: BorderSide(
@@ -117,6 +124,16 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                         color: Colors.black87,
                       ),
                     ),
+                    errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black54,
+                      ),
+                    ),
+                    focusedErrorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black87,
+                      ),
+                    ),
                     hintText: 'Email',
                   ),
                 ),
@@ -125,6 +142,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   // 패스워드 입력
 
                   controller: _ptc,
+
                   obscureText: _isObscure,
                   autocorrect: false,
                   validator: (value) =>
@@ -165,6 +183,19 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                       color: Colors.black54,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
+                    ),
+                    errorStyle: const TextStyle(
+                      color: Colors.pink,
+                    ),
+                    errorBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black54,
+                      ),
+                    ),
+                    focusedErrorBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black87,
+                      ),
                     ),
                     enabledBorder: const UnderlineInputBorder(
                       // 입력창 밑줄 비활성화 상태

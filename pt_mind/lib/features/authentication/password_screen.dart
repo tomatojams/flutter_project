@@ -225,7 +225,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                           size: 16, color: Colors.black54),
                   Gaps.h8,
                   const Text(
-                    '영어, 숫자, 특수문자를 포함해야 합니다.',
+                    '영어, 숫자, 특수문자 @\$!%*#?&를 포함해야 합니다.',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 12,

@@ -75,6 +75,8 @@ flutter:
     - assets/line/
     - assets/profile/
     - assets/program/
+    - assets/random/
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
