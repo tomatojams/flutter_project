@@ -118,7 +118,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Gaps.h1,
-              Text('Sign Up'),
+              Text('회원가입'),
               Gaps.h52,
             ],
           ),
@@ -147,9 +147,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 decoration: InputDecoration(
                   // prefixIcon: const Icon(
                   //   // 입력창 왼쪽 아이콘
-                  //   Icons.key,
-                  //   color: Colors.black54,
-                  // ),
+
                   suffixIcon: Row(
                     // 입력창 오른쪽 아이콘
 

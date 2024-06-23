@@ -1,7 +1,8 @@
 // 팝업화면
 
 import 'package:flutter/material.dart';
-import 'package:pt_mind/constants/gaps.dart';
+
+import '../../constants/gaps.dart';
 
 void dialogPopup(BuildContext context) {
   showDialog(

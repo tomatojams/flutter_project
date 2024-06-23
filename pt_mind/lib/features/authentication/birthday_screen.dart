@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/gaps.dart';
+
 import 'widgets/form_button.dart';
 
 class BirthdayScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
 
   @override
   void initState() {
+    // 텍스트필드에 초기 날짜 표시
     super.initState();
     _setTextFieldDate(initialDate);
   }
@@ -31,18 +33,21 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
     super.dispose();
   }
 
-  // void _onNextTap() {
-  //   // stateful widget에서는 context를 인자로 받지 않아도 됨
-  //   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-  //     return const InterestsScreen();
-  //   }));
-  // }
+  void _onNextTap() {
+    // 온보딩으로
+    // stateful widget에서는 context를 인자로 받지 않아도 됨
+    // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+    //   return const InterestsScreen();
+    // }));
+  }
 
   void _onScaffoldTap() {
+    // 키보드 내리기
     FocusScope.of(context).unfocus();
   }
 
   void _setTextFieldDate(DateTime date) {
+    // 텍스트필드에 날짜 표시
     final textDate = date.toString().split(' ').first;
     _birthdayc.value = TextEditingValue(text: textDate);
   }
@@ -61,7 +66,7 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Gaps.h1,
-              Text('Sign Up'),
+              Text('회원가입'),
               Gaps.h52,
             ],
           ),
@@ -99,7 +104,7 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
                   ),
                   Gaps.h28,
                   Image.asset(
-                    'assets/icon/birthday-cake.png',
+                    'assets/icon/happy-birthday.png',
                     width: 60,
                   ),
                 ],
@@ -132,11 +137,10 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
               Gaps.v20,
               GestureDetector(
                 child: const FormButton(disabled: false),
+                onTap: () {
+                  _onNextTap;
+                },
               ),
-              // onTap: () {
-              //   dialogPopup(context);
-              // },
-              // child: const FormButton(disabled: false))
             ],
           ),
         ),

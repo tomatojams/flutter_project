@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pt_mind/constants/gaps.dart';
-import 'package:pt_mind/features/authentication/email_screen.dart';
-import 'package:pt_mind/features/authentication/login_screen.dart';
-import 'package:pt_mind/features/authentication/widgets/auth_button.dart';
+
+import '../../constants/gaps.dart';
+import 'email_screen.dart';
+import 'login_screen.dart';
+import 'widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});

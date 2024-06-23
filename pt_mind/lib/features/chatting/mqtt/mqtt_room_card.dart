@@ -35,7 +35,7 @@ class MqttChatCard extends StatefulWidget {
 }
 
 class _MqttChatCardState extends State<MqttChatCard> {
-  String userId = 'tomato' + Random().nextInt(100).toString();
+  String userId = 'tomato${Random().nextInt(100)}';
   // String? userId;
   // String checkUser() {
   //   if (widget.userProvider.userNickName == null) {
@@ -52,7 +52,7 @@ class _MqttChatCardState extends State<MqttChatCard> {
 
   Future<void> _move(BuildContext context) async {
     // userId  = checkUser();
-    final bool connectCheck = await widget.chatProvider.join(nickName: userId!);
+    final bool connectCheck = await widget.chatProvider.join(nickName: userId);
     // print(connectCheck);
     if (!connectCheck) {
       await Fluttertoast.showToast(
@@ -66,7 +66,7 @@ class _MqttChatCardState extends State<MqttChatCard> {
       );
     }
 
-    widget.userProvider.setUserNickName(userId!);
+    widget.userProvider.setUserNickName(userId);
     // print("before move check");
     // print(widget.userProvider.userNickName);
     // widget.chatProvider.sendChat(

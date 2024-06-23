@@ -58,7 +58,7 @@ class _UsernameScreenState extends State<NicknameScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Gaps.h1,
-              Text('Sign Up'),
+              Text('회원가입'),
               Gaps.h52,
             ],
           ),

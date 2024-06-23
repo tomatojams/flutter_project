@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class FormButton extends StatelessWidget {
+  final bool disabled;
+  final String? text; // 인자를 안받아도 될때 final 에 ?를 붙임
+
   const FormButton({
     super.key,
     required this.disabled,
+    this.text = 'Next', // 디펄트값을 생성자에서 지정
   });
 
-  final bool disabled;
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
@@ -27,8 +30,8 @@ class FormButton extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
-            child: const Text(
-              "Next",
+            child: Text(
+              text!,
             ),
           ),
         ),
