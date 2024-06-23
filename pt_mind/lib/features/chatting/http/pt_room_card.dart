@@ -61,7 +61,7 @@ class PtRoomCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
+                  horizontal: 20.0,
                   vertical: 15.0,
                 ),
                 child: Row(

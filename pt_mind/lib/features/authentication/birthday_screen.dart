@@ -99,7 +99,7 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
                   ),
                   Gaps.h28,
                   Image.asset(
-                    'assets/icons/happy-birthday.png',
+                    'assets/icon/birthday-cake.png',
                     width: 60,
                   ),
                 ],

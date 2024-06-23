@@ -14,7 +14,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ChatProvider>(
@@ -43,6 +42,7 @@ class App extends StatelessWidget {
           return null;
         },
         theme: ThemeData(
+          useMaterial3: false,
           scaffoldBackgroundColor: const Color(0xFFF8F2F5),
           primaryColor: const Color(0xFF807FFF),
           primaryColorDark: const Color(0xFF4645A9),

@@ -41,20 +41,20 @@ class _PTstateState extends State<PTstate> {
         ),
       ),
       body: _navIndex[currentPageIndex], // 여기서 페이지를 바꿔줌
-      // floatingActionButton: FloatingActionButton(
-      //   // 가입아이콘
-
-      //   onPressed: () {
-      //     Navigator.of(context).push(
-      //         MaterialPageRoute(builder: (context) => const SignUpScreen()));
-      //   },
-      //   tooltip: 'Increment',
-      //   child: Text('Join',
-      //       style: TextStyle(
-      //         fontSize: 14.0,
-      //         color: Theme.of(context).primaryColorDark,
-      //       )),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        // 플로팅 가입아이콘
+        backgroundColor: Theme.of(context).cardColor,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const SignUpScreen(),
+              fullscreenDialog: true));
+        },
+        tooltip: 'Increment',
+        child: Image.asset(
+          'assets/icon/birthday-cake.png',
+          width: 30,
+        ),
+      ),
       bottomNavigationBar: NavigationBarTheme(
         // 바텀 네비게이션 테마
 

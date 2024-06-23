@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tiktok/constants/gaps.dart';
-import 'package:tiktok/features/authentication/widgets/auth_button.dart';
+
+import '../../constants/gaps.dart';
+import 'login_form_screen.dart';
+import 'widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -10,22 +12,26 @@ class LoginScreen extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
+
+  void onEmailLoginTap(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginFormScreen()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
+      body: SafeArea(
         child: FractionallySizedBox(
           widthFactor: 1,
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 40,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Gaps.v80,
-                Text(
-                  'TikTok 로그인',
+                const Text(
+                  'P.Tmind 로그인',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
@@ -33,8 +39,8 @@ class LoginScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Gaps.v20,
-                Text(
-                  '지금 바로, TikTok을 시작하세요.',
+                const Text(
+                  '지금 바로, P.Tmind를 시작하세요.',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black54,
@@ -42,15 +48,18 @@ class LoginScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Gaps.v40,
-                AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.user),
-                    text: "Email과 Password로 로그인"),
+                GestureDetector(
+                  onTap: ()=>onEmailLoginTap(context),
+                  child: const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.user),
+                      text: "Email과 Password로 로그인"),
+                ),
                 Gaps.v10,
-                AuthButton(
+                const AuthButton(
                     icon: FaIcon(FontAwesomeIcons.instagram),
                     text: "Instagram으로 계속하기"),
                 Gaps.v10,
-                AuthButton(
+                const AuthButton(
                     icon: FaIcon(FontAwesomeIcons.apple), text: "Apple로 계속하기"),
               ],
             ),

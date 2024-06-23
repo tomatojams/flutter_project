@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pt_mind/constants/gaps.dart';
+import 'package:pt_mind/features/authentication/email_screen.dart';
 import 'package:pt_mind/features/authentication/login_screen.dart';
 import 'package:pt_mind/features/authentication/widgets/auth_button.dart';
 
@@ -11,30 +13,40 @@ class SignUpScreen extends StatelessWidget {
         .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
+  void _onEmailTap(context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const EmailScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+      ),
+      body: SafeArea(
         child: FractionallySizedBox(
           widthFactor: 1,
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 40,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Gaps.v80,
-                Text(
-                  'TikTok에 가입하세요.',
+                const Text(
+                  'P.Tmind에 가입하세요.',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Gaps.v20,
-                Text(
-                  '자신만의 계정을 만들고, TikTok을 시작하세요.',
+                const Text(
+                  '자신만의 계정을 만들고, P.Tmind를 시작하세요.',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black54,
@@ -42,16 +54,25 @@ class SignUpScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Gaps.v40,
-                AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.user),
-                    text: "Email과 Password로 로그인"),
+                GestureDetector(
+                  onTap: () =>
+                      _onEmailTap(context), // stateless라서 context를 넘겨줘야함
+                  child: const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.user),
+                      text: "Email과 Password로 로그인"),
+                ),
                 Gaps.v10,
-                AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.instagram),
-                    text: "Instagram으로 계속하기"),
+                GestureDetector(
+                  child: const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.instagram),
+                      text: "Instagram으로 계속하기"),
+                ),
                 Gaps.v10,
-                AuthButton(
-                    icon: FaIcon(FontAwesomeIcons.apple), text: "Apple로 계속하기"),
+                GestureDetector(
+                  child: const AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.apple),
+                      text: "Apple로 계속하기"),
+                ),
               ],
             ),
           ),
@@ -76,7 +97,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Gaps.h3,
                 GestureDetector(
-                  onTap: () => _onLoginTap(context),
+                  onTap: () =>
+                      _onLoginTap(context), // stateless라서 context를 넘겨줘야함
                   child: Text(
                     '로그인',
                     style: TextStyle(
