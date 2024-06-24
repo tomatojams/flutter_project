@@ -82,8 +82,8 @@ class SignUpScreen extends StatelessWidget {
                 Gaps.v15,
                 GestureDetector(
                   child: const AuthButton(
-                      icon:
-                          FaIcon(FontAwesomeIcons.apple, color: Colors.black54),
+                      icon: FaIcon(FontAwesomeIcons.apple,
+                          color: Colors.black54, size: 28),
                       text: "Apple로 계속하기"),
                 ),
               ],

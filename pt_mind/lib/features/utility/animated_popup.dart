@@ -34,6 +34,7 @@ void showPopup(BuildContext context) {
             backgroundColor: Colors.white, // 배경색
             actions: <Widget>[
               TextButton(
+                
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },

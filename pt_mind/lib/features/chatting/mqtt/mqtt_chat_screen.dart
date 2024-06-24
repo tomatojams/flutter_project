@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/chatting/widgets/pt_conv_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:pt_mind/features/chatting/widgets/mqtt_conv_widget.dart';
 import 'package:pt_mind/features/chatting/widgets/user_conv_widget.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
@@ -8,13 +9,19 @@ import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart'
 import 'package:pt_mind/features/chatting/widgets/mqtt_utf8.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
+import '../widgets/pt_conv_widget.dart';
+
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
+  // final String profile;
   final ChatProvider chatProvider;
   final UserProvider userProvider;
 
-  const MqttChatScreen(
-      {super.key, required this.chatProvider, required this.userProvider});
+  const MqttChatScreen({
+    super.key,
+    required this.chatProvider,
+    required this.userProvider,
+  });
   @override
   State<MqttChatScreen> createState() => _ChatScreenState();
 }
@@ -81,6 +88,13 @@ class _ChatScreenState extends State<MqttChatScreen>
     });
   }
 
+  bool isPng() {
+    if (widget.userProvider.profile.contains('png')) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -136,8 +150,12 @@ class _ChatScreenState extends State<MqttChatScreen>
                           if (mqttchatModel.userNickName != userNickName) {
                             // print("mqttchatModel.chat");
                             // print(mqttchatModel.chat);
-                            return PTconv(conv: utf8Sample(mqttchatModel.chat));
-                            // return PTconv(conv: utf8.decode( utf8.encode(mqttchatModel.chat)));
+                            return MqttConv(
+                                isPng: isPng(),
+                                profile: widget.userProvider.profile,
+                                conv: utf8Sample(mqttchatModel.chat));
+
+                            // return PTconv(conv: utf8Sample(mqttchatModel.chat));
                           }
                           return UserConv(conv: utf8Sample(mqttchatModel.chat));
                         },
@@ -155,10 +173,11 @@ class _ChatScreenState extends State<MqttChatScreen>
                 // },
                 onSubmitted: (text) {
                   // 엔터를 누르면 호출되고 그 다음에 onEditingComplete가 호출됨
-                  _send();
+                  // _send();
                 },
                 onEditingComplete: () {
                   //  포커스를 잃을때 호출되므로 다시 포커스를 요청
+                  _send();
                   _focusNode.requestFocus(); //
                 },
                 decoration: InputDecoration(

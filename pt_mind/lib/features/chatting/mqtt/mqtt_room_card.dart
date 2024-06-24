@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:pt_mind/features/chatting/mqtt/mqtt_chat_screen.dart';
 import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
@@ -33,8 +34,9 @@ class MqttChatCard extends StatefulWidget {
   @override
   State<MqttChatCard> createState() => _MqttChatCardState();
 }
+
 class _MqttChatCardState extends State<MqttChatCard> {
-  String userId = 'tomato${Random().nextInt(100)}';
+  late String userId;
   bool _isConnecting = false; // Flag to track connection status
 
   Future<void> _move(BuildContext context) async {
@@ -45,6 +47,20 @@ class _MqttChatCardState extends State<MqttChatCard> {
     setState(() {
       _isConnecting = true; // Start connection attempt
     });
+
+    final List<String> mentor = ['나미선', '이다민', '매니저'];
+    final List<String> profile = [
+      'assets/profile/Namisun-profile.png',
+      'assets/profile/Damin-profile.png',
+      'assets/profile/manager-profile.svg'
+    ];
+
+    final List<String> user = ['tomato1', 'tomato2', 'tomato3'];
+    String userId = user[mentor.indexOf(widget.name)];
+
+    // String userId = 'tomato${Random().nextInt(100)}';
+    // print(context.watch<UserProvider>().userNickName);
+    print('userId: $userId');
 
     final bool connectCheck = await widget.chatProvider.join(nickName: userId);
 
@@ -66,7 +82,7 @@ class _MqttChatCardState extends State<MqttChatCard> {
     }
 
     widget.userProvider.setUserNickName(userId);
-
+    widget.userProvider.setProfile(profile[mentor.indexOf(widget.name)]);
     Navigator.of(context).pushNamed(MqttChatScreen.path);
 
     setState(() {
