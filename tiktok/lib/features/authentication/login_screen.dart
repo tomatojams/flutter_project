@@ -31,11 +31,12 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Gaps.v80,
-                const Text(
+                Text(
                   'P.Tmind 로그인',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
+                    color: Theme.of(context).dialogBackgroundColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -91,29 +92,34 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               vertical: 3,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  '아직 계정이 없으신가요?',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black54,
-                  ),
-                ),
-                Gaps.h3,
-                GestureDetector(
-                  onTap: () => _onSignUpTap(context),
-                  child: Text(
-                    '계정만들기',
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 15
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '아직 계정이 없으신가요?',
                     style: TextStyle(
                       fontSize: 15,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                     ),
                   ),
-                ),
-              ],
+                  Gaps.h3,
+                  GestureDetector(
+                    onTap: () => _onSignUpTap(context),
+                    child: Text(
+                      '계정만들기',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           )),
     );

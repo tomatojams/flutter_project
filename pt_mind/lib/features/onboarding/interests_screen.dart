@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/gaps.dart';
+import '../authentication/provider/auth_provider.dart';
 import '../navigator/pt_state.dart';
 
 class InterestsScreen extends StatefulWidget {
@@ -44,6 +46,8 @@ class _InterestsScreenState extends State<InterestsScreen> {
   }
 
   void _onSubmitTap() {
+    context.read<AuthProvider>().setUserRegister(true); // 가입이 되었다는 것을 프로바이더에 알림
+
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const PTstate()),

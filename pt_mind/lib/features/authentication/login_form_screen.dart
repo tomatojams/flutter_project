@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
+import '../navigator/pt_state.dart';
 import '../onboarding/interests_screen.dart';
 import 'widgets/form_button.dart';
 
@@ -35,9 +36,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return const InterestsScreen();
-      }));
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const PTstate()),
+        (Route<dynamic> route) => false,
+      );
 
       // Navigator.pushAndRemoveUntil(
       //   context,

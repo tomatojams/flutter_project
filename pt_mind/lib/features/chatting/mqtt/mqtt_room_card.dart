@@ -33,30 +33,24 @@ class MqttChatCard extends StatefulWidget {
   @override
   State<MqttChatCard> createState() => _MqttChatCardState();
 }
-
 class _MqttChatCardState extends State<MqttChatCard> {
   String userId = 'tomato${Random().nextInt(100)}';
-  // String? userId;
-  // String checkUser() {
-  //   if (widget.userProvider.userNickName == null) {
-  //     userId = 'tomato' + Random().nextInt(100).toString();
-  //     return userId!;
-  //   } else {
-  //     return widget.userProvider.userNickName;
-  //   }
-  // }
-
-  // utf8.encode(userId);
-  //  final utf8Id = utf8.encode('토마토');
-  // Color bgcolor = Colors.white;
+  bool _isConnecting = false; // Flag to track connection status
 
   Future<void> _move(BuildContext context) async {
-    // userId  = checkUser();
+    if (_isConnecting) {
+      return; // Prevent new connection attempts if a connection is in progress
+    }
+
+    setState(() {
+      _isConnecting = true; // Start connection attempt
+    });
+
     final bool connectCheck = await widget.chatProvider.join(nickName: userId);
-    // print(connectCheck);
+
     if (!connectCheck) {
       await Fluttertoast.showToast(
-        msg: '${widget.name}님과의 연결이 원활화지 않습니다. ',
+        msg: '${widget.name}님과의 연결이 원활하지 않습니다. ',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -64,16 +58,20 @@ class _MqttChatCardState extends State<MqttChatCard> {
         textColor: Theme.of(context).scaffoldBackgroundColor,
         fontSize: 14.0,
       );
+
+      setState(() {
+        _isConnecting = false; // Reset connection status
+      });
+      return;
     }
 
     widget.userProvider.setUserNickName(userId);
-    // print("before move check");
-    // print(widget.userProvider.userNickName);
-    // widget.chatProvider.sendChat(
-    //     nickName: (widget.userProvider.userNickName), chat: 'before message');
-    // 메세지 버퍼가 없을때 에러가 나고있음.
 
     Navigator.of(context).pushNamed(MqttChatScreen.path);
+
+    setState(() {
+      _isConnecting = false; // Reset connection status
+    });
   }
 
   @override

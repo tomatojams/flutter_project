@@ -98,30 +98,35 @@ class SignUpScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               vertical: 3,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  '이미 계정이 있으신가요?',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black54,
-                  ),
-                ),
-                Gaps.h3,
-                GestureDetector(
-                  onTap: () =>
-                      _onLoginTap(context), // stateless라서 context를 넘겨줘야함
-                  child: Text(
-                    '로그인',
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 15,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    '이미 계정이 있으신가요?',
                     style: TextStyle(
                       fontSize: 15,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                     ),
                   ),
-                ),
-              ],
+                  Gaps.h3,
+                  GestureDetector(
+                    onTap: () =>
+                        _onLoginTap(context), // stateless라서 context를 넘겨줘야함
+                    child: Text(
+                      '로그인',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           )),
     );

@@ -3,10 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
-void popupDialog(context) {
-  showDialog(
+void popupDialog(BuildContext context) {
+  showGeneralDialog(
     context: context,
-    builder: (context) {
+    barrierDismissible: true,
+    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    barrierColor: Colors.black54, // 팝업 바깥쪽의 어두운 배경색
+    transitionDuration: const Duration(milliseconds: 300), // 애니메이션 지속 시간
+    pageBuilder: (BuildContext context, Animation<double> animation,
+        Animation<double> secondaryAnimation) {
       return Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -211,6 +216,13 @@ void popupDialog(context) {
             ],
           ),
         ),
+      );
+    },
+    transitionBuilder: (BuildContext context, Animation<double> animation,
+        Animation<double> secondaryAnimation, Widget child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
       );
     },
   );

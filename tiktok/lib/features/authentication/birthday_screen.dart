@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../constants/gaps.dart';
 
 import '../onboarding/interests_screen.dart';
-import 'widgets/form_button.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
