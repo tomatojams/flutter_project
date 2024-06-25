@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:pt_mind/models/chat_model.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
+import 'package:pt_mind/models/mentor_model.dart';
 import 'dart:convert';
 
 import '../models/ramdom_chat_room.dart';
@@ -12,6 +13,7 @@ class ApiService {
   static const String chatptPost = "chat/user/";
   static const String chatptRoom = "chatroom/";
   static const String randomChatRoom = "chatroom/random";
+  static const String mentor = "mentor";
 
   static Future<String> getChat() async {
     final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
@@ -54,6 +56,23 @@ class ApiService {
       final chatObject = jsonDecode(utf8.decode(response.bodyBytes));
       chatModel = ChatModel.fromJson(chatObject);
       return chatModel.outText;
+    } else {
+      throw Error();
+    }
+  }
+
+  static Future<MentorModel> getMentor(mentorId) async {
+    MentorModel mentorModel;
+    final url =
+        Uri.parse('$baseUrl/$mentor/$mentorId'); // parse는 새로운  uri 객체를 만듬
+    final response = await http.get(url);
+    print(url);
+
+    if (response.statusCode == 200) {
+      final mentorObject = jsonDecode(utf8.decode(response.bodyBytes));
+      mentorModel = MentorModel.fromJson(mentorObject);
+      print(mentorModel.profile);
+      return mentorModel;
     } else {
       throw Error();
     }
