@@ -57,7 +57,7 @@ class _EmailScreenState extends State<EmailScreen> {
 
   // 디버깅용 위의 코드가 진짜
   void _onSubmit() {
-    // if (_email.isEmpty || _isEmailValid() != null) return;
+    if (_email.isEmpty || _isEmailValid() != null) return;
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return const PasswordScreen();

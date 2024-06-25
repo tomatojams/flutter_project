@@ -29,6 +29,22 @@ class ApiService {
     }
   }
 
+  static Future<String> getEmotion() async {
+    final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final chatString = utf8.decode(response.bodyBytes);
+      // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
+      // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
+      //jsonDecode(utf8.decode(response.bodyBytes));
+      return chatString;
+    } else {
+      throw Error();
+    }
+  }
+
   static Future<String> getChatAll() async {
     ChatModel chatModel;
     final url = Uri.parse('$baseUrl/$chatptAll'); // parse는 새로운  uri 객체를 만듬

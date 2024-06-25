@@ -41,11 +41,11 @@ class LoginScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Gaps.v20,
-                const Text(
+                Text(
                   '지금 바로, P.Tmind를 시작하세요.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black54,
+                    color: Theme.of(context).indicatorColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -76,8 +76,8 @@ class LoginScreen extends StatelessWidget {
                 Gaps.v15,
                 GestureDetector(
                   child: const AuthButton(
-                      icon:
-                          FaIcon(FontAwesomeIcons.apple, color: Colors.black54),
+                      icon: FaIcon(FontAwesomeIcons.apple,
+                          color: Colors.black54, size: 28),
                       text: "Apple로 계속하기"),
                 ),
               ],
@@ -93,9 +93,7 @@ class LoginScreen extends StatelessWidget {
               vertical: 3,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

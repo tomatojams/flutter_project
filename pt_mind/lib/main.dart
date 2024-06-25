@@ -21,7 +21,7 @@ class App extends StatelessWidget {
             create: (BuildContext _) => ChatProvider()),
         ChangeNotifierProvider<UserProvider>(
             create: (BuildContext _) => UserProvider()),
-            ChangeNotifierProvider<AuthProvider>(
+        ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext _) => AuthProvider())
       ],
       child: MaterialApp(
