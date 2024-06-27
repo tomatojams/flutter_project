@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
-import '../../services/api_service.dart';
-import 'pt_conv_widget_debug.dart';
+
 import 'email_screen.dart';
 import 'login_screen.dart';
 import 'widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
   void _onLoginTap(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
@@ -19,8 +18,6 @@ class SignUpScreen extends StatelessWidget {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const EmailScreen()));
   }
-
-  Future<String> chat = ApiService.getChatDebug(); // 최초 AI 대화 데이타 가져오기
 
   @override
   Widget build(BuildContext context) {
@@ -91,24 +88,6 @@ class SignUpScreen extends StatelessWidget {
                           color: Colors.black54, size: 28),
                       text: "Apple로 계속하기"),
                 ),
-                // FutureBuilder(
-                //   // 데이타가 들어오면 빌드
-                //   future: chat,
-                //   builder: (context, snapshot) {
-                //     if (snapshot.hasData) {
-                //       return PTconv(
-                //         conv: snapshot.data!,
-                //       );
-                //     } else {
-                //       return CircularProgressIndicator(
-                //         color: Theme.of(context).primaryColorLight,
-                //       );
-                //     }
-                //   },
-                // ),
-                const PTconv(
-                    conv:
-                        "안녕하세요. 무엇을 도와드릴까요? 오늘 날씨가 정말 좋네요. 오늘은 어떤고민이 있으신가요??[m20240103]"),
               ],
             ),
           ),

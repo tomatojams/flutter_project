@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/features/authentication/provider/auth_provider.dart';
-import 'package:pt_mind/features/chatting/http/provider/chat_mentor_provider.dart';
+import 'package:pt_mind/features/provider/auth_provider.dart';
+import 'package:pt_mind/features/provider/ai_chat_provider.dart';
 import 'package:pt_mind/features/navigator/pt_state.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
+import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/chatting/mqtt/chat_screen_mqtt.dart';
-
-import 'features/chatting/http/provider/chat_screen_provider.dart';
 
 void main() {
   runApp(const App());
@@ -20,16 +17,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ChatScrProvider>(
-            create: (BuildContext _) => ChatScrProvider()),
         ChangeNotifierProvider<MqttChatProvider>(
             create: (BuildContext _) => MqttChatProvider()),
-        ChangeNotifierProvider<MqttUserProvider>(
-            create: (BuildContext _) => MqttUserProvider()),
         ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext _) => AuthProvider()),
-        ChangeNotifierProvider<ChatMentorProvider>(
-            create: (BuildContext _) => ChatMentorProvider()),
+        ChangeNotifierProvider<AiChatProvider>(
+            create: (BuildContext _) => AiChatProvider()),
+        ChangeNotifierProvider<FavoriteProvider>(
+            create: (BuildContext _) => FavoriteProvider()),
       ],
       child: MaterialApp(
         onGenerateRoute: (RouteSettings route) {
@@ -38,13 +33,11 @@ class App extends StatelessWidget {
               return MaterialPageRoute(
                   settings: const RouteSettings(name: MqttChatScreen.path),
                   builder: (BuildContext context) {
-                    MqttChatProvider mqttChatProvider=
+                    MqttChatProvider mqttChatProvider =
                         Provider.of<MqttChatProvider>(context);
-                    MqttUserProvider mqttUserProvider =
-                        Provider.of<MqttUserProvider>(context);
+
                     return MqttChatScreen(
                       chatProvider: mqttChatProvider,
-                      userProvider: mqttUserProvider,
                     );
                   });
             }

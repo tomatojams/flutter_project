@@ -7,28 +7,6 @@ class UserConv extends StatelessWidget {
     required this.conv,
   });
 
-  // Future<List<String>> findId(String conv) async {
-  //   List<String> findId = ["[m20240103]", "[m20240104]", "[m20240105]"];
-  //   String reConv = conv;
-  //   // Iterating through the list of IDs
-  //   for (String id in findId) {
-  //     if (conv.contains(id)) {
-  //       reConv = conv.replaceAll(id, '');
-
-  //       MentorModel mentor = await ApiService.getMentor(id);
-  //       return [id, reConv, mentor.profile];
-  //     }
-  //   }
-  //   return ['none', reConv, 'none'];
-  // }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   String reConv = widget.conv;
-  //   String mentorId = 'none';
-  //   String foundProfile = 'none';
-
-  //   Future<List<String>> convP = findId(widget.conv);
 
   @override
   Widget build(BuildContext context) {

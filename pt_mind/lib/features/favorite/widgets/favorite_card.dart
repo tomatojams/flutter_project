@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/favorite/widgets/popup_dialog.dart';
+import 'package:pt_mind/features/favorite/widgets/mentor_popup_dialog.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:pt_mind/constants/gaps.dart';
 

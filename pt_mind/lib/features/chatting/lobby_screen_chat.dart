@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/features/authentication/provider/auth_provider.dart';
+import 'package:pt_mind/features/provider/auth_provider.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
 import 'package:pt_mind/features/chatting/http/room_card_ai.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
+import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/chatting/mqtt/room_card_mqtt.dart';
 
 import '../../models/ramdom_chat_room.dart';
 import '../utility/animated_popup.dart';
-import 'http/program_card.dart';
+import 'http/room_card_random.dart';
 
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";
@@ -48,7 +47,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
   @override
   Widget build(BuildContext context) {
     final MqttChatProvider chatProvider = Provider.of<MqttChatProvider>(context);
-    final MqttUserProvider userProvider = Provider.of<MqttUserProvider>(context);
+   
     // 가입을 마쳤다면 팝업창 띄우기 provider로 정보를 가져옴
     if (context.watch<AuthProvider>().userRegister == true) {
       context.read<AuthProvider>().clearUserRegister();
@@ -114,7 +113,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                               beforeTime: chatRoom.beforeTime,
                               badge: chatRoom.badge,
                               chatProvider: chatProvider,
-                              userProvider: userProvider),
+                              ),
                       ],
                     );
                   }

@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
 import '../navigator/pt_state.dart';
-import '../onboarding/interests_screen.dart';
+// import '../onboarding/interests_screen.dart';
 import 'widgets/form_button.dart';
 
 class LoginFormScreen extends StatefulWidget {

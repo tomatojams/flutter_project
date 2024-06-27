@@ -32,159 +32,163 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     // print("providercheck");
     // print(widget.userProvider.userNickName);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("채팅"),
-        backgroundColor: const Color(0xFF807FFF),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                  child: Container(
-                child: widget.chatProvider.chat.isEmpty
-                    ? Container()
-                    : ListView.builder(
-                        controller: _sc,
-                        reverse: true,
-                        itemCount: widget.chatProvider.chat.length,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                        itemBuilder: (BuildContext context, int index) {
-                          // final Size size = MediaQuery.of(context).size;
-                          final ChatModel chatModel =
-                              widget.chatProvider.chat[index];
-                          final String userNickName =
-                              widget.userProvider.userNickName;
-                          if (chatModel.userNickName != userNickName) {
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("채팅"),
+          backgroundColor: const Color(0xFF807FFF),
+          centerTitle: true,
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                    child: Container(
+                  child: widget.chatProvider.chat.isEmpty
+                      ? Container()
+                      : ListView.builder(
+                          controller: _sc,
+                          reverse: true,
+                          itemCount: widget.chatProvider.chat.length,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          itemBuilder: (BuildContext context, int index) {
+                            // final Size size = MediaQuery.of(context).size;
+                            final ChatModel chatModel =
+                                widget.chatProvider.chat[index];
+                            final String userNickName =
+                                widget.userProvider.userNickName;
+                            if (chatModel.userNickName != userNickName) {
+                              return Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Card(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 20.0, horizontal: 20.0),
+                                        child: Container(
+                                            margin: const EdgeInsets.only(
+                                                top: 10.0),
+                                            child: Text.rich(
+                                              TextSpan(children: [
+                                                TextSpan(
+                                                  text:
+                                                      "${chatModel.userNickName} : ",
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                TextSpan(
+                                                    text: utf8Sample(
+                                                        chatModel.chat))
+                                              ]),
+                                            )),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
                             return Container(
                               margin:
                                   const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Card(
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 20.0, horizontal: 20.0),
-                                      child: Container(
-                                          margin:
-                                              const EdgeInsets.only(top: 10.0),
-                                          child: Text.rich(
-                                            TextSpan(children: [
-                                              TextSpan(
-                                                text:
-                                                    "${chatModel.userNickName} : ",
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              TextSpan(
-                                                  text: utf8Sample(
-                                                      chatModel.chat))
-                                            ]),
-                                          )),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(utf8Sample(chatModel.chat)),
                                     ),
                                   ),
                                 ],
                               ),
                             );
-                          }
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Card(
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20.0, horizontal: 20.0),
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(utf8Sample(chatModel.chat)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-              )),
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: TextField(
-                              autofocus: true,
-                              focusNode: _fn,
-                              controller: _tc,
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
-                              onSubmitted: (String _) => _send(),
-                            ))),
-                    IconButton(onPressed: _send, icon: const Icon(Icons.send))
-                  ],
-                ),
-              )
-            ],
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Card(
-              elevation: 5.0,
-              margin: EdgeInsets.zero,
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "참가자 : ${widget.chatProvider.chatUserList.length}명",
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                            onPressed: () => setState(() => isOpen = !isOpen),
-                            icon: Icon(!isOpen
-                                ? Icons.arrow_drop_down
-                                : Icons.arrow_drop_up)),
-                      ],
-                    ),
-                    !isOpen
-                        ? Container()
-                        : ListView(
-                            shrinkWrap: true,
-                            children: widget.chatProvider.chatUserList
-                                .map<Widget>((String userNickName) => Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 5.0),
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Text(
-                                      " - $userNickName",
-                                    )))
-                                .toList(),
+                          }),
+                )),
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Container(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              decoration: BoxDecoration(border: Border.all()),
+                              child: TextField(
+                                  autofocus: true,
+                                  focusNode: _fn,
+                                  controller: _tc,
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none),
+                                  onSubmitted: (String _) => _send()))),
+                      IconButton(onPressed: _send, icon: const Icon(Icons.send))
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Card(
+                elevation: 5.0,
+                margin: EdgeInsets.zero,
+                child: Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "참가자 : ${widget.chatProvider.chatUserList.length}명",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                  ],
+                          IconButton(
+                              onPressed: () => setState(() => isOpen = !isOpen),
+                              icon: Icon(!isOpen
+                                  ? Icons.arrow_drop_down
+                                  : Icons.arrow_drop_up)),
+                        ],
+                      ),
+                      !isOpen
+                          ? Container()
+                          : ListView(
+                              shrinkWrap: true,
+                              children: widget.chatProvider.chatUserList
+                                  .map<Widget>((String userNickName) =>
+                                      Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Text(
+                                            " - $userNickName",
+                                          )))
+                                  .toList(),
+                            ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
 
   void _send() {
-    _fn.unfocus();
+    _fn.requestFocus();
     if (_tc.text.isEmpty) return;
     // print(widget.userProvider.userNickName);
     // print(_tc.text);

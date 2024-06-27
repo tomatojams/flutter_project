@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/chatting/mqtt/chat_screen_mqtt.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
+import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";
   final MqttChatProvider chatProvider;
-  final MqttUserProvider userProvider;
+
   final String profile;
   final String imageExt;
   final String titleName;
@@ -18,17 +16,17 @@ class MqttChatCard extends StatefulWidget {
   final String? beforeTime;
   final int? badge;
 
-  const MqttChatCard(
-      {super.key,
-      required this.profile,
-      required this.imageExt,
-      required this.titleName,
-      required this.name,
-      this.lastMessage,
-      this.beforeTime,
-      this.badge,
-      required this.chatProvider,
-      required this.userProvider});
+  const MqttChatCard({
+    super.key,
+    required this.profile,
+    required this.imageExt,
+    required this.titleName,
+    required this.name,
+    this.lastMessage,
+    this.beforeTime,
+    this.badge,
+    required this.chatProvider,
+  });
 
   @override
   State<MqttChatCard> createState() => _MqttChatCardState();
@@ -80,8 +78,8 @@ class _MqttChatCardState extends State<MqttChatCard> {
       return;
     }
 
-    widget.userProvider.setUserNickName(userId);
-    widget.userProvider.setProfile(profile[mentor.indexOf(widget.name)]);
+    widget.chatProvider.setUserNickName(userId);
+    widget.chatProvider.setProfile(profile[mentor.indexOf(widget.name)]);
     Navigator.of(context).pushNamed(MqttChatScreen.path);
 
     setState(() {

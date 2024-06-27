@@ -2,25 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:pt_mind/features/chatting/widgets/mqtt_conv_widget.dart';
-import 'package:pt_mind/features/chatting/widgets/user_conv_widget.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/provider/mqtt_user_provider.dart';
-import 'package:pt_mind/features/chatting/widgets/mqtt_utf8.dart';
+import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/utility/mqtt_utf8.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
-
+import '../widgets/ai_conv_widget.dart';
+import '../widgets/user_conv_widget.dart';
 
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";
   // final String profile;
   final MqttChatProvider chatProvider;
-  final MqttUserProvider userProvider;
 
   const MqttChatScreen({
     super.key,
     required this.chatProvider,
-    required this.userProvider,
   });
   @override
   State<MqttChatScreen> createState() => _ChatScreenState();
@@ -80,7 +77,7 @@ class _ChatScreenState extends State<MqttChatScreen>
     }
 
     widget.chatProvider
-        .sendChat(nickName: (widget.userProvider.userNickName), chat: text);
+        .sendChat(nickName: (widget.chatProvider.userNickName), chat: text);
 
     _textController.clear();
     setState(() {
@@ -89,7 +86,7 @@ class _ChatScreenState extends State<MqttChatScreen>
   }
 
   bool isPng() {
-    if (widget.userProvider.profile.contains('png')) {
+    if (widget.chatProvider.profile.contains('png')) {
       return true;
     }
     return false;
@@ -117,7 +114,7 @@ class _ChatScreenState extends State<MqttChatScreen>
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Gaps.v20,
+              Gaps.h20,
               SvgPicture.asset(
                 'assets/logo/PTlogo-small.svg',
                 height: 25.0,
@@ -146,18 +143,17 @@ class _ChatScreenState extends State<MqttChatScreen>
                           final MqttChatModel mqttchatModel =
                               widget.chatProvider.chat[index];
                           final String userNickName =
-                              widget.userProvider.userNickName;
+                              widget.chatProvider.userNickName;
                           if (mqttchatModel.userNickName != userNickName) {
                             // print("mqttchatModel.chat");
                             // print(mqttchatModel.chat);
                             return MqttConv(
                                 isPng: isPng(),
-                                profile: widget.userProvider.profile,
+                                profile: widget.chatProvider.profile,
                                 conv: utf8Sample(mqttchatModel.chat));
-
-                            // return PTconv(conv: utf8Sample(mqttchatModel.chat));
                           }
                           return UserConv(conv: utf8Sample(mqttchatModel.chat));
+                          // return PTconv(conv: utf8Sample(mqttchatModel.chat));
                         },
                       ),
               ),
