@@ -8,7 +8,8 @@ class MqttConv extends StatelessWidget {
   const MqttConv({
     super.key,
     required this.conv,
-    required this.profile, required this.isPng,
+    required this.profile,
+    required this.isPng,
   });
 
   @override
@@ -18,13 +19,15 @@ class MqttConv extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            isPng? Image.asset( 
-              profile,
-              width: 40,
-            ): SvgPicture.asset(
-              profile,
-              width: 40,
-            ),
+            isPng
+                ? Image.asset(
+                    profile,
+                    width: 40,
+                  )
+                : SvgPicture.asset(
+                    profile,
+                    width: 40,
+                  ),
             const SizedBox(
               width: 10.0,
             ),
@@ -38,7 +41,7 @@ class MqttConv extends StatelessWidget {
                 child: ConstrainedBox(
                   // 동적 조정하는 바로 위에 지정해야만 함
                   constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                    maxWidth: MediaQuery.of(context).size.width * 0.66,
                   ),
                   child: Text(
                     conv,

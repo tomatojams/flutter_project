@@ -62,12 +62,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "get",
-      "rootUri": "file:///C:/Users/tomat/AppData/Local/Pub/Cache/hosted/pub.dev/get-4.6.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
       "name": "leak_tracker",
       "rootUri": "file:///C:/Users/tomat/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.4",
       "packageUri": "lib/",
@@ -176,7 +170,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-06-25T04:43:47.428361Z",
+  "generated": "2024-06-27T08:55:43.679647Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
   "flutterRoot": "file:///D:/Soma/flutter",

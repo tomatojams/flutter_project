@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/authentication/sign_up_screen.dart';
-import 'package:pt_mind/features/chatting/chat_lobby_screen.dart';
+import 'package:pt_mind/features/chatting/lobby_screen_chat.dart';
 import 'package:pt_mind/features/favorite/favorite_screen.dart';
 import 'package:pt_mind/features/training/training_screen.dart';
 import 'package:pt_mind/features/personal/personal_screen.dart';
@@ -46,8 +46,7 @@ class _PTstateState extends State<PTstate> {
         backgroundColor: Theme.of(context).cardColor,
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const SignUpScreen(),
-              fullscreenDialog: true));
+              builder: (context) => SignUpScreen(), fullscreenDialog: true));
         },
         tooltip: 'Increment',
         child: Image.asset(
