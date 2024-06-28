@@ -11,8 +11,25 @@ class AiChatProvider extends ChangeNotifier {
   // 모델 캐싱
   final Map<String, MentorModel> _mentorCache = {}; // 캐시를 저장할 변수
 
-  // ID와 대화 필터링
+  //디버깅용 소스 서버접속 안할때 캐쉬대용으로 사용.
+  final MentorModel mentorCache = MentorModel(
+    id: 'm20240103',
+    gender: '여성',
+    name: '김지수',
+    profile: 'assets/profile/Namisun-profile.png',
+    titleName: '요가 강사',
+    career: '5년차 요가강사',
+    license: '요가지도사 2급',
+    slogan: '안녕하세요. 요가 강사 김지수입니다. 요가를 통해 몸과 마음을 편안하게 만들어드립니다.',
+  );
+
   List<String> findId(String conv) {
+    // ID를 찾아 ID와 대화내용을 반환
+
+    // 서버 접속시 주석처리!!
+    _mentorCache['m20240103'] = mentorCache;
+    // 서버 접속시 주석처리!!
+
     List<String> findId = ["m20240103", "m20240104", "m20240105"];
     String reConv = conv;
     for (String id in findId) {

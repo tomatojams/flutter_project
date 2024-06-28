@@ -1,3 +1,5 @@
+// 따로 프로젝트 만들어서 테스트해보기
+
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;

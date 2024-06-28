@@ -5,7 +5,7 @@ import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 
 import '../../utility/mentor_popup_dialog.dart';
-import '../../provider/ai_chat_provider.dart';
+import '../../provider/PT_chat_provider.dart';
 import '../../utility/favorite_toggle_widget.dart';
 // ConvProvider import 추가
 

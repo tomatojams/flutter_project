@@ -19,16 +19,17 @@ class _ChatScreenState extends State<PtChatScreen> {
   final FocusNode _focusNode = FocusNode(); // 입력되어도 키보드가 내려가지 않게 추가
 
   final userId = 'a1234';
+  // 디버깅용 대화 스크립트
   List<Map<String, String>> chatdata = [
     {"user": "오늘은 기분이 좋아요"},
     // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
     // {"user": "안녕하세요"},
     {"pt": "디버깅 테스트 화면입니다.[m20240103]"},
-    // {"user": "요가를 하고 싶어요"},
-    // {
-    //   "pt":
-    //       "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
-    // },
+    {"user": "요가를 하고 싶어요"},
+    {
+      "pt":
+          "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
+    },
   ];
 
 // 최초 AI 대화 데이타 가져오기
@@ -40,12 +41,14 @@ class _ChatScreenState extends State<PtChatScreen> {
     initChat(); // 초기에 대화내용 가져오기
     _focusNode.unfocus();
     _focusNode.addListener(() {
+      // 팝업문제 해결위한 포커스 확인
       print("focused:${_focusNode.hasFocus}"); // 포커스가 되었는지 확인
     });
     super.initState();
   }
 
   void _updateFromChild() {
+    // 자식위젯인 PTconv에서 상태변경 테스트 아직 작동안함.
     setState(() {});
   }
 
@@ -63,6 +66,7 @@ class _ChatScreenState extends State<PtChatScreen> {
     super.dispose();
   }
 
+// 스크롤을 맨 아래로 이동 채팅창 자동 스크롤
   void moveScroll() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {

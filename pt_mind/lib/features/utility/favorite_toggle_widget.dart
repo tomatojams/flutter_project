@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/features/provider/ai_chat_provider.dart';
+import 'package:pt_mind/features/provider/PT_chat_provider.dart';
 
 class FavoriteToggleWidget extends StatelessWidget {
   const FavoriteToggleWidget({
