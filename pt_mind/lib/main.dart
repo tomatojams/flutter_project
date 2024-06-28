@@ -58,7 +58,7 @@ class App extends StatelessWidget {
           cardColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        home: const PTstate(),
+        home: const PTstate(), // 네비게이션 포함 홈화면
       ),
     );
   }

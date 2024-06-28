@@ -4,6 +4,7 @@ import 'package:pt_mind/features/utility/favorite_toggle_widget.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
+// 데이타 연결 아직 안했음 초본
 void popupDialog(BuildContext context) {
   showGeneralDialog(
     context: context,
@@ -50,8 +51,9 @@ void popupDialog(BuildContext context) {
                             ),
                           ),
                           IconButton(
-                            onPressed: () { // 팝업 닫기
-                              Navigator.of(context).pop(); // 네이게이터로 조작
+                            onPressed: () {
+                              // 팝업 닫기
+                              Navigator.of(context).pop();
                             },
                             icon: const Icon(Icons.close),
                           ),

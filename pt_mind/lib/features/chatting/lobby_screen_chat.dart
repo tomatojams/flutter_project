@@ -46,8 +46,9 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final MqttChatProvider chatProvider = Provider.of<MqttChatProvider>(context);
-   
+    final MqttChatProvider chatProvider =
+        Provider.of<MqttChatProvider>(context);
+
     // 가입을 마쳤다면 팝업창 띄우기 provider로 정보를 가져옴
     if (context.watch<AuthProvider>().userRegister == true) {
       context.read<AuthProvider>().clearUserRegister();
@@ -59,19 +60,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
       maxUnderScrollExtent: 30.0,
       child: SmartRefresher(
         header: const WaterDropMaterialHeader(), // 로딩모양
-        // header: CustomHeader(
-        //   builder: (BuildContext context, RefreshStatus? mode) {
-        //     return SizedBox(
-        //       height: 80.0,
-        //       child: Center(
-        //         child: mode == RefreshStatus.refreshing
-        //             ? const CircularProgressIndicator()
-        //             : const SizedBox.shrink(),
-        //       ),
-        //     );
-        //   },
-        // ),
-        // 풀다운하면 리프레쉬
+
         controller: widget._refreshController,
         enablePullDown: true,
 
@@ -81,14 +70,8 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           children: [
-            // Row(
-            //   children: [
-            //     Gaps.h10,
-            //     Image.asset('assets/icon/chat2.png', width: 30),
-            //   ],
-            // ),
-            // Gaps.v10,
             const PtRoomCard(
+              // PT 채팅방
               name: 'P.T',
               titleName: '뉴럴.안내',
               lastMessage: '당신에게 알맞은 상담사를 찾아드려요.',
@@ -98,6 +81,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
               badge: 1,
             ),
             FutureBuilder(
+                // MQTT 채팅방
                 future: chat,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -105,15 +89,15 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                       children: [
                         for (var chatRoom in snapshot.data!)
                           MqttChatCard(
-                              profile: chatRoom.profile,
-                              imageExt: chatRoom.imageExt,
-                              titleName: chatRoom.titleName,
-                              name: chatRoom.name,
-                              lastMessage: chatRoom.lastMessage,
-                              beforeTime: chatRoom.beforeTime,
-                              badge: chatRoom.badge,
-                              chatProvider: chatProvider,
-                              ),
+                            profile: chatRoom.profile,
+                            imageExt: chatRoom.imageExt,
+                            titleName: chatRoom.titleName,
+                            name: chatRoom.name,
+                            lastMessage: chatRoom.lastMessage,
+                            beforeTime: chatRoom.beforeTime,
+                            badge: chatRoom.badge,
+                            chatProvider: chatProvider,
+                          ),
                       ],
                     );
                   }
@@ -122,6 +106,7 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                   );
                 }),
             FutureBuilder(
+                // 랜덤 채팅방
                 future: randomChat,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {

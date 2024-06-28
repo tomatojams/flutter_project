@@ -32,16 +32,12 @@ class _ChatScreenState extends State<PtChatScreen> {
     },
   ];
 
-// 최초 AI 대화 데이타 가져오기
-
-//chatdata에 최초 AI 대화 데이타 추가
-
   @override
   void initState() {
-    initChat(); // 초기에 대화내용 가져오기
+    initChat(); // 초기에 웹에서 PT 대화를 가져옴
+    // 디버깅 시도 코드
     _focusNode.unfocus();
     _focusNode.addListener(() {
-      // 팝업문제 해결위한 포커스 확인
       print("focused:${_focusNode.hasFocus}"); // 포커스가 되었는지 확인
     });
     super.initState();
@@ -69,6 +65,7 @@ class _ChatScreenState extends State<PtChatScreen> {
 // 스크롤을 맨 아래로 이동 채팅창 자동 스크롤
   void moveScroll() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // 빌드가 완료된 후에 실행
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController
@@ -109,7 +106,7 @@ class _ChatScreenState extends State<PtChatScreen> {
     // 최초 AI 대화 데이타 추가
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus(); // 본문 스크롤을 탭하면 키보드 내리기
+        FocusScope.of(context).unfocus(); // 텍스트 입력창 외부를 클릭하면 포커스 해제
       },
       child: Scaffold(
         appBar: AppBar(
@@ -160,7 +157,7 @@ class _ChatScreenState extends State<PtChatScreen> {
                       // 사용자 메시지인 경우 UserConv 위젯 반환
                       return UserConv(
                           conv: chatdata[chatdata.length - index - 1]["user"]!);
-                      // 스크롤을 역방향으로해서 끝에서 부터 시작
+                      // 스크롤을 역방향으로해서 대화를 끝에서 부터 시작
                     } else {
                       // PT 메시지인 경우 PTconv 위젯 반환
                       return PTconv(

@@ -136,7 +136,7 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final dynamic chatRooms = jsonDecode(utf8.decode(response.bodyBytes));
-      print(chatRooms);
+      // print(chatRooms);
       return RandomChatRoom.fromJson(chatRooms);
     } else {
       throw Error();
