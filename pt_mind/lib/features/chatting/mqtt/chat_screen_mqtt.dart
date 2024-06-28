@@ -6,8 +6,6 @@ import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/utility/mqtt_utf8.dart';
 import 'package:pt_mind/constants/gaps.dart';
-
-import '../widgets/ai_conv_widget.dart';
 import '../widgets/user_conv_widget.dart';
 
 class MqttChatScreen extends StatefulWidget {

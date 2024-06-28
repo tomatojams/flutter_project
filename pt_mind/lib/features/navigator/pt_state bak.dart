@@ -46,7 +46,8 @@ class _PTstateState extends State<PTstate> {
         backgroundColor: Theme.of(context).cardColor,
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SignUpScreen(), fullscreenDialog: true));
+              builder: (context) => const SignUpScreen(),
+              fullscreenDialog: true));
         },
         tooltip: 'Increment',
         child: Image.asset(

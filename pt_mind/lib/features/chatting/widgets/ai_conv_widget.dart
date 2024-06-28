@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 
-import '../../favorite/widgets/mentor_popup_dialog.dart';
+import '../../utility/animated_popup.dart';
+import '../../utility/mentor_popup_dialog.dart';
 import '../../provider/ai_chat_provider.dart';
 import '../../utility/favorite_toggle_widget.dart';
 // ConvProvider import 추가
@@ -240,6 +241,7 @@ class PTconv extends StatelessWidget {
                                             children: [
                                               GestureDetector(
                                                   onTap: () {
+                                                    // showPopup(context);
                                                     popupDialog(context);
                                                   },
                                                   child: const Text('더보기>')),

@@ -23,7 +23,7 @@ class _ChatScreenState extends State<PtChatScreen> {
     {"user": "오늘은 기분이 좋아요"},
     // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
     // {"user": "안녕하세요"},
-    {"pt": "안녕하세요. 무엇을 도와드릴까요? 오늘 날씨가 정말 좋네요. 오늘은 어떤고민이 있으신가요??[m20240103]"},
+    {"pt": "디버깅 테스트 화면입니다.[m20240103]"},
     // {"user": "요가를 하고 싶어요"},
     // {
     //   "pt":
@@ -38,6 +38,7 @@ class _ChatScreenState extends State<PtChatScreen> {
   @override
   void initState() {
     initChat(); // 초기에 대화내용 가져오기
+    _focusNode.unfocus();
     super.initState();
   }
 
