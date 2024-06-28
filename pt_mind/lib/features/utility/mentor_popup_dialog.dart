@@ -5,7 +5,8 @@ import 'package:simple_shadow/simple_shadow.dart';
 import 'package:pt_mind/constants/gaps.dart';
 
 // 데이타 연결 아직 안했음 초본
-void popupDialog(BuildContext context) {
+popupDialog(BuildContext context) {  // return으로 바꾼뒤 void가 아니게 해서 비동기 실행을 가능하게 함
+  return
   showGeneralDialog(
     context: context,
     barrierDismissible: true,

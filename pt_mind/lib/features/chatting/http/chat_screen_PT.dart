@@ -21,32 +21,32 @@ class _ChatScreenState extends State<PtChatScreen> {
   final userId = 'a1234';
   // 디버깅용 대화 스크립트
   List<Map<String, String>> chatdata = [
-    {"user": "오늘은 기분이 좋아요"},
-    // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
-    // {"user": "안녕하세요"},
-    {"pt": "디버깅 테스트 화면입니다.[m20240103]"},
-    {"user": "요가를 하고 싶어요"},
-    {
-      "pt":
-          "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
-    },
+    // {"user": "오늘은 기분이 좋아요"},
+    // // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
+    // // {"user": "안녕하세요"},
+    {"pt":"문제해결은 했습니당 해야할 일md파일 2번 5번에 해결책을 적었는데 리프레쉬문제는 코드가 길어져서 별로네요. .[m20240103]"},
+    // {"user": "요가를 하고 싶어요"},
+    // {
+    //   "pt":
+    //       "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
+    // },
   ];
 
   @override
   void initState() {
     initChat(); // 초기에 웹에서 PT 대화를 가져옴
     // 디버깅 시도 코드
-    _focusNode.unfocus();
-    _focusNode.addListener(() {
-      print("focused:${_focusNode.hasFocus}"); // 포커스가 되었는지 확인
-    });
+    // _focusNode.unfocus();
+    // _focusNode.addListener(() {
+    //   print("focused:${_focusNode.hasFocus}"); // 포커스가 되었는지 확인
+    // });
     super.initState();
   }
 
-  void _updateFromChild() {
-    // 자식위젯인 PTconv에서 상태변경 테스트 아직 작동안함.
-    setState(() {});
-  }
+  // void _updateFromChild() {
+  //   // 자식위젯인 PTconv에서 상태변경 테스트 아직 작동안함.
+  //   setState(() {});
+  // }
 
   void initChat() async {
     final chat = await ApiService.getChat();
@@ -161,7 +161,6 @@ class _ChatScreenState extends State<PtChatScreen> {
                     } else {
                       // PT 메시지인 경우 PTconv 위젯 반환
                       return PTconv(
-                          notifyParent: _updateFromChild,
                           focusNode: _focusNode,
                           conv: chatdata[chatdata.length - index - 1]["pt"]!);
                     }

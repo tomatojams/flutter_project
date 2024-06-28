@@ -22,11 +22,11 @@ class MqttChatProvider with ChangeNotifier {
   String _profile = "";
   String get profile => _profile;
   void setProfile(String profile) => _profile = profile;
- // mqtt 서비스
+  // mqtt 서비스
   MqttRepo mqttService = MqttRepo();
   bool _isLoad = false;
   bool get isLoad => _isLoad;
- 
+
   void _update(bool loadingStatus) {
     _isLoad = loadingStatus;
     notifyListeners();
@@ -114,7 +114,7 @@ class MqttRepo {
           .withWillQos(MqttQos.atMostOnce);
       MqttClientConnectionStatus? status = await client
           .connect()
-          .timeout(const Duration(seconds: 5), onTimeout: () async => null);
+          .timeout(const Duration(seconds: 3), onTimeout: () async => null);
       if (status == null) return null;
       return status.state;
     } catch (e) {

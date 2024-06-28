@@ -9,29 +9,37 @@ import '../../provider/PT_chat_provider.dart';
 import '../../utility/favorite_toggle_widget.dart';
 // ConvProvider import 추가
 
-class PTconv extends StatelessWidget {
+class PTconv extends StatefulWidget {
   final String conv;
   final FocusNode focusNode;
-  final VoidCallback notifyParent;
+
   // stateless로 바꾸고 provider로 데이타 이동했음
   const PTconv({
     super.key,
     required this.conv,
-    required this.focusNode, required this.notifyParent,
+    required this.focusNode,
   });
 
-  void showMentorPopup(context) {
-    popupDialog(context);
-    context._focusNode.unfocus();
+  @override
+  State<PTconv> createState() => _PTconvState();
+}
+
+class _PTconvState extends State<PTconv> {
+  void showMentorPopup(context) async {
+    // 비동기가 멈추게 하기위해 await 사용
+    await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
+    widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
+    // 다만 원래랑 다르게 팝업이 닫히고나서 리프레쉬가 생김
+
+    // 팝업이 닫히고나서 리프레쉬가 생기지 않게 하기위해 이벤트 전달이 안되는게 가장 최선임
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AiChatProvider>(
-      // ChangeNotifierProvider 를 넣지말고 바로 Consumer를 사용.
       builder: (context, provider, _) {
         List<String> idAndConv =
-            provider.findId(conv); // provider에서 id와 대화내용 필터링해서
+            provider.findId(widget.conv); // provider에서 id와 대화내용 필터링해서
         String reConv = idAndConv[1];
         String mentorId = idAndConv[0];
 
@@ -71,8 +79,169 @@ class PTconv extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          if (mentorId !=
-                              'none') // 멘토 ID가 있는 경우 이미 멘토 정보를 가져온 상태
+                          if (provider.isCashed(mentorId) == true &&
+                              mentorId != 'none')
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4.0,
+                                vertical: 0.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFCFBFE),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Image.asset(
+                                          provider.mentorWithID.profile,
+                                          width: 50,
+                                          height: 50,
+                                        ),
+                                        Gaps.h12, // 대화창과의 간격
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        //별칭
+                                                        provider.mentorWithID
+                                                            .titleName,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .focusColor,
+                                                          fontSize: 15.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Gaps.h4,
+                                                      Text(
+                                                        //이름
+                                                        provider
+                                                            .mentorWithID.name,
+                                                        style: TextStyle(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .indicatorColor,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const FavoriteToggleWidget()
+                                                ],
+                                              ),
+                                              Gaps.v5,
+                                              Text(
+                                                // 슬로건
+                                                provider.mentorWithID.slogan,
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .indicatorColor,
+                                                  fontSize: 15.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Gaps.v12,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color:
+                                                  Theme.of(context).hintColor,
+                                            ),
+                                            color: const Color(0xFFFCFBFE),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 6),
+                                            child: Text(
+                                              // 자격증
+                                              provider.mentorWithID.license,
+                                              style: TextStyle(
+                                                fontSize: 13.0,
+                                                color: Theme.of(context)
+                                                    .primaryColorDark,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Gaps.h4,
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color:
+                                                  Theme.of(context).hintColor,
+                                            ),
+                                            color: const Color(0xFFFCFBFE),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 6),
+                                            child: Text(
+                                              // 경력
+                                              provider.mentorWithID.career,
+                                              style: TextStyle(
+                                                fontSize: 13.0,
+                                                color: Theme.of(context)
+                                                    .primaryColorDark,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Gaps.h10,
+                                      ],
+                                    ),
+                                    Gaps.v15,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                            onTap: () {
+                                              // popupDialog(context);
+                                              // showPopup(context);// 팝업창 띄우기
+                                              showMentorPopup(context);
+                                            },
+                                            child: const Text('더보기>')),
+                                        Gaps.h10,
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          else if (mentorId !=
+                              'none') // 멘토 ID가 있는 경우 추천받았으나 캐싱은 안된경우
 
                             // 추천창 생성
                             FutureBuilder<MentorModel>(

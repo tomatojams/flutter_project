@@ -63,6 +63,15 @@
       <excludeFolder url="file://$MODULE_DIR$/provider_ex/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/provider_ex/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/provider_ex/build" />
+      <excludeFolder url="file://$MODULE_DIR$/kakao_login/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/kakao_login/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/kakao_login/build" />
+      <excludeFolder url="file://$MODULE_DIR$/refresh/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/refresh/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/refresh/build" />
+      <excludeFolder url="file://$MODULE_DIR$/tiktok/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/tiktok/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/tiktok/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
