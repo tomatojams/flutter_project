@@ -7,7 +7,6 @@ class UserConv extends StatelessWidget {
     required this.conv,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +21,11 @@ class UserConv extends StatelessWidget {
               alignment: Alignment.centerRight,
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0),
+                  bottomLeft: Radius.circular(10.0),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(

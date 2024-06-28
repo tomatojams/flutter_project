@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok/features/authentication/sign_up_screen.dart';
 
 import 'features/onboarding/interests_screen.dart';
 

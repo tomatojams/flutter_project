@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/chatting/widgets/ai_conv_widget.dart';
+import 'package:pt_mind/features/chatting/widgets/PTconv_widget.dart';
 import 'package:pt_mind/features/chatting/widgets/user_conv_widget.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pt_mind/constants/gaps.dart';
@@ -39,7 +39,14 @@ class _ChatScreenState extends State<PtChatScreen> {
   void initState() {
     initChat(); // 초기에 대화내용 가져오기
     _focusNode.unfocus();
+    _focusNode.addListener(() {
+      print("focused:${_focusNode.hasFocus}"); // 포커스가 되었는지 확인
+    });
     super.initState();
+  }
+
+  void _updateFromChild() {
+    setState(() {});
   }
 
   void initChat() async {
@@ -153,6 +160,8 @@ class _ChatScreenState extends State<PtChatScreen> {
                     } else {
                       // PT 메시지인 경우 PTconv 위젯 반환
                       return PTconv(
+                          notifyParent: _updateFromChild,
+                          focusNode: _focusNode,
                           conv: chatdata[chatdata.length - index - 1]["pt"]!);
                     }
                   },

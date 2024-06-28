@@ -50,8 +50,8 @@ void popupDialog(BuildContext context) {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
+                            onPressed: () { // 팝업 닫기
+                              Navigator.of(context).pop(); // 네이게이터로 조작
                             },
                             icon: const Icon(Icons.close),
                           ),

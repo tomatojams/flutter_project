@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 
-import '../../utility/animated_popup.dart';
 import '../../utility/mentor_popup_dialog.dart';
 import '../../provider/ai_chat_provider.dart';
 import '../../utility/favorite_toggle_widget.dart';
@@ -12,11 +11,19 @@ import '../../utility/favorite_toggle_widget.dart';
 
 class PTconv extends StatelessWidget {
   final String conv;
+  final FocusNode focusNode;
+  final VoidCallback notifyParent;
   // stateless로 바꾸고 provider로 데이타 이동했음
   const PTconv({
     super.key,
     required this.conv,
+    required this.focusNode, required this.notifyParent,
   });
+
+  void showMentorPopup(context) {
+    popupDialog(context);
+    context._focusNode.unfocus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class PTconv extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SvgPicture.asset(
-                  'assets/profile/PT-profile-chat.svg',
+                  'assets/profile/PT-profile-chat.svg', // 인공지능 대화 아이콘
                 ),
                 Gaps.h12,
                 Container(
@@ -56,7 +63,7 @@ class PTconv extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            // 대화내용 출력
+                            // 대화내용 필터링 된것이 출력
                             reConv,
                             style: TextStyle(
                               color: Theme.of(context).indicatorColor,
@@ -111,7 +118,7 @@ class PTconv extends StatelessWidget {
                                                 width: 50,
                                                 height: 50,
                                               ),
-                                              Gaps.h12,
+                                              Gaps.h12, // 대화창과의 간격
                                               Expanded(
                                                 child: Column(
                                                   crossAxisAlignment:
@@ -241,8 +248,8 @@ class PTconv extends StatelessWidget {
                                             children: [
                                               GestureDetector(
                                                   onTap: () {
-                                                    // showPopup(context);
-                                                    popupDialog(context);
+                                                    // showPopup(context);// 팝업창 띄우기
+                                                    showMentorPopup(context);
                                                   },
                                                   child: const Text('더보기>')),
                                               Gaps.h10,
