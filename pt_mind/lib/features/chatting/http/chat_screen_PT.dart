@@ -10,6 +10,10 @@ class PtChatScreen extends StatefulWidget {
 
   @override
   State<PtChatScreen> createState() => _ChatScreenState();
+
+
+
+  
 }
 
 // 수정된 부분 시작
@@ -48,8 +52,13 @@ class _ChatScreenState extends State<PtChatScreen> {
   //   setState(() {});
   // }
 
+String removeQuotesAndBackslashes(String input) {
+  // \"와 \를 제거합니다.
+  return input.replaceAll(RegExp(r'[\\"]'), '');
+}
+
   void initChat() async {
-    final chat = await ApiService.getChat();
+    final chat = await ApiService.getSingleChat();
     chatdata.insert(0, {"pt": chat}); // 대화 첫번째에 추가
     setState(() {});
   }
@@ -212,7 +221,7 @@ class _ChatScreenState extends State<PtChatScreen> {
                       height: 30,
                     ),
                     onPressed: () {
-                      // _submitText(); // 아이콘 클릭시에도 전송이 되게
+                      _submitText(); // 아이콘 클릭시에도 전송이 되게
                     },
                   ),
                 ),

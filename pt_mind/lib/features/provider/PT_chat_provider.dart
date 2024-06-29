@@ -11,7 +11,7 @@ class AiChatProvider extends ChangeNotifier {
   // 모델 캐싱
   final Map<String, MentorModel> _mentorCache = {}; // 캐시를 저장할 변수
   String _mentorId = 'none'; // 현재 추천된 ID
-  bool isCashed(id) {
+  bool isCached(id) {
     if (_mentorCache.containsKey(id)) {
       _mentorId = id;
       return true;
@@ -19,6 +19,16 @@ class AiChatProvider extends ChangeNotifier {
       return false;
     }
   }
+
+  void toggleFavoriteID(String id) {
+    _mentorCache[id]!.isFavorite = !_mentorCache[id]!.isFavorite;
+    notifyListeners();
+  }
+
+  bool getFavoriteID(String id) {
+    return _mentorCache[id]!.isFavorite;
+  }
+
 
   //디버깅용 소스 서버접속 안할때 캐쉬대용으로 사용.
   final MentorModel mentorCache = MentorModel(
@@ -30,6 +40,7 @@ class AiChatProvider extends ChangeNotifier {
     career: '5년차 요가강사',
     license: '요가지도사 2급',
     slogan: '안녕하세요. 요가 강사 김지수입니다. 요가를 통해 몸과 마음을 편안하게 만들어드립니다.',
+    isFavorite: false,
   );
   MentorModel get mentorWithID => _mentorCache[_mentorId]!;
 
@@ -66,12 +77,3 @@ class AiChatProvider extends ChangeNotifier {
   }
 }
 
-// 즐겨찾기 상태 관리
-class FavoriteProvider extends ChangeNotifier {
-  bool _isFavorite = false;
-  bool get isFavorite => _isFavorite;
-  void toggleFavorite() {
-    _isFavorite = !_isFavorite; // 상태를 토글합니다.
-    notifyListeners(); // 변화를 듣고 있는 위젯들에게 알립니다.
-  }
-}

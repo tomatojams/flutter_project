@@ -15,7 +15,13 @@ class ApiService {
   static const String randomChatRoom = "chatroom/random";
   static const String mentor = "mentor";
 
-  static Future<String> getChat() async {
+  static String removeQuotesAndBackslashes(String input) {
+    // \"와 \ 그리고 AI:제거합니다.
+    return input.replaceAll(RegExp(r'\\|\"|AI:'), '');
+    // return input.replaceAll(RegExp(r'[\\"]'), '');
+  }
+
+  static Future<String> getSingleChat() async {
     final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
 
     final response = await http.get(url);
@@ -25,15 +31,14 @@ class ApiService {
       // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
       // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
       //jsonDecode(utf8.decode(response.bodyBytes));
-      return chatString;
+      return removeQuotesAndBackslashes(chatString);
     } else {
       throw Error();
     }
   }
 
   static Future<String> getEmotion() async {
-    final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
-
+    final url = Uri.parse('$baseUrl/$chatpt');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -47,7 +52,7 @@ class ApiService {
 
   static Future<ChatModel> getChatAll() async {
     ChatModel chatModel;
-    final url = Uri.parse('$baseUrl/$chatptAll'); // parse는 새로운  uri 객체를 만듬
+    final url = Uri.parse('$baseUrl/$chatptAll');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -61,8 +66,7 @@ class ApiService {
 
   static Future<MentorModel> getMentor(mentorId) async {
     MentorModel mentorModel;
-    final url =
-        Uri.parse('$baseUrl/$mentor/$mentorId'); // parse는 새로운  uri 객체를 만듬
+    final url = Uri.parse('$baseUrl/$mentor/$mentorId');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -75,41 +79,40 @@ class ApiService {
     }
   }
 
-  static Future<MentorModel> getMentorDebug(mentorId) async {
-    MentorModel mentorModel;
-    final url =
-        Uri.parse('$baseUrl/$mentor/m20240104'); // parse는 새로운  uri 객체를 만듬
-    final response = await http.get(url);
+  // static Future<MentorModel> getMentorDebug(mentorId) async {
+  //   MentorModel mentorModel;
+  //   final url =
+  //       Uri.parse('$baseUrl/$mentor/m20240104');
+  //   final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      final mentorObject = jsonDecode(utf8.decode(response.bodyBytes));
-      mentorModel = MentorModel.fromJson(mentorObject);
-      // print(mentorModel.profile);
-      return mentorModel;
-    } else {
-      throw Error();
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     final mentorObject = jsonDecode(utf8.decode(response.bodyBytes));
+  //     mentorModel = MentorModel.fromJson(mentorObject);
+  //     // print(mentorModel.profile);
+  //     return mentorModel;
+  //   } else {
+  //     throw Error();
+  //   }
+  // }
 
-  static Future<String> getChatDebug() async {
-    final url = Uri.parse('$baseUrl/debug'); // parse는 새로운  uri 객체를 만듬
+  // static Future<String> getChatDebug() async {
+  //   final url = Uri.parse('$baseUrl/debug');
+  //   final response = await http.get(url);
 
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final chatString = utf8.decode(response.bodyBytes);
-      // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
-      // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
-      //jsonDecode(utf8.decode(response.bodyBytes));
-      return chatString;
-    } else {
-      throw Error();
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     final chatString = utf8.decode(response.bodyBytes);
+  //     // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
+  //     // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
+  //     //jsonDecode(utf8.decode(response.bodyBytes));
+  //     return chatString;
+  //   } else {
+  //     throw Error();
+  //   }
+  // }
 
   static Future<List<ChatLobbyModel>> getChatRoomList() async {
     List<ChatLobbyModel> chatRoomLists = [];
-    final url = Uri.parse('$baseUrl/$chatptRoom'); // parse는 새로운  uri 객체를 만듬
+    final url = Uri.parse('$baseUrl/$chatptRoom');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -131,7 +134,7 @@ class ApiService {
   }
 
   static Future<RandomChatRoom> getRandomChatRoom() async {
-    final url = Uri.parse('$baseUrl/$randomChatRoom'); // parse는 새로운  uri 객체를 만듬
+    final url = Uri.parse('$baseUrl/$randomChatRoom');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -147,13 +150,13 @@ class ApiService {
     Map data = {'user_id': userID, 'user_answer': userAnswer};
     ChatModel chatModel;
     final body = json.encode(data);
-    final url = Uri.parse('$baseUrl/$chatptPost'); // parse는 새로운  uri 객체를 만듬
+    final url = Uri.parse('$baseUrl/$chatptPost');
     final response = await http
         .post(url, body: body, headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
       final chatObject = jsonDecode(utf8.decode(response.bodyBytes));
       chatModel = ChatModel.fromJson(chatObject);
-      return chatModel.outText;
+      return removeQuotesAndBackslashes(chatModel.outText);
     } else {
       throw Error();
     }

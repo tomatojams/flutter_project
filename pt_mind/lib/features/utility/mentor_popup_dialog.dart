@@ -93,7 +93,7 @@ popupDialog(BuildContext context) {  // return으로 바꾼뒤 void가 아니게
                             // SvgPicture.asset(
                             //   'assets/icon/heartOff.svg',
                             // ),
-                            const FavoriteToggleWidget()
+                            const FavoriteToggleWidget(mentorId: 'm20240103')
                           ],
                         ),
                       ),

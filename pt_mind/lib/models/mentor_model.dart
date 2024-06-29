@@ -7,6 +7,7 @@ class MentorModel {
   final String license;
   final String career;
   final String profile;
+  bool isFavorite;
 
   MentorModel({
     required this.id,
@@ -17,6 +18,7 @@ class MentorModel {
     required this.slogan,
     required this.license,
     required this.career,
+    required this.isFavorite,
   });
 
   // Factory 모델을 사용하여 인터넷에서 항상 직접 읽어오지 않고 캐싱을 사용할 수 있음
@@ -32,6 +34,7 @@ class MentorModel {
       slogan: json['slogan'],
       license: json['license'],
       career: json['career'],
+      isFavorite: json['isFavorite'],
     );
   }
 }

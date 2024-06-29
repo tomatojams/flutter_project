@@ -4,10 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 
-import '../../utility/mentor_popup_dialog.dart';
 import '../../provider/PT_chat_provider.dart';
-import '../../utility/favorite_toggle_widget.dart';
-// ConvProvider import 추가
+import 'mentor_from_api.dart';
+import 'mentor_from_cache.dart';
+
+// PT 대화창 위젯
+// 1. 대화필터링
+// 2. ID 추출
+// 3. 캐싱여부 확인 해서 캐싱된 경우 추천창 생성
+// 4. 캐싱 안된 경우 API에서 멘토 정보 가져와서 추천창 생성
 
 class PTconv extends StatefulWidget {
   final String conv;
@@ -25,23 +30,23 @@ class PTconv extends StatefulWidget {
 }
 
 class _PTconvState extends State<PTconv> {
-  void showMentorPopup(context) async {
-    // 비동기가 멈추게 하기위해 await 사용
-    await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
-    widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
-    // 다만 원래랑 다르게 팝업이 닫히고나서 리프레쉬가 생김
+  // void showMentorPopup(context) async {
+  //   // 비동기가 멈추게 하기위해 await 사용
+  //   await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
+  //   widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
+  //   // 다만 원래랑 다르게 팝업이 닫히고나서 리프레쉬가 생김
 
-    // 팝업이 닫히고나서 리프레쉬가 생기지 않게 하기위해 이벤트 전달이 안되는게 가장 최선임
-  }
+  //   // 팝업이 닫히고나서 리프레쉬가 생기지 않게 하기위해 이벤트 전달이 안되는게 가장 최선임
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AiChatProvider>(
       builder: (context, provider, _) {
-        List<String> idAndConv =
-            provider.findId(widget.conv); // provider에서 id와 대화내용 필터링해서
-        String reConv = idAndConv[1];
-        String mentorId = idAndConv[0];
+        List<String> idAndConv = // provider에서 id와 대화내용 필터링
+            provider.findId(widget.conv);
+        String reConv = idAndConv[1]; // 필터링된 대화내용
+        String mentorId = idAndConv[0]; // 멘토 ID
 
         return Column(
           children: [
@@ -79,171 +84,14 @@ class _PTconvState extends State<PTconv> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          if (provider.isCashed(mentorId) == true &&
+                          if (provider.isCached(mentorId) == true &&
                               mentorId != 'none')
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4.0,
-                                vertical: 0.0,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFFCFBFE),
-                                borderRadius: BorderRadius.circular(3),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 10.0,
-                                  bottom: 10.0,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Image.asset(
-                                          provider.mentorWithID.profile,
-                                          width: 50,
-                                          height: 50,
-                                        ),
-                                        Gaps.h12, // 대화창과의 간격
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        //별칭
-                                                        provider.mentorWithID
-                                                            .titleName,
-                                                        style: TextStyle(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .focusColor,
-                                                          fontSize: 15.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Gaps.h4,
-                                                      Text(
-                                                        //이름
-                                                        provider
-                                                            .mentorWithID.name,
-                                                        style: TextStyle(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .indicatorColor,
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const FavoriteToggleWidget()
-                                                ],
-                                              ),
-                                              Gaps.v5,
-                                              Text(
-                                                // 슬로건
-                                                provider.mentorWithID.slogan,
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .indicatorColor,
-                                                  fontSize: 15.0,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Gaps.v12,
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color:
-                                                  Theme.of(context).hintColor,
-                                            ),
-                                            color: const Color(0xFFFCFBFE),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 2, horizontal: 6),
-                                            child: Text(
-                                              // 자격증
-                                              provider.mentorWithID.license,
-                                              style: TextStyle(
-                                                fontSize: 13.0,
-                                                color: Theme.of(context)
-                                                    .primaryColorDark,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Gaps.h4,
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color:
-                                                  Theme.of(context).hintColor,
-                                            ),
-                                            color: const Color(0xFFFCFBFE),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 2, horizontal: 6),
-                                            child: Text(
-                                              // 경력
-                                              provider.mentorWithID.career,
-                                              style: TextStyle(
-                                                fontSize: 13.0,
-                                                color: Theme.of(context)
-                                                    .primaryColorDark,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Gaps.h10,
-                                      ],
-                                    ),
-                                    Gaps.v15,
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () {
-                                              // popupDialog(context);
-                                              // showPopup(context);// 팝업창 띄우기
-                                              showMentorPopup(context);
-                                            },
-                                            child: const Text('더보기>')),
-                                        Gaps.h10,
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
+                            ReccMentorFromCache( // 캐싱된 경우 추천창 생성
+                                mentorId: mentorId,
+                                widget: widget,
+                                provider: provider)
                           else if (mentorId !=
                               'none') // 멘토 ID가 있는 경우 추천받았으나 캐싱은 안된경우
-
-                            // 추천창 생성
                             FutureBuilder<MentorModel>(
                               future: provider.getMentor(mentorId),
                               builder: (context, snapshot) {
@@ -253,181 +101,19 @@ class _PTconvState extends State<PTconv> {
                                   return const CircularProgressIndicator(
                                     color: Colors.transparent,
                                   );
-                                } // 로딩시간 단축 불필요한 조건 주석처리
-                                // else if (snapshot.hasError) {
-                                //   return Text('Error: ${snapshot.error}');
-                                // } else if (!snapshot.hasData) {
-                                //   return const SizedBox();
-                                // }
+                                } // 로딩시간 단축 불필요한 조건 아래는 주석처리 해도 됨
+                                else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (!snapshot.hasData) {
+                                  return const SizedBox();
+                                }
                                 else {
                                   // 멘토 모델 가져옴
                                   MentorModel mentor = snapshot.data!;
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0,
-                                      vertical: 0.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFFCFBFE),
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 10.0,
-                                        bottom: 10.0,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Image.asset(
-                                                mentor.profile,
-                                                width: 50,
-                                                height: 50,
-                                              ),
-                                              Gaps.h12, // 대화창과의 간격
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              //별칭
-                                                              mentor.titleName,
-                                                              style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .focusColor,
-                                                                fontSize: 15.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                            Gaps.h4,
-                                                            Text(
-                                                              //이름
-                                                              mentor.name,
-                                                              style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .indicatorColor,
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const FavoriteToggleWidget()
-                                                      ],
-                                                    ),
-                                                    Gaps.v5,
-                                                    Text(
-                                                      // 슬로건
-                                                      mentor.slogan,
-                                                      style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .indicatorColor,
-                                                        fontSize: 15.0,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Gaps.v12,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                  color:
-                                                      const Color(0xFFFCFBFE),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 2,
-                                                      horizontal: 6),
-                                                  child: Text(
-                                                    // 자격증
-                                                    mentor.license,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Theme.of(context)
-                                                          .primaryColorDark,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Gaps.h4,
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                  color:
-                                                      const Color(0xFFFCFBFE),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 2,
-                                                      horizontal: 6),
-                                                  child: Text(
-                                                    // 경력
-                                                    mentor.career,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0,
-                                                      color: Theme.of(context)
-                                                          .primaryColorDark,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Gaps.h10,
-                                            ],
-                                          ),
-                                          Gaps.v15,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    // showPopup(context);// 팝업창 띄우기
-                                                    showMentorPopup(context);
-                                                  },
-                                                  child: const Text('더보기>')),
-                                              Gaps.h10,
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                                  return ReccMentorFromAPI( // API에서 가져온 멘토 정보로 추천창 생성
+                                      mentor: mentor,
+                                      mentorId: mentorId,
+                                      widget: widget);
                                 }
                               },
                             ),

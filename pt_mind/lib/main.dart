@@ -23,8 +23,6 @@ class App extends StatelessWidget {
             create: (BuildContext _) => AuthProvider()),
         ChangeNotifierProvider<AiChatProvider>(
             create: (BuildContext _) => AiChatProvider()),
-        ChangeNotifierProvider<FavoriteProvider>(
-            create: (BuildContext _) => FavoriteProvider()),
       ],
       child: MaterialApp(
         onGenerateRoute: (RouteSettings route) {
