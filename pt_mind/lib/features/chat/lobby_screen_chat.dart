@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/provider/auth_provider.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
-import 'package:pt_mind/features/chat/http/room_card_PT.dart';
+import 'package:pt_mind/features/chat/room_card_PT.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chat/mqtt/room_card_mqtt.dart';
+import 'package:pt_mind/features/chat/room_card_mqtt.dart';
 
 import '../../models/ramdom_chat_room.dart';
 import '../../utility/animated_popup.dart';
-import 'http/room_card_random.dart';
+import 'room_card_random.dart';
 
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";

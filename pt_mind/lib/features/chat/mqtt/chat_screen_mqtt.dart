@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:pt_mind/features/chat/mqtt/mqtt_conv_widget.dart';
+import 'package:pt_mind/features/chat/mqtt/chat_screen_mqtt/mqtt_conv_widget.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/utility/mqtt_utf8.dart';
