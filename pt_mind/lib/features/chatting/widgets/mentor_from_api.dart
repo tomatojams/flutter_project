@@ -150,8 +150,6 @@ class ReccMentorFromAPI extends StatelessWidget {
                       // 비동기가 멈추게 하기위해 await 사용
                       await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
                       widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
-                      // 다만 원래랑 다르게 팝업이 닫히고나서 리프레쉬가 생김
-                      // 팝업이 닫히고나서 리프레쉬가 생기지 않게 하기위해 이벤트 전달이 안되는게 가장 최선임
                     },
                     child: const Text('더보기>')),
                 Gaps.h10,
