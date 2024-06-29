@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tiktok/features/onboarding/tutorial_screen.dart';
-import '../authentication/provider/auth_provider.dart';
+import 'package:tiktok/features/onboarding/tutorial_screen_ani.dart';
 import '../../constants/gaps.dart';
 import 'widgets/interest_button.dart';
 
@@ -74,13 +72,6 @@ class _InterestsScreenState extends State<InterestsScreen> {
   }
 
   void _onNextTap() {
-    // context.read<AuthProvider>().setUserRegister(true); // 가입이 되었다는 것을 프로바이더에 알림
-
-    // Navigator.pushAndRemoveUntil(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const InterestsScreen()),
-    //   (Route<dynamic> route) => false,
-    // );
     Navigator.push(
         context,
         MaterialPageRoute(
