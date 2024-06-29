@@ -10,11 +10,13 @@ class TutorialScreen extends StatefulWidget {
   State<TutorialScreen> createState() => _TutorialScreenState();
 }
 
+// DefaultTabController( child:TabBarView(children[pages]) + bottom: TabPageSelector)
+
 class _TutorialScreenState extends State<TutorialScreen> {
   @override
   Widget build(BuildContext context) {
+    //TabBarView와 TabPageSelector() 사용전 DefaultTabController 세팅
     return DefaultTabController(
-        //TabBarView와 TabPageSelector()를 사용하기 위해 DefaultTabController 사용
         length: 3,
         child: Scaffold(
           body: SafeArea(

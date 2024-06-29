@@ -57,7 +57,7 @@ class _MqttChatCardState extends State<MqttChatCard> {
 
     // String userId = 'tomato${Random().nextInt(100)}';
     // print(context.watch<UserProvider>().userNickName);
-    print('userId: $userId');
+    // print('userId: $userId');
 
     final bool connectCheck = await widget.chatProvider.join(nickName: userId);
 
