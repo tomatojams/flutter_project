@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/chatting/widgets/PTconv_widget.dart';
-import 'package:pt_mind/features/chatting/widgets/user_conv_widget.dart';
+import 'package:pt_mind/features/chat/http/chat_scrren_PT/PTconv_widget.dart';
+import 'package:pt_mind/features/chat/http/chat_scrren_PT/user_conv_widget.dart';
 import 'package:pt_mind/services/api_service.dart';
 import 'package:pt_mind/constants/gaps.dart';
 

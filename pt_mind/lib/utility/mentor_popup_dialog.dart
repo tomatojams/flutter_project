@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/utility/favorite_toggle_widget.dart';
+import 'package:pt_mind/utility/favorite_toggle_widget.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:pt_mind/constants/gaps.dart';
 

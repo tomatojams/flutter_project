@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pt_mind/features/chatting/mqtt/chat_screen_mqtt.dart';
-import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chat/mqtt/chat_screen_mqtt.dart';
+import 'package:pt_mind/provider/mqtt_chat_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class MqttChatCard extends StatefulWidget {

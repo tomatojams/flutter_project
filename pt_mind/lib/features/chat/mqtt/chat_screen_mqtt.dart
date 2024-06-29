@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:pt_mind/features/chatting/widgets/mqtt_conv_widget.dart';
+import 'package:pt_mind/features/chat/mqtt/mqtt_conv_widget.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
-import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/utility/mqtt_utf8.dart';
+import 'package:pt_mind/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/utility/mqtt_utf8.dart';
 import 'package:pt_mind/constants/gaps.dart';
-import '../widgets/user_conv_widget.dart';
+import '../http/chat_scrren_PT/user_conv_widget.dart';
 
 class MqttChatScreen extends StatefulWidget {
   static const String path = "/chat/room";

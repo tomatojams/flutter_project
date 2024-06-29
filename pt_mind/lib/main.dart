@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pt_mind/features/provider/auth_provider.dart';
-import 'package:pt_mind/features/provider/PT_chat_provider.dart';
+import 'package:pt_mind/provider/auth_provider.dart';
+import 'package:pt_mind/provider/PT_chat_provider.dart';
 import 'package:pt_mind/features/navigator/pt_state.dart';
-import 'package:pt_mind/features/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chatting/mqtt/chat_screen_mqtt.dart';
+import 'package:pt_mind/provider/mqtt_chat_provider.dart';
+import 'package:pt_mind/features/chat/mqtt/chat_screen_mqtt.dart';
 
 void main() {
   runApp(const App());

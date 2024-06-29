@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 
-import '../../provider/PT_chat_provider.dart';
+import '../../../../provider/PT_chat_provider.dart';
 import 'mentor_from_api.dart';
 import 'mentor_from_cache.dart';
 
