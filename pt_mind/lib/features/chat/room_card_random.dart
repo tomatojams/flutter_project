@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// 랜덤 채팅방 카드
+/// 랜덤 프로그램 카드
 class RandomRoomCard extends StatelessWidget {
   final String profile;
   final String imageExt;

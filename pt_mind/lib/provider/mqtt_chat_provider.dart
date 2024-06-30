@@ -3,18 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:pt_mind/models/mqtt_chat_model.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
-
+/// mqtt 채팅 프로바이더
 class MqttChatProvider with ChangeNotifier {
-  // 함수 리스트
-  // 1. _update
-  // 2. sendChat
-  // 3. join
-  // 변수리스트
-  // 1. mqttService = MqttRepo()
-  // 2. _isLoad = false
-  // 3. _chatUserList = []
-  // 4. _chat = []
-  // 사용자 이름
+ /// 현재 사용자 닉네임
   String _userNickName = "";
   String get userNickName => _userNickName;
   void setUserNickName(String nickName) => _userNickName = nickName;
@@ -32,10 +23,10 @@ class MqttChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // 유저 리스트
+  /// 유저 리스트
   final List<String> _chatUserList = [];
   List<String> get chatUserList => [..._chatUserList];
-// 대화 리스트
+/// 대화 리스트
   final List<MqttChatModel> _chat = [];
   List<MqttChatModel> get chat => [..._chat];
 // 대화전송

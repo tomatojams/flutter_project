@@ -12,6 +12,7 @@ import '../../models/ramdom_chat_room.dart';
 import '../../utility/animated_popup.dart';
 import 'room_card_random.dart';
 
+/// 채팅 로비 화면
 class ChatLobbyScreen extends StatefulWidget {
   static const String path = "/lobby";
   final RefreshController _refreshController =

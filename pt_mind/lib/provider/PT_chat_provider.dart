@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pt_mind/models/mentor_model.dart';
 import 'package:pt_mind/services/api_service.dart';
-
+// P.T. 챗 프로바이더
 class AiChatProvider extends ChangeNotifier {
   // 대화내용 저장, 아직 사용안함
   List<Map<String, String>> _chatdata = [];
   List<Map<String, String>> get chatdata => _chatdata;
   void setChatData(List<Map<String, String>> chatData) => _chatdata = chatData;
 
-  // 모델 캐싱
+  /// 멘토정보를 캐싱변수
   final Map<String, MentorModel> _mentorCache = {}; // 캐시를 저장할 변수
-  String _mentorId = 'none'; // 현재 추천된 ID
+  String _mentorId = 'none';
+   /// 아이디가 캐시에 있는지 확인
   bool isCached(id) {
     if (_mentorCache.containsKey(id)) {
       _mentorId = id;
@@ -19,7 +20,7 @@ class AiChatProvider extends ChangeNotifier {
       return false;
     }
   }
-
+ 
   void toggleFavoriteID(String id) {
     _mentorCache[id]!.isFavorite = !_mentorCache[id]!.isFavorite;
     notifyListeners();

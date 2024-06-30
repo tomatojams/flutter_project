@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+/// 사용자 대화 위젯
 class UserConv extends StatelessWidget {
   final String conv;
   const UserConv({

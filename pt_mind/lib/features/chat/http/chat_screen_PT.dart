@@ -16,7 +16,7 @@ class PtChatScreen extends StatefulWidget {
   
 }
 
-// 수정된 부분 시작
+/// PT 인공지능 대화 화면
 class _ChatScreenState extends State<PtChatScreen> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();

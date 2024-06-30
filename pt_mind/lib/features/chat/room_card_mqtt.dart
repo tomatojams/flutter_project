@@ -4,6 +4,7 @@ import 'package:pt_mind/features/chat/mqtt/chat_screen_mqtt.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+/// 쌍방향 대화 룸카드
 class MqttChatCard extends StatefulWidget {
   static const String path = "/card";
   final MqttChatProvider chatProvider;

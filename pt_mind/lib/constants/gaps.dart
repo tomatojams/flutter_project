@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pt_mind/constants/sizes.dart';
-
+/// 가로세로 간격을 정의한 클래스
 class Gaps {
   // Vertical Gaps
   static const v1 = SizedBox(height: Sizes.size1);

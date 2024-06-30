@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/chat/http/chat_screen_PT.dart';
 
+/// PT 대화 룸카드
 class PtRoomCard extends StatelessWidget {
   final String profile;
   final String imageExt;

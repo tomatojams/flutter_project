@@ -13,7 +13,7 @@ import '../../../../utility/mentor_popup_dialog.dart';
 // 2. ID 추출
 // 3. 캐싱여부 확인 해서 캐싱된 경우 추천창 생성
 // 4. 캐싱 안된 경우 API에서 멘토 정보 가져와서 추천창 생성
-
+/// PT 대화창 위젯
 class PTconv extends StatefulWidget {
   final String conv;
   final FocusNode focusNode;
@@ -41,7 +41,7 @@ class _PTconvState extends State<PTconv> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AiChatProvider>(
+    return Consumer<AiChatProvider>( // provider에서 내용이 변하면 재 렌더링 여러가지 속성을 불러와야 하므로 Consumer 사용
       builder: (context, provider, _) {
         List<String> idAndConv = // provider에서 id와 대화내용 필터링
             provider.findId(widget.conv);
