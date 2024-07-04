@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pt_mind/features/web/webview.dart';
 
 /// 랜덤 프로그램 카드
 class RandomRoomCard extends StatelessWidget {
@@ -27,14 +28,14 @@ class RandomRoomCard extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          // onTap: () {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => const PtChatScreen(),
-          //     ),
-          //   );
-          // },
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Webview(),
+              ),
+            );
+          },
           child: Badge(
             largeSize: 15,
             offset: const Offset(-1, -5),

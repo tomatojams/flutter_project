@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- <user-permission android:name="android.permission.INTERNET"/> -->
+<!-- 이런거 안해도 됨 하면 에러남 -->
     <application
         android:label="pt_mind"
         android:name="${applicationName}"

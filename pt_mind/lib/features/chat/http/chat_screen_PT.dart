@@ -10,10 +10,6 @@ class PtChatScreen extends StatefulWidget {
 
   @override
   State<PtChatScreen> createState() => _ChatScreenState();
-
-
-
-  
 }
 
 /// PT 인공지능 대화 화면
@@ -52,10 +48,10 @@ class _ChatScreenState extends State<PtChatScreen> {
   //   setState(() {});
   // }
 
-String removeQuotesAndBackslashes(String input) {
-  // \"와 \를 제거합니다.
-  return input.replaceAll(RegExp(r'[\\"]'), '');
-}
+  String removeQuotesAndBackslashes(String input) {
+    // \"와 \를 제거합니다.
+    return input.replaceAll(RegExp(r'[\\"]'), '');
+  }
 
   void initChat() async {
     final chat = await ApiService.getSingleChat();

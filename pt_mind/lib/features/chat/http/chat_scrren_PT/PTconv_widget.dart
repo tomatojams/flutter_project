@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/constants/gaps.dart';
 import 'package:pt_mind/models/mentor_model.dart';
-
 import '../../../../provider/PT_chat_provider.dart';
 import '../../../../utility/favorite_toggle_widget.dart';
 import '../../../../utility/mentor_popup_dialog.dart';
@@ -41,7 +40,8 @@ class _PTconvState extends State<PTconv> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AiChatProvider>( // provider에서 내용이 변하면 재 렌더링 여러가지 속성을 불러와야 하므로 Consumer 사용
+    return Consumer<AiChatProvider>(
+      // provider에서 내용이 변하면 재 렌더링 여러가지 속성을 불러와야 하므로 Consumer 사용
       builder: (context, provider, _) {
         List<String> idAndConv = // provider에서 id와 대화내용 필터링
             provider.findId(widget.conv);
@@ -437,6 +437,9 @@ class ReccMentorFromCache extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () async {
+                      // widget.focusNode.unfocus();
+                      // widget.focusNode.requestFocus();
+
                       // 비동기가 멈추게 하기위해 await 사용
                       await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
                       widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
