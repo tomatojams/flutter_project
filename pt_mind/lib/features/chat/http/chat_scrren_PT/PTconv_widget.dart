@@ -277,7 +277,11 @@ class ReccMentorFromAPI extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () async {
+                      // API에서 받아오는거라 실험용으로는 의미없음
                       // 비동기가 멈추게 하기위해 await 사용
+                      // widget.focusNode.unfocus();
+                      // widget.focusNode.requestFocus();
+                      // await popupDialog(context, widget.focusNode);
                       await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
                       widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
                     },
@@ -442,6 +446,8 @@ class ReccMentorFromCache extends StatelessWidget {
 
                       // 비동기가 멈추게 하기위해 await 사용
                       await popupDialog(context); // 팝업이 닫힐때까지 비동기가 멈추고
+                      // await popupDialog(context,widget.focusNode); // focustNode 추가사용시
+                      // showPopup(context);
                       widget.focusNode.unfocus(); // 닫히고나서 실행하게 됨
                     },
                     child: const Text('더보기>')),

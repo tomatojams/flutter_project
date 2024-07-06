@@ -3,8 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/provider/PT_chat_provider.dart';
 
-import 'mentor_popup_dialog.dart';
-
 class FavoriteToggleWidget extends StatelessWidget {
   final String mentorId;
   const FavoriteToggleWidget({

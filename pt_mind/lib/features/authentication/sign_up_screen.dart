@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
 
+import '../../services/kakao_service.dart';
 import 'email_screen.dart';
 import 'login_screen.dart';
 import 'widgets/auth_button.dart';
@@ -69,6 +70,18 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Gaps.v15,
                 GestureDetector(
+                  onTap: () async{
+                    final result = await KakaoService().login();
+                    result.when(
+                      onSuccess: (data) {
+                        print(data);
+                      },
+                      onError: (error) {
+                        print(error);
+                      },
+                    );
+                  
+                  },
                   child: AuthButton(
                       image: Image.asset('assets/icon/kakao.png',
                           color: Colors.black54, width: 23),

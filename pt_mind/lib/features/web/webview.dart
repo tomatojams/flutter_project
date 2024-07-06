@@ -102,7 +102,7 @@ class _WebviewState extends State<Webview> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh, color: Theme.of(context).primaryColor),
+            icon: const Icon(Icons.refresh, color: Color(0xFFA077F2)),
             onPressed: () {
               _wc.reload();
             },

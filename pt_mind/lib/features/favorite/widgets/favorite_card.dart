@@ -27,6 +27,7 @@ class FavoriteCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         popupDialog(context);
+        // popupDialog(context, null); // 포커스 노드 추가시 사용
       },
       child: Container(
         decoration: BoxDecoration(
