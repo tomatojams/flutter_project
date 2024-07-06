@@ -5,6 +5,8 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
+import '../../constants/gaps.dart';
+
 class Webview extends StatefulWidget {
   const Webview({
     super.key,
@@ -100,20 +102,29 @@ class _WebviewState extends State<Webview> {
         backgroundColor: Theme.of(context).cardColor,
         foregroundColor: Colors.black87,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh, color: Color(0xFFA077F2)),
-            onPressed: () {
-              _wc.reload();
-            },
-          ),
-          // IconButton(
-          //   icon: Icon(Icons.home),
-          //   onPressed: () {
-          //     _wc.loadUrl('https://experienced-experiences-877979.framer.app/');
-          //   },
-          // ),
-        ],
+        leading: Row(
+          children: [
+            Gaps.h8,
+            IconButton(
+              icon: const Icon(Icons.arrow_back, color: Color(0xFFA077F2)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.refresh, color: Color(0xFFA077F2)),
+              onPressed: () {
+                _wc.reload();
+              },
+            ),
+            Gaps.h4,
+          ],
+        ),
       ),
       body: WebViewWidget(
         controller: _wc,

@@ -22,12 +22,13 @@ class AiChatProvider extends ChangeNotifier {
   }
  
   void toggleFavoriteID(String id) {
-    _mentorCache[id]!.isFavorite = !_mentorCache[id]!.isFavorite;
+    _mentorCache[id]==null? true: _mentorCache[id]!.isFavorite = !_mentorCache[id]!.isFavorite;
+    // _mentorCache[id]!.isFavorite = !_mentorCache[id]!.isFavorite;
     notifyListeners();
   }
 
   bool getFavoriteID(String id) {
-    return _mentorCache[id]!.isFavorite;
+    return _mentorCache[id]==null? false: _mentorCache[id]!.isFavorite;
   }
 
 
