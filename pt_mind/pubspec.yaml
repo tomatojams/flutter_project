@@ -30,10 +30,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #unity
+  # flutter_unity_widget: ^2022.2.0
+  # flutter_flavorizr: ^2.2.3
+  # flame
+  flame: ^1.18.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-   # logging
+  # logging
   logger: ^2.3.0
   # talker_flutter: ^4.3.2
 
@@ -48,11 +53,12 @@ dependencies:
   fluttertoast: ^8.2.5
   http: ^1.1.0
   simple_shadow: ^0.3.1
-  mqtt_client: ^10.2.1
+  # mqtt_client: ^10.2.1
+  mqtt_client: ^10.3.0
   provider: ^6.1.2
   pull_to_refresh: ^2.0.0
   font_awesome_flutter: ^10.7.0
-  
+
   kakao_flutter_sdk_user: ^1.9.2
   web_socket_channel: ^3.0.0
   webview_flutter: ^4.8.0
@@ -90,6 +96,8 @@ flutter:
     - assets/profile/
     - assets/program/
     - assets/random/
+    - assets/images/game/back/
+    - assets/images/game/character/
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

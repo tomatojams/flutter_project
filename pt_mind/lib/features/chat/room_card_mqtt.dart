@@ -185,7 +185,7 @@ class _MqttChatCardState extends State<MqttChatCard> {
                                   widget.lastMessage!,
                                   style: TextStyle(
                                     color: Theme.of(context).hintColor,
-                                    fontSize: 12.0,
+                                    fontSize: 13.0,
                                   ),
                                 )
                         ],

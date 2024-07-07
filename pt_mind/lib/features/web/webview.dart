@@ -106,7 +106,8 @@ class _WebviewState extends State<Webview> {
           children: [
             Gaps.h8,
             IconButton(
-              icon: const Icon(Icons.arrow_back, color: Color(0xFFA077F2)),
+              icon: const Icon(Icons.arrow_back_ios_new,
+                  size: 23, color: Colors.black45),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -117,12 +118,12 @@ class _WebviewState extends State<Webview> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
-              icon: const Icon(Icons.refresh, color: Color(0xFFA077F2)),
+              icon: const Icon(Icons.refresh, size: 25, color: Colors.black45),
               onPressed: () {
                 _wc.reload();
               },
             ),
-            Gaps.h4,
+            // Gaps.h4,
           ],
         ),
       ),

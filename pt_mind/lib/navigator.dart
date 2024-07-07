@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/authentication/sign_up_screen.dart';
 import 'package:pt_mind/features/chat/lobby_screen_chat.dart';
 import 'package:pt_mind/features/favorite/favorite_screen.dart';
-import 'package:pt_mind/features/training/training_screen.dart';
+import 'package:pt_mind/features/game/lobby_screen_game.dart';
 import 'package:pt_mind/features/personal/personal_screen.dart';
 
 class PTstate extends StatefulWidget {
