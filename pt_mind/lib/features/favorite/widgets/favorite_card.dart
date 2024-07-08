@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/utility/mentor_popup_dialog.dart';
@@ -102,7 +98,7 @@ class FavoriteCard extends StatelessWidget {
                       slogan,
                       style: TextStyle(
                         color: Theme.of(context).hintColor,
-                        fontSize: 12.0,
+                        fontSize: 13.0,
                       ),
                     ),
                     Gaps.v10,

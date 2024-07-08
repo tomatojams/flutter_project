@@ -4,10 +4,10 @@ import 'package:flame/components.dart';
 
 // 게임 인스턴스 생성
 class StartGame extends FlameGame {
-  // 게임 인스턴스가 생성될때 실행하는 함수, 대부분 여기에 내용을 배치한다.
+  // 게임 인스턴스가 생성될때 실행하는 함수, 대부분 여기에 배치
   @override
   Future<void> onLoad() async {
-    final AirplaneGameBg _ = AirplaneGameBg();
+    final AirplaneGameBg _ = AirplaneGameBg(); // 게임배경 컴포넌트 생성
     await add(_);
 
     super.onLoad();
@@ -18,13 +18,13 @@ class StartGame extends FlameGame {
   // 인스턴스가 해제될 떄 실행되는 로직
 }
 
-// 배경 불러오기
+// 게임배경 컴포넌트 (SpriteComponent를 상속) HasGameRef를 Mixin
 class AirplaneGameBg extends SpriteComponent with HasGameRef {
   @override
-  Future<void> onLoad() async {
+  Future<void> onLoad() async { // 게임배경 이미지 로드
     super.onLoad();
 
-    sprite = await gameRef.loadSprite('game/back/forest1-1.png');
+    sprite = await gameRef.loadSprite('game/back/forest1-1.png'); 
     size = Vector2(gameRef.size.x, gameRef.size.y);
   }
 }
