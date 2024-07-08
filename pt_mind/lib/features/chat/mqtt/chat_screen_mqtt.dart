@@ -10,7 +10,7 @@ import 'package:pt_mind/constants/gaps.dart';
 import '../http/chat_scrren_PT/user_conv_widget.dart';
 
 class MqttChatScreen extends StatefulWidget {
-  static const String path = "/chat/room";
+  // static const String path = "/chat/room";
   // final String profile;
 
   const MqttChatScreen({

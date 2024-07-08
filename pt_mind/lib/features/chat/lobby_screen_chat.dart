@@ -14,7 +14,7 @@ import 'room_card_random.dart';
 
 /// 채팅 로비 화면
 class ChatLobbyScreen extends StatefulWidget {
-  static const String path = "/lobby";
+  // static const String path = "/lobby";
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   ChatLobbyScreen({
