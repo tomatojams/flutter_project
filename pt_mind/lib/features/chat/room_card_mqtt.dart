@@ -81,8 +81,16 @@ class _MqttChatCardState extends State<MqttChatCard> {
 
     widget.chatProvider.setUserNickName(userId);
     widget.chatProvider.setProfile(profile[mentor.indexOf(widget.name)]);
-    Navigator.of(context).pushNamed(MqttChatScreen.path);
+    // Navigator.of(context).pushNamed(MqttChatScreen.path);
 
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MqttChatScreen(),
+      ),
+    );
+    
     setState(() {
       _isConnecting = false; // Reset connection status
     });

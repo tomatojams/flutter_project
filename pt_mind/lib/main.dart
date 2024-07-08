@@ -4,7 +4,7 @@ import 'package:pt_mind/provider/auth_provider.dart';
 import 'package:pt_mind/provider/PT_chat_provider.dart';
 import 'package:pt_mind/navigator.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
-import 'package:pt_mind/features/chat/mqtt/chat_screen_mqtt.dart';
+
 
 void main() {
   runApp(const App());
@@ -25,23 +25,6 @@ class App extends StatelessWidget {
             create: (BuildContext _) => AiChatProvider()),
       ],
       child: MaterialApp(
-        onGenerateRoute: (RouteSettings route) {
-          {
-            if (route.name == MqttChatScreen.path) {
-              return MaterialPageRoute(
-                  settings: const RouteSettings(name: MqttChatScreen.path),
-                  builder: (BuildContext context) {
-                    MqttChatProvider mqttChatProvider =
-                        Provider.of<MqttChatProvider>(context);
-
-                    return MqttChatScreen(
-                      chatProvider: mqttChatProvider,
-                    );
-                  });
-            }
-          }
-          return null;
-        },
         theme: ThemeData(
           useMaterial3: false,
           scaffoldBackgroundColor: const Color(0xFFF8F2F5),

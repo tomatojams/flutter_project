@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MqttConv extends StatelessWidget {
-  final String conv;
+  final String conv; // 대화내용
   final String profile;
-  final bool isPng;
+  final bool isPng; // 이미지 파일이 png인지 svg인지
   const MqttConv({
     super.key,
     required this.conv,
@@ -44,7 +44,7 @@ class MqttConv extends StatelessWidget {
                     maxWidth: MediaQuery.of(context).size.width * 0.66,
                   ),
                   child: Text(
-                    conv,
+                    conv,// 대화내용
                     style: TextStyle(
                       color: Theme.of(context).indicatorColor,
                       fontSize: 16.0,
