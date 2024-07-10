@@ -131,13 +131,24 @@ class _PasswordScreenState extends State<PasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v40,
-              const Text(
-                // 상단 텍스트
-                "패스워드를 만들어주세요.",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    // 상단 텍스트
+                    "패스워드를 만들어주세요.",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  // Image.asset(
+                  //   'assets/images/auth/lock.png',
+                  //   width: 50,
+                  // ),
+                ],
               ),
               Gaps.v16,
               TextField(
+                autofocus: true,
                 // 패스워드 입력창
                 autocorrect: false,
                 controller: _passc,

@@ -41,18 +41,22 @@ class _PTstateState extends State<PTstate> {
         ),
       ),
       body: _navIndex[currentPageIndex], // 여기서 페이지를 바꿔줌
-      floatingActionButton: FloatingActionButton(
-        // 플로팅 가입아이콘
-        backgroundColor: Theme.of(context).cardColor,
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const SignUpScreen(),
-              fullscreenDialog: true));
-        },
-        tooltip: 'Increment',
-        child: Image.asset(
-          'assets/icon/birthday-cake.png',
-          width: 30,
+      floatingActionButton: ClipOval(
+        child: FloatingActionButton(
+          // 플로팅 가입아이콘
+          backgroundColor: Theme.of(context).cardColor,
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SignUpScreen(),
+                fullscreenDialog: true));
+          },
+          // // tooltip: 'Increment',
+          // child: SvgPicture.asset('assets/icon/join.svg', width: 200),
+          // Image.asset(
+          //   'assets/icon/join2.png',
+          //   width: 30,
+          // ),
+          child: Image.asset('assets/icon/birthday-cake.png', width: 35),
         ),
       ),
       bottomNavigationBar: NavigationBarTheme(

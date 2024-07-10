@@ -20,17 +20,24 @@ class _ChatScreenState extends State<PtChatScreen> {
 
   final userId = 'a1234';
   // 디버깅용 대화 스크립트
-  List<Map<String, String>> chatdata = [
+  bool isDebug = false;
+  bool showDebug = false;
+  String metaInfo =
+      '[ converNum: 2, emotion: null, subject: null, stage: stage1 ]';
+
+  List<Map<String, String>> chatdataDebug = [
     // {"user": "오늘은 기분이 좋아요"},
     // // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
     // // {"user": "안녕하세요"},
-    {"pt": "스크롤 키보드 문제는 해결했습니다 >_< README에  [m20240103]"},
+    // {"pt": "스크롤 키보드 문제는 해결했습니다 >_< README에  [m20240103]"},
     // {"user": "요가를 하고 싶어요"},
     // {
     //   "pt":
     //       "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
     // },
   ];
+
+  List<Map<String, String>> chatdataFiltered = [];
 
   @override
   void initState() {
@@ -55,7 +62,18 @@ class _ChatScreenState extends State<PtChatScreen> {
 
   void initChat() async {
     final chat = await ApiService.getSingleChat();
-    chatdata.insert(0, {"pt": chat}); // 대화 첫번째에 추가
+    chatdataDebug.insert(0, {"pt": chat}); // 대화 첫번째에 추가
+
+    RegExp regExp = RegExp(
+        r'\[ converNum: (\d+), emotion: ([^,]+), subject: ([^,]+), stage: ([^\]]+) \]');
+    RegExpMatch? match =
+        regExp.firstMatch(chatdataDebug[chatdataDebug.length - 1]["pt"]!);
+    if (match != null) {
+      String filtered =
+          chatdataDebug[chatdataDebug.length - 1]["pt"]!.replaceAll(regExp, "");
+      chatdataFiltered.add({"pt": filtered});
+    }
+
     setState(() {});
   }
 
@@ -88,19 +106,69 @@ class _ChatScreenState extends State<PtChatScreen> {
     if (text.isEmpty) {
       return;
     }
-    chatdata.add({"user": text});
+    chatdataFiltered.add({"user": text});
+    final newText = metaInfo + text;
+    chatdataDebug.add({"user": newText});
+
     _textController.clear(); // 추가후 텍스트 지움
+
     setState(() {
       // print("submit &moveScroll");
       moveScroll(); // 초기화후 스크롤이 맨 아래로 가게 추가
     });
+    // String answer = await ApiService.postChat(userId, text);
+    String answer = await ApiService.postChat(userId, newText); // 포스트 후에 답변받음
+    if (answer.contains('자세히')) {
+      answer = answer.replaceAll('자세히', '');
+    }
 
-    String answer = await ApiService.postChat(userId, text); // 포스트 후에 답변받음
-    chatdata.add({"pt": answer.toString()});
+    chatdataDebug.add({"pt": answer.toString()});
+
+    // AI 대화에서 meta-info 추출제거 후 저장
+    RegExp regExp = RegExp(
+        r'\[ converNum: (\d+), emotion: ([^,]+), subject: ([^,]+), stage: ([^\]]+) \]');
+    RegExpMatch? match =
+        regExp.firstMatch(chatdataDebug[chatdataDebug.length - 1]["pt"]!);
+    if (match != null) {
+      int converNum = int.parse(match.group(1)!) + 1;
+      String emotion = match.group(2)!;
+      String subject = match.group(3)!;
+      String stage = match.group(4)!;
+
+      if (stage == "stage4") {
+        stage = "stage5";
+      }
+
+      metaInfo =
+          '[ converNum: $converNum, emotion: $emotion, subject: $subject, stage: $stage ]';
+
+      String filtered =
+          chatdataDebug[chatdataDebug.length - 1]["pt"]!.replaceAll(regExp, "");
+      print(regExp);
+      chatdataFiltered.add({"pt": filtered});
+
+      // print(chatdataFiltered);
+    } else {
+      // 매칭 실패 시 원본 텍스트를 추가
+      chatdataFiltered
+          .add({"pt": chatdataDebug[chatdataDebug.length - 1]["pt"]!});
+    }
 
     setState(() {
       // print("submit &moveScroll2");
       moveScroll(); // AI 답변받은후 스크롤
+    });
+  }
+
+  _onDebug() {
+    setState(() {
+      isDebug = !isDebug;
+    });
+  }
+
+  _showDebug() {
+    setState(() {
+      showDebug = !showDebug;
     });
   }
 
@@ -134,10 +202,32 @@ class _ChatScreenState extends State<PtChatScreen> {
                 'assets/logo/PTlogo-small.svg',
                 height: 25.0,
               ),
-              Gaps.h64,
+              // Gaps.h64, // 원래 이거
+              Gaps.h1,
+              GestureDetector(
+                // 디버깅활성화버튼
+                onTap: _showDebug,
+                child: SvgPicture.asset(
+                  'assets/icon/debug.svg',
+                  height: 10.0,
+                ),
+              ),
             ],
           ),
         ),
+        // 디버깅 버튼
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: showDebug
+            ? FloatingActionButton(
+                backgroundColor: Theme.of(context).cardColor,
+                onPressed: _onDebug,
+                tooltip: 'Increment',
+                child: Image.asset(
+                  'assets/icon/debugon.png',
+                  width: 30,
+                ),
+              )
+            : null,
         body: Column(
           children: [
             Expanded(
@@ -145,32 +235,15 @@ class _ChatScreenState extends State<PtChatScreen> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor),
-                child: ListView.builder(
-                  // 리스트뷰빌더로 최적화
-                  reverse: true,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  shrinkWrap: true, // 리스트뷰가 자신의 크기에 맞게 축소되도록 설정
-                  controller: _scrollController, // 스크롤 컨트롤러 추가
-                  itemCount: chatdata.length, // 리스트 아이템 개수 설정
-                  itemBuilder: (context, index) {
-                    // 리스트 아이템을 동적으로 생성
-                    if (chatdata[chatdata.length - index - 1]
-                        .containsKey("user")) {
-                      // 사용자 메시지인 경우 UserConv 위젯 반환
-                      return UserConv(
-                          conv: chatdata[chatdata.length - index - 1]["user"]!);
-                      // 스크롤을 역방향으로해서 대화를 끝에서 부터 시작
-                    } else {
-                      // PT 메시지인 경우 PTconv 위젯 반환
-                      return PTconv(
-                          focusNode: _focusNode,
-                          conv: chatdata[chatdata.length - index - 1]["pt"]!);
-                    }
-                  },
-                ),
+                child: isDebug
+                    ? ListViewChat(
+                        scrollController: _scrollController,
+                        chatdata: chatdataDebug,
+                        focusNode: _focusNode)
+                    : ListViewChat(
+                        scrollController: _scrollController,
+                        chatdata: chatdataFiltered,
+                        focusNode: _focusNode),
               ),
             ),
 
@@ -178,6 +251,7 @@ class _ChatScreenState extends State<PtChatScreen> {
             Container(
               margin: const EdgeInsets.all(10),
               child: TextField(
+                autocorrect: false,
                 controller: _textController, // 내부 텍스트를 추출하기 위한 컨트롤러
                 focusNode: _focusNode, // 포커스를 유지해서 전송되어도, 키보드가 내려가지 않게 추가
                 // textInputAction: TextInputAction.done, // 완료액션 설정
@@ -226,6 +300,48 @@ class _ChatScreenState extends State<PtChatScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ListViewChat extends StatelessWidget {
+  const ListViewChat({
+    super.key,
+    required ScrollController scrollController,
+    required this.chatdata,
+    required FocusNode focusNode,
+  })  : _scrollController = scrollController,
+        _focusNode = focusNode;
+
+  final ScrollController _scrollController;
+  final List<Map<String, String>> chatdata;
+  final FocusNode _focusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // 리스트뷰빌더로 최적화
+      reverse: true,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 10.0,
+      ),
+      shrinkWrap: true, // 리스트뷰가 자신의 크기에 맞게 축소되도록 설정
+      controller: _scrollController, // 스크롤 컨트롤러 추가
+      itemCount: chatdata.length, // 리스트 아이템 개수 설정
+      itemBuilder: (context, index) {
+        // 리스트 아이템을 동적으로 생성
+        if (chatdata[chatdata.length - index - 1].containsKey("user")) {
+          // 사용자 메시지인 경우 UserConv 위젯 반환
+          return UserConv(conv: chatdata[chatdata.length - index - 1]["user"]!);
+          // 스크롤을 역방향으로해서 대화를 끝에서 부터 시작
+        } else {
+          // PT 메시지인 경우 PTconv 위젯 반환
+          return PTconv(
+              focusNode: _focusNode,
+              conv: chatdata[chatdata.length - index - 1]["pt"]!);
+        }
+      },
     );
   }
 }

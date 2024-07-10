@@ -67,7 +67,8 @@ class _ChatScreenState extends State<MqttChatScreen>
     });
   }
 
-  void _send(provider) {  // provider를 받아와서 사용하면 됨
+  void _send(provider) {
+    // provider를 받아와서 사용하면 됨
     final text = _textController.text;
     if (text.isEmpty) {
       return;
@@ -81,11 +82,10 @@ class _ChatScreenState extends State<MqttChatScreen>
     });
   }
 
-
-
   @override
-  Widget build(BuildContext context) { 
-    return Consumer<MqttChatProvider>(builder: (context, chatProvider, child) { // Consumer로 변경 생성할때 provider를 받아올 필요없음.
+  Widget build(BuildContext context) {
+    return Consumer<MqttChatProvider>(builder: (context, chatProvider, child) {
+      // Consumer로 변경 생성할때 provider를 받아올 필요없음.
       return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();

@@ -18,24 +18,22 @@ class ApiService {
   static const String mentor = "mentor";
 
   static String getBaseUrl() {
-  if (Platform.isAndroid) {
-    return 'http://10.0.2.2:8000'; // 안드로이드 에뮬레이터
-  } else if (Platform.isWindows) {
-    return 'http://127.0.0.1:8000'; // 윈도우 앱
-  } else {
-    return 'http://127.0.0.1:8000'; // 기본값
+    if (Platform.isAndroid) {
+      return 'http://10.0.2.2:8000'; // 안드로이드 에뮬레이터
+    } else if (Platform.isWindows) {
+      return 'http://127.0.0.1:8000'; // 윈도우 앱
+    } else {
+      return 'http://127.0.0.1:8000'; // 기본값
+    }
   }
-}
-
 
   static String removeQuotesAndBackslashes(String input) {
     // \"와 \ 그리고 AI:제거합니다.
-    return input.replaceAll(RegExp(r'\\|\"|AI:'), '');
+    return input.replaceAll(RegExp(r'(\\n|\"|AI:)'), '');
     // return input.replaceAll(RegExp(r'[\\"]'), '');
   }
 
   static Future<String> getSingleChat() async {
-
     final baseUrl = getBaseUrl();
     final url = Uri.parse('$baseUrl/$chatpt'); // parse는 새로운  uri 객체를 만듬
 
@@ -53,7 +51,7 @@ class ApiService {
   }
 
   static Future<String> getEmotion() async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     final url = Uri.parse('$baseUrl/$chatpt');
     final response = await http.get(url);
 
@@ -67,7 +65,7 @@ class ApiService {
   }
 
   static Future<ChatModel> getChatAll() async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     ChatModel chatModel;
     final url = Uri.parse('$baseUrl/$chatptAll');
     final response = await http.get(url);
@@ -82,7 +80,7 @@ class ApiService {
   }
 
   static Future<MentorModel> getMentor(mentorId) async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     MentorModel mentorModel;
     final url = Uri.parse('$baseUrl/$mentor/$mentorId');
     final response = await http.get(url);
@@ -129,7 +127,7 @@ class ApiService {
   // }
 
   static Future<List<ChatLobbyModel>> getChatRoomList() async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     List<ChatLobbyModel> chatRoomLists = [];
     final url = Uri.parse('$baseUrl/$chatptRoom');
     final response = await http.get(url);
@@ -153,7 +151,7 @@ class ApiService {
   }
 
   static Future<RandomChatRoom> getRandomChatRoom() async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     final url = Uri.parse('$baseUrl/$randomChatRoom');
     final response = await http.get(url);
 
@@ -167,7 +165,7 @@ class ApiService {
   }
 
   static Future<String> postChat(userID, userAnswer) async {
-      final baseUrl = getBaseUrl();
+    final baseUrl = getBaseUrl();
     Map data = {'user_id': userID, 'user_answer': userAnswer};
     ChatModel chatModel;
     final body = json.encode(data);

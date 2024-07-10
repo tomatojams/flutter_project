@@ -87,61 +87,87 @@ class _EmailScreenState extends State<EmailScreen> {
           padding: const EdgeInsets.symmetric(
             horizontal: 36,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gaps.v40,
-              const Text(
-                "이메일을 적어주세요",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-              ),
-              Gaps.v16,
-              TextField(
-                keyboardType: TextInputType.emailAddress, // 키보드 타입 지정
-                autocorrect: false,
-                controller: _tec,
-                onEditingComplete: _onSubmit,
-                cursorColor: Theme.of(context).primaryColor,
-                decoration: InputDecoration(
-                  errorStyle: const TextStyle(
-                    color: Colors.pink,
-                  ),
-                  errorText: _isEmailValid(),
-                  hintText: 'Email',
-                  hintStyle: const TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  errorBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.v40,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      // 글자수가 길어지면 화면을 넘어가게 되는데, Expanded를 사용하면 화면을 넘어가지 않게 해줌
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "이메일을 적어주세요",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          Gaps.v16,
+                          TextField(
+                            autofocus: true,
+                            keyboardType:
+                                TextInputType.emailAddress, // 키보드 타입 지정
+                            autocorrect: false,
+                            controller: _tec,
+                            onEditingComplete: _onSubmit,
+                            cursorColor: Theme.of(context).primaryColor,
+                            decoration: InputDecoration(
+                              errorStyle: const TextStyle(
+                                color: Colors.pink,
+                              ),
+                              errorText: _isEmailValid(),
+                              hintText: 'Email',
+                              hintStyle: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              errorBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              focusedErrorBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  focusedErrorBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black87,
-                    ),
-                  ),
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black87,
-                    ),
-                  ),
+                    Gaps.h10,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 40,
+                      ),
+                      child: Image.asset('assets/images/auth/mail3.png',
+                          width: 40),
+                    ), // 이미지 추가
+                  ],
                 ),
-              ),
-              Gaps.v20,
-              GestureDetector(
-                onTap: _onSubmit,
-                child: FormButton(
-                    disabled: _email.isEmpty || _isEmailValid() != null),
-              ), // 메세지가 사라져야 활성화
-            ],
+                Gaps.v20,
+                GestureDetector(
+                  onTap: _onSubmit,
+                  child: FormButton(
+                      disabled: _email.isEmpty || _isEmailValid() != null),
+                ), // 메세지가 사라져야 활성화
+              ],
+            ),
           ),
         ),
       ),
