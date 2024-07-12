@@ -14,16 +14,16 @@ class ProgrmaIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 60.0,
-      height: 84.0,
+      height: 76.0,
       child: Column(
         children: [
           icon != null
               ? Image.asset(
                   icon!,
-                  height: 60,
+                  height: 55,
                 )
               : const SizedBox(
-                  height: 60,
+                  height: 55,
                 ),
           Gaps.h2,
           title != null

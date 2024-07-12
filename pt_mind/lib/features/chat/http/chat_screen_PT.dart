@@ -16,25 +16,17 @@ class PtChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<PtChatScreen> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
-  final FocusNode _focusNode = FocusNode(); // 입력되어도 키보드가 내려가지 않게 추가
+  final FocusNode _focusNode = FocusNode();
 
   final userId = 'a1234';
   // 디버깅용 대화 스크립트
   bool isDebug = false;
-  bool showDebug = false;
+  bool showDebug = true;
   String metaInfo =
       '[ converNum: 2, emotion: null, subject: null, stage: stage1 ]';
 
   List<Map<String, String>> chatdataDebug = [
-    // {"user": "오늘은 기분이 좋아요"},
-    // // {"pt": "기분이 좋으시다니 다행입니다. 기분이 좋으시다면 무엇을 하고 싶으신가요?"},
-    // // {"user": "안녕하세요"},
     // {"pt": "스크롤 키보드 문제는 해결했습니다 >_< README에  [m20240103]"},
-    // {"user": "요가를 하고 싶어요"},
-    // {
-    //   "pt":
-    //       "요가를 하고 싶으시다니 좋은 생각이에요. 요가를 하면 몸과 마음이 편안해지는 효과가 있어요. 요가를 하면서 마음을 편안하게 해보세요."
-    // },
   ];
 
   List<Map<String, String>> chatdataFiltered = [];
@@ -50,17 +42,14 @@ class _ChatScreenState extends State<PtChatScreen> {
     super.initState();
   }
 
-  // void _updateFromChild() {
-  //   // 자식위젯인 PTconv에서 상태변경 테스트 아직 작동안함.
-  //   setState(() {});
+  // String removeQuotesAndBackslashes(String input) {
+  //   // \"와 \를 제거합니다.
+  //   return input.replaceAll(RegExp(r'[\\"]'), '');
   // }
 
-  String removeQuotesAndBackslashes(String input) {
-    // \"와 \를 제거합니다.
-    return input.replaceAll(RegExp(r'[\\"]'), '');
-  }
-
   void initChat() async {
+    // 초기화
+    // 처음 AI 대화를 가져오고 메타정보를 추출하여 저장
     final chat = await ApiService.getSingleChat();
     chatdataDebug.insert(0, {"pt": chat}); // 대화 첫번째에 추가
 
@@ -72,6 +61,10 @@ class _ChatScreenState extends State<PtChatScreen> {
       String filtered =
           chatdataDebug[chatdataDebug.length - 1]["pt"]!.replaceAll(regExp, "");
       chatdataFiltered.add({"pt": filtered});
+    } else {
+      // 매칭 실패 시 원본 텍스트를 추가
+      chatdataFiltered
+          .add({"pt": chatdataDebug[chatdataDebug.length - 1]["pt"]!});
     }
 
     setState(() {});
@@ -81,7 +74,7 @@ class _ChatScreenState extends State<PtChatScreen> {
   void dispose() {
     _scrollController.dispose();
     _textController.dispose();
-    _focusNode.dispose(); // 입력되어도 키보드가 내려가지 않게 추가
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -118,8 +111,13 @@ class _ChatScreenState extends State<PtChatScreen> {
     });
     // String answer = await ApiService.postChat(userId, text);
     String answer = await ApiService.postChat(userId, newText); // 포스트 후에 답변받음
-    if (answer.contains('자세히')) {
-      answer = answer.replaceAll('자세히', '');
+    if (answer.contains('자세히') ||
+        answer.contains('상세히') ||
+        answer.contains('?')) {
+      answer = answer
+          .replaceAll('자세히', '')
+          .replaceAll('상세히', '')
+          .replaceAll('?', '');
     }
 
     chatdataDebug.add({"pt": answer.toString()});
@@ -144,7 +142,7 @@ class _ChatScreenState extends State<PtChatScreen> {
 
       String filtered =
           chatdataDebug[chatdataDebug.length - 1]["pt"]!.replaceAll(regExp, "");
-      print(regExp);
+      // print(regExp);
       chatdataFiltered.add({"pt": filtered});
 
       // print(chatdataFiltered);
@@ -198,20 +196,16 @@ class _ChatScreenState extends State<PtChatScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Gaps.h20,
-              SvgPicture.asset(
-                'assets/logo/PTlogo-small.svg',
-                height: 25.0,
-              ),
-              // Gaps.h64, // 원래 이거
-              Gaps.h1,
               GestureDetector(
-                // 디버깅활성화버튼
-                onTap: _showDebug,
+                onTap: () {
+                  _showDebug();
+                },
                 child: SvgPicture.asset(
-                  'assets/icon/debug.svg',
-                  height: 10.0,
+                  'assets/logo/PTlogo-small.svg',
+                  height: 25.0,
                 ),
               ),
+              Gaps.h64, // 원래 이거
             ],
           ),
         ),
@@ -304,6 +298,7 @@ class _ChatScreenState extends State<PtChatScreen> {
   }
 }
 
+// 대화창 리스트뷰
 class ListViewChat extends StatelessWidget {
   const ListViewChat({
     super.key,

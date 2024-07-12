@@ -34,14 +34,14 @@ class AiChatProvider extends ChangeNotifier {
 
   //디버깅용 소스 서버접속 안할때 캐쉬대용으로 사용.
   final MentorModel mentorCache = MentorModel(
-    id: 'm20240102',
+    id: 'm20240103',
     gender: '여성',
-    name: '김지수',
+    name: '나미선',
     profile: 'assets/profile/Namisun-profile.png',
-    titleName: '요가 강사',
-    career: '5년차 요가강사',
-    license: '요가지도사 2급',
-    slogan: '안녕하세요. 요가 강사 김지수입니다. 요가를 통해 몸과 마음을 편안하게 만들어드립니다.',
+    titleName: '해피매직',
+    career: '15년차 베테랑',
+    license: '상담심리사1급',
+    slogan: '행복의 기적을 찾아갑니다',
     isFavorite: false,
   );
   MentorModel get mentorWithID => _mentorCache[_mentorId]!;

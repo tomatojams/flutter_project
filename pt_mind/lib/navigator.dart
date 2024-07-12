@@ -3,19 +3,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/authentication/sign_up_screen.dart';
 import 'package:pt_mind/features/chat/lobby_screen_chat.dart';
 import 'package:pt_mind/features/favorite/favorite_screen.dart';
-import 'package:pt_mind/features/game/lobby_screen_game.dart';
+import 'package:pt_mind/features/training/lobby_screen_train.dart';
 import 'package:pt_mind/features/personal/personal_screen.dart';
 
-class PTstate extends StatefulWidget {
-  const PTstate({
+class NaviState extends StatefulWidget {
+  const NaviState({
     super.key,
   });
 
   @override
-  State<PTstate> createState() => _PTstateState();
+  State<NaviState> createState() => _NaviStateState();
 }
 
-class _PTstateState extends State<PTstate> {
+class _NaviStateState extends State<NaviState> {
+  bool elevated = true;
   int currentPageIndex = 0;
   final List<Widget> _navIndex = [
     ChatLobbyScreen(// ChatLobbyScreen
@@ -24,12 +25,21 @@ class _PTstateState extends State<PTstate> {
     const TraingScreen(),
     const PersonalScreen(),
   ];
+
+  bool isElevated() {
+    if (currentPageIndex == 0 || currentPageIndex == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.black87,
-        elevation: 2,
+        elevation: isElevated() ? 2 : 0, // 페이지에 따라 evevation을 다르게 줌
         // 엘리베이션을 하려면 shadowColor를 지정해야함
         backgroundColor: Theme.of(context).primaryColor,
         title: Padding(
@@ -66,7 +76,7 @@ class _PTstateState extends State<PTstate> {
             labelTextStyle: WidgetStateProperty.all(
           TextStyle(
             color: Theme.of(context).cardColor,
-            fontSize: 11.0,
+            fontSize: 15.0,
           ),
         )),
         child: Container(

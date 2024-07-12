@@ -78,7 +78,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const PTstate()),
+      MaterialPageRoute(builder: (context) => const NaviState()),
       (Route<dynamic> route) => false,
     );
   }

@@ -1,44 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pt_mind/features/personal/widgets/program_icon.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:pt_mind/constants/gaps.dart';
 
-class PersonalScreen extends StatefulWidget {
+class PersonalScreen extends StatelessWidget {
   const PersonalScreen({
     super.key,
   });
-
-  @override
-  State<PersonalScreen> createState() => _PersonalScreenState();
-}
-
-class _PersonalScreenState extends State<PersonalScreen> {
-  String word = 'Not yet';
-
-  Future<void> onPressed() async {
-    const String baseUrl = "http://10.0.2.2:8000";
-    const String getstate = "state";
-    var url = Uri.parse('$baseUrl/$getstate'); // parse는 새로운  uri 객체를 만듬
-
-    var response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> item = jsonDecode(response.body);
-      setState(() {
-        word = item['state'];
-      });
-    } else {
-      throw Error();
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    onPressed();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +72,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                     )
                   ],
                 ),
-                Gaps.v28,
+                Gaps.v64,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -112,26 +80,91 @@ class _PersonalScreenState extends State<PersonalScreen> {
                       'assets/logo/facebook.png',
                       width: 21,
                     ),
-                    Gaps.h5,
+                    Gaps.h10,
                     Image.asset(
                       'assets/logo/insta.png',
                       width: 22,
                     ),
-                    Gaps.h10
+                    Gaps.h28,
                   ],
                 ),
               ],
             ),
           ),
-          IconButton(
-              onPressed: onPressed,
-              icon: Image.asset(
-                'assets/icon/server-test.png',
-                width: 30,
-              )),
-          Text(word)
+          Gaps.v10,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: 0,
+                  child: SvgPicture.asset(
+                    'assets/line/hLine400.svg',
+                    width: MediaQuery.of(context).size.width * 0.8,
+                  ),
+                ),
+                const InfoPersonal(
+                  text: "정보변경",
+                ),
+                const InfoPersonal(
+                  text: "공지사항",
+                ),
+                const InfoPersonal(
+                  text: "고객센터",
+                ),
+                const InfoPersonal(
+                  text: "환경설정",
+                ),
+                Gaps.v10,
+              ],
+            ),
+          ),
         ],
       ),
+    );
+  }
+}
+
+class InfoPersonal extends StatelessWidget {
+  final String text;
+  const InfoPersonal({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(text,
+                  style: const TextStyle(
+                    // color: Theme.of(context).indicatorColor,
+                    fontSize: 16.0,
+                    // fontWeight: FontWeight.w600,
+                  )),
+              SvgPicture.asset(
+                'assets/line/arrow_back.svg',
+                width: 18,
+              ),
+            ],
+          ),
+        ),
+        Opacity(
+          opacity: 0.3,
+          child: SvgPicture.asset(
+            'assets/line/hLine400.svg',
+            width: MediaQuery.of(context).size.width * 0.79,
+          ),
+        ),
+      ],
     );
   }
 }
