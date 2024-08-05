@@ -1,7 +1,7 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tiktok/features/main_navigation/navigator.dart';
+import 'package:tiktok/features/onboarding/interests_screen.dart';
 
 import '../../constants/gaps.dart';
 
@@ -61,6 +61,15 @@ class _TutorialScreenState extends State<TutorialScreen> {
         _showingPage = Page.first;
       });
     }
+  }
+
+  void _onEnterTap() {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NaviState(),
+        ),
+        (route) => false);
   }
 
   @override
@@ -152,7 +161,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
               duration: const Duration(milliseconds: 300),
               child: CupertinoButton(
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: _onEnterTap,
                 child: const Text('시작합니다.'),
               ),
             ),

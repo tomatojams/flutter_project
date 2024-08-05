@@ -72,6 +72,9 @@
       <excludeFolder url="file://$MODULE_DIR$/tiktok/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/tiktok/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/tiktok/build" />
+      <excludeFolder url="file://$MODULE_DIR$/trde_crossing_ios/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/trde_crossing_ios/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/trde_crossing_ios/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

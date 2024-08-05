@@ -37,9 +37,12 @@ class _BrithdayScreenState extends State<BirthdayScreen> {
     print('next');
     // 온보딩으로
     // stateful widget에서는 context를 인자로 받지 않아도 됨
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return const InterestsScreen();
-    }));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const InterestsScreen(),
+        ),
+        ((route) => false));
   }
 
   void _onScaffoldTap() {

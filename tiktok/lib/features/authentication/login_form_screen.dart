@@ -35,11 +35,18 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      Navigator.pushAndRemoveUntil(
+      Navigator.pushAndRemoveUntil(context, // 문맥정보
+          MaterialPageRoute(builder: (context) => const InterestsScreen()),// 새로운경로
+          (route) { // route 기존경로들
+        /* print(route); */
+        return false; // false -> 루트 유지 안됨 true-> 유지됨 (뒤로가기)
+      });
+
+      /*     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const InterestsScreen()),
         (Route<dynamic> route) => false,
-      );
+      ); */
 
       // Navigator.pushAndRemoveUntil(
       //   context,
