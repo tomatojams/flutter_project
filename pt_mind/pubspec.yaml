@@ -97,7 +97,6 @@ flutter:
     - assets/program/
     - assets/random/
     - assets/images/game/back/
-    - assets/images/game/character/
     - assets/images/auth/
 
   #   - images/a_dot_burr.jpeg
