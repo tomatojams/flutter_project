@@ -1,17 +1,16 @@
 # pt_mind
 
-1. MQTT 통신에서 메세지 문장의 utf8 문제를 해결했지만
-   네임의 인코딩 문제도 해야함
+A new Flutter project.
 
-2. 상담사 추천후 스크롤시 리프레쉬 문제가있음 ---리프레쉬 문제 해결, 캐싱된 경우 Future.Builder를 우회하는 방법으로
-   그래서 코드가 길어졌음
+## Getting Started
 
-3. 상담내역을 provider에 저장해야함
-   ai_chat_provider 와 chat_screen_ai 를 수정해야하고
-   consumer로 고쳐서 지역별 업데이트를 하게하거나 select를 써서 해야함
-   provider를 매개변수로 받아야 할듯함 chat_screen_ai를 provider를 받아서 처리하게 수정
+This project is a starting point for a Flutter application.
 
-4. ai 채팅시 답변이 오기전까지는 메세지를 보내지 못하게 수정
+A few resources to get you started if this is your first Flutter project:
 
-5. 채팅창에서 추천후 팝업을 띄우고나서 닫으면 키보드가 올라오는 경우가있음(해결) ---팝업창을 여는 함수를 따로 만들고 async처리하고 팝업창함수를 await로 만들어 팝업이 닫힐때까지
-   기다리게만든다 따라서 완전히 닫힌후에 unfocus처리하면 닫히고나서 동작제어가능
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
