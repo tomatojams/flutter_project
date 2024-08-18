@@ -10,9 +10,9 @@ import 'dart:io';
 class ApiService {
   // static const String baseUrl = "http://10.0.2.2:8000";
   // static const String baseUrl = "http://127.0.0.1:8000";
-  static const String chatpt = "chat/pt";
-  static const String chatptAll = "chat/pt/";
-  static const String chatptPost = "chat/user/";
+  static const String chatpt = "aichat/pt";
+  static const String chatptAll = "aichat/pt/";
+  static const String chatptPost = "aichat/user/";
   static const String chatptRoom = "chatroom/";
   static const String randomChatRoom = "chatroom/random";
   static const String mentor = "mentor";
