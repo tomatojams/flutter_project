@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:pt_mind/models/token_model.dart';
 
 import '../../constants/gaps.dart';
 import '../../navigator.dart';
 // import '../onboarding/interests_screen.dart';
+import '../../provider/auth_provider.dart';
 import 'widgets/form_button.dart';
+import '../../services/api_service.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -29,27 +33,30 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     super.dispose();
   }
 
-  void _onSubmitTap() {
+  void _onSubmitTap() async {
     // 로그인 버튼 클릭시  유효성검사
     // _formKey.currentState?.validate(); // 유효한지 검사
 
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const NaviState()),
-        (Route<dynamic> route) => false,
-      );
+      bool answer =
+          await ApiService.logIn(_formData["email"]!, _formData["password"]!);
 
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const PTstate()),
-      //   (Route<dynamic> route) => false,
-      // );
+      if (answer) {
+        context
+            .read<AuthProvider>()
+            .setUserLogin(true); // 가입이 되었다는 것을 프로바이더에 알림
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const NaviState()),
+          (Route<dynamic> route) => false,
+        );
+      }
     }
 
-    // print(_formData.values); // 이메일, 패스워드 출력
+    // 이메일, 패스워드 출력
   }
 
   void _toggleObscureText() {

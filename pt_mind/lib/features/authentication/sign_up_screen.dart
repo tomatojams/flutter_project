@@ -83,10 +83,10 @@ class SignUpScreen extends StatelessWidget {
                       final result = await KakaoService().login();
                       result.when(
                         onSuccess: (data) {
-                          print(data);
+                          // print(data);
                         },
                         onError: (error) {
-                          print(error);
+                          // print(error);
                         },
                       );
                     },

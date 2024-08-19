@@ -8,4 +8,14 @@ class AuthProvider with ChangeNotifier {
   bool get userRegister => _userRegister;
   void setUserRegister(bool userRegister) => _userRegister = true;
   void clearUserRegister() => _userRegister = false;
+
+  bool _userLogin = false;
+  bool get userLogin => _userLogin;
+  void setUserLogin(bool userLogin) => _userLogin = true;
+  void clearUserLogin() => _userLogin = false;
+
+
+
+
+
 }

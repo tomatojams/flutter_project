@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:pt_mind/provider/auth_provider.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
 import 'package:pt_mind/features/chat/room_card_PT.dart';
 import 'package:pt_mind/services/api_service.dart';
+import 'package:pt_mind/utility/custum_toast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/chat/room_card_mqtt.dart';
 
 import '../../models/ramdom_chat_room.dart';
 import '../../utility/animated_popup.dart';
+import '../../utility/animated_popupLogin.dart';
 import 'room_card_random.dart';
 
 /// 채팅 로비 화면
@@ -54,6 +57,27 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
     if (context.watch<AuthProvider>().userRegister == true) {
       context.read<AuthProvider>().clearUserRegister();
       showPopup(context);
+    }
+    // 로그인후 팝업창 provider 가져오고 수정
+    if (context.watch<AuthProvider>().userLogin == true) {
+      context.read<AuthProvider>().clearUserLogin();
+      // showPopupLogin(context);
+
+      // Future.delayed(const Duration(milliseconds: 300), () {
+      //   showCustomToast(context, '로그인 되었습니다.');
+      // });
+      Future.delayed(const Duration(milliseconds: 300), () {
+        Fluttertoast.showToast(
+          msg: '로그인 되었습니다.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+// 화면 하단에서 위로 50픽셀 정도 올림
+          timeInSecForIosWeb: 3,
+          backgroundColor: Theme.of(context).dialogBackgroundColor,
+          textColor: Theme.of(context).scaffoldBackgroundColor,
+          fontSize: 14.0,
+        );
+      });
     }
 
     return RefreshConfiguration(

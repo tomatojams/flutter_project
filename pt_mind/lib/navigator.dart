@@ -19,8 +19,7 @@ class _NaviStateState extends State<NaviState> {
   bool elevated = true;
   int currentPageIndex = 0;
   final List<Widget> _navIndex = [
-    ChatLobbyScreen(// ChatLobbyScreen
-        ),
+    ChatLobbyScreen(),
     const FavoriteScreen(),
     const TraingScreen(),
     const PersonalScreen(),
@@ -51,7 +50,7 @@ class _NaviStateState extends State<NaviState> {
         ),
       ),
       body: _navIndex[currentPageIndex], // 여기서 페이지를 바꿔줌
-      floatingActionButton: ClipOval(
+      floatingActionButton: ClipOval( // 박스벗어나는거 잘라냄
         child: FloatingActionButton(
           // 플로팅 가입아이콘
           backgroundColor: Theme.of(context).cardColor,

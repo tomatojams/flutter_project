@@ -2,6 +2,9 @@ import 'package:http/http.dart' as http;
 import 'package:pt_mind/models/chat_model.dart';
 import 'package:pt_mind/models/chat_lobby_model.dart';
 import 'package:pt_mind/models/mentor_model.dart';
+import 'package:pt_mind/models/token_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'dart:convert';
 
 import '../models/ramdom_chat_room.dart';
@@ -111,21 +114,6 @@ class ApiService {
   //   }
   // }
 
-  // static Future<String> getChatDebug() async {
-  //   final url = Uri.parse('$baseUrl/debug');
-  //   final response = await http.get(url);
-
-  //   if (response.statusCode == 200) {
-  //     final chatString = utf8.decode(response.bodyBytes);
-  //     // Use utf8.decode() to decode UTF8-encoded bytes to a Dart string:
-  //     // utf8을 사용하여 UTF8로 인코딩된 바이트를 Dart 문자열로 디코딩합니다.
-  //     //jsonDecode(utf8.decode(response.bodyBytes));
-  //     return chatString;
-  //   } else {
-  //     throw Error();
-  //   }
-  // }
-
   static Future<List<ChatLobbyModel>> getChatRoomList() async {
     final baseUrl = getBaseUrl();
     List<ChatLobbyModel> chatRoomLists = [];
@@ -180,4 +168,72 @@ class ApiService {
       throw Error();
     }
   }
+
+// 로그인 API needs test
+
+  static Future<bool> logIn(String email, String password) async {
+    final baseUrl = getBaseUrl();
+
+    // CSRF 토큰을 가져옵니다.
+    final csrfResponse = await http.get(Uri.parse('$baseUrl/user/init'));
+    if (csrfResponse.statusCode != 200) {
+      throw Exception('Failed to fetch CSRF token');
+    }
+    final csrfToken = jsonDecode(csrfResponse.body)['csrf_token'];
+
+    // 로그인 요청을 보냅니다.
+    final url = Uri.parse('$baseUrl/user/login');
+    final response = await http.post(
+      url,
+      body: {'username': email, 'password': password},
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRF-Token": csrfToken
+      },
+    );
+
+    // 받을 때는 json
+    if (response.statusCode == 200) {
+      final tokenObject = jsonDecode(utf8.decode(response.bodyBytes));
+      final tokenModel = TokenModel.fromJson(tokenObject);
+
+      // 토큰 저장
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('access_token', tokenModel.accessToken);
+      await prefs.setString('email', tokenModel.email);
+
+      return true;
+    } else {
+      throw Exception('Failed to log in');
+    }
+  }
+}
+
+// 토큰 읽기 예시
+Future<String?> getAccessToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('access_token');
+}
+
+// 예시 API 호출에 토큰 사용
+Future<void> makeAuthenticatedRequest() async {
+  final token = await getAccessToken();
+  if (token != null) {
+    await http
+        .get(Uri.parse('https://example.com/protected-endpoint'), headers: {
+      'Authorization': 'Bearer $token',
+    });
+  } else {
+    return (null);
+  }
+}
+
+// 토큰 삭제
+Future<void> logout() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('access_token');
+  await prefs.remove('token_type');
+  await prefs.remove('email');
+
+  // 이후 로그아웃 후 페이지 이동 또는 상태 변경
 }
