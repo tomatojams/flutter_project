@@ -44,11 +44,6 @@ class SignUpScreen extends StatelessWidget {
                     'assets/images/auth/signupnew.svg',
                     width: 280,
                   ),
-                  // Image.asset(
-                  //   'assets/images/auth/signup.png',
-                  //   width: 280,
-                  // ),
-                  // Gaps.v80,
                   Text(
                     'P.Tmind 친구하기',
                     style: TextStyle(
@@ -75,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                         //   FontAwesomeIcons.user,
                         //   color: Colors.black54,
                         // ),
-                        text: "Email과 Password로 로그인"),
+                        text: "Email과 Password로 가입"),
                   ),
                   Gaps.v15,
                   GestureDetector(

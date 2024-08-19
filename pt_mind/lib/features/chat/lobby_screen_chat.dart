@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pt_mind/provider/mqtt_chat_provider.dart';
 import 'package:pt_mind/features/chat/room_card_mqtt.dart';
 
+import '../../constants/gaps.dart';
 import '../../models/ramdom_chat_room.dart';
 import '../../utility/animated_popup.dart';
 import '../../utility/animated_popupLogin.dart';
@@ -61,23 +62,8 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
     // 로그인후 팝업창 provider 가져오고 수정
     if (context.watch<AuthProvider>().userLogin == true) {
       context.read<AuthProvider>().clearUserLogin();
-      // showPopupLogin(context);
-
-      // Future.delayed(const Duration(milliseconds: 300), () {
-      //   showCustomToast(context, '로그인 되었습니다.');
-      // });
-      Future.delayed(const Duration(milliseconds: 300), () {
-        Fluttertoast.showToast(
-          msg: '로그인 되었습니다.',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-// 화면 하단에서 위로 50픽셀 정도 올림
-          timeInSecForIosWeb: 3,
-          backgroundColor: Theme.of(context).dialogBackgroundColor,
-          textColor: Theme.of(context).scaffoldBackgroundColor,
-          fontSize: 14.0,
-        );
-      });
+      // 토스트 메시지
+      toastMessage(context);
     }
 
     return RefreshConfiguration(
@@ -153,9 +139,84 @@ class _ChatLobbyScreenState extends State<ChatLobbyScreen> {
                     height: 28,
                   );
                 }),
+            const PtRoomCard(
+              // PT 채팅방
+              name: 'P.T',
+              titleName: '뉴럴.안내',
+              lastMessage: '당신에게 알맞은 상담사를 찾아드려요.',
+              imageExt: 'svg',
+              profile: 'assets/profile/PT-profile.svg',
+              beforeTime: '10분전',
+              badge: 1,
+            ),
+            FutureBuilder(
+                // MQTT 채팅방
+                future: chat,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        for (var chatRoom in snapshot.data!)
+                          MqttChatCard(
+                            profile: chatRoom.profile,
+                            imageExt: chatRoom.imageExt,
+                            titleName: chatRoom.titleName,
+                            name: chatRoom.name,
+                            lastMessage: chatRoom.lastMessage,
+                            beforeTime: chatRoom.beforeTime,
+                            badge: chatRoom.badge,
+                            chatProvider: chatProvider,
+                          ),
+                      ],
+                    );
+                  }
+                  return const SizedBox(
+                    height: 28,
+                  );
+                }),
+            FutureBuilder(
+                // 랜덤 채팅방
+                future: randomChat,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        RandomRoomCard(
+                          profile: snapshot.data!.profile,
+                          imageExt: snapshot.data!.imageExt,
+                          titleName: snapshot.data!.titleName,
+                          name: snapshot.data!.name,
+                          lastMessage: snapshot.data!.lastMessage,
+                          beforeTime: snapshot.data!.beforeTime,
+                          badge: snapshot.data?.badge,
+                        ),
+                      ],
+                    );
+                  }
+                  return const SizedBox(
+                    height: 28,
+                  );
+                }),
+            const SizedBox(
+              height: 70,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> toastMessage(BuildContext context) {
+    return Future.delayed(const Duration(milliseconds: 300), () {
+      Fluttertoast.showToast(
+        msg: '로그인 되었습니다.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 3,
+        backgroundColor: const Color(0xFF4645A9).withOpacity(0.8),
+        textColor: const Color(0xFFF8F2F5),
+        fontSize: 14.0,
+      );
+    });
   }
 }
