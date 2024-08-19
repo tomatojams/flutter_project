@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../constants/gaps.dart';
+import '../../../../constants/gaps.dart';
 
 class NavTab extends StatelessWidget {
   const NavTab({
@@ -20,7 +20,7 @@ class NavTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: InkWell(
+      child: GestureDetector(
         onTap: () => tap(),
         child: Container(
           color: Colors.transparent,

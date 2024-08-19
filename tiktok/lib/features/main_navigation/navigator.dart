@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/gaps.dart';
+import 'post_video_button.dart';
 import 'stf_screen.dart';
 import 'widgets/nav_tab.dart';
 
@@ -18,10 +19,22 @@ class _NaviStateState extends State<NaviState> {
   int _selectedIndex = 0;
 
   final screens = [
-    const StfScreen(),
-    const StfScreen(),
-    const StfScreen(),
-    const StfScreen(),
+    // 서로 다른 웨젯이라면 다른 키를 가지고 있어야함
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
   ];
 
   void _onTab(int index) {
@@ -30,10 +43,45 @@ class _NaviStateState extends State<NaviState> {
     });
   }
 
+  void _onPostVideoButtonTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: const Text('Post Video'),
+          ),
+        ),
+        fullscreenDialog: true, // 전체화면으로 덮음
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens.elementAt(_selectedIndex),
+      // body: screens.elementAt(_selectedIndex),
+      body: Stack(
+        children: [
+          Offstage(
+            // Offstage는 화면에 보이지 않게 할 수 있음
+            offstage: _selectedIndex != 0,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 2,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const StfScreen(),
+          ),
+        ],
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 30,
@@ -53,7 +101,7 @@ class _NaviStateState extends State<NaviState> {
                   ),
                 ],
                 color: Color(0xff807FFF),
-                borderRadius: BorderRadius.all(Radius.circular(18)),
+                borderRadius: BorderRadius.all(Radius.elliptical(20, 20)),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -75,6 +123,12 @@ class _NaviStateState extends State<NaviState> {
                       icon: SvgPicture.asset('assets/menu/favoriteOn.svg'),
                       tap: () => _onTab(1),
                     ),
+                    Gaps.h20,
+                    GestureDetector(
+                      onTap: _onPostVideoButtonTap,
+                      child: const PostVideoButton(),
+                    ),
+                    Gaps.h20,
                     NavTab(
                       isSelected: _selectedIndex == 2,
                       icon: SvgPicture.asset('assets/menu/PTOn.svg'),

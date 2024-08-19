@@ -6,6 +6,8 @@ import 'package:pt_mind/features/favorite/favorite_screen.dart';
 import 'package:pt_mind/features/training/lobby_screen_train.dart';
 import 'package:pt_mind/features/personal/personal_screen.dart';
 
+import 'utility/navigator_widget.dart';
+
 class NaviState extends StatefulWidget {
   const NaviState({
     super.key,
@@ -33,6 +35,12 @@ class _NaviStateState extends State<NaviState> {
     }
   }
 
+  void _onTab(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +58,8 @@ class _NaviStateState extends State<NaviState> {
         ),
       ),
       body: _navIndex[currentPageIndex], // 여기서 페이지를 바꿔줌
-      floatingActionButton: ClipOval( // 박스벗어나는거 잘라냄
+      floatingActionButton: ClipOval(
+        // 박스벗어나는거 잘라냄
         child: FloatingActionButton(
           // 플로팅 가입아이콘
           backgroundColor: Theme.of(context).cardColor,
@@ -59,92 +68,65 @@ class _NaviStateState extends State<NaviState> {
                 builder: (context) => const SignUpScreen(),
                 fullscreenDialog: true));
           },
-          // // tooltip: 'Increment',
-          // child: SvgPicture.asset('assets/icon/join.svg', width: 200),
-          // Image.asset(
-          //   'assets/icon/join2.png',
-          //   width: 30,
-          // ),
+
           child: Image.asset('assets/icon/birthday-cake.png', width: 35),
         ),
       ),
-      bottomNavigationBar: NavigationBarTheme(
-        // 바텀 네비게이션 테마
-
-        data: NavigationBarThemeData(
-            labelTextStyle: WidgetStateProperty.all(
-          TextStyle(
-            color: Theme.of(context).cardColor,
-            fontSize: 15.0,
-          ),
-        )),
-        child: Container(
-          decoration: BoxDecoration(
-            // 그림자 생성을 위한 컨테이너
-
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                spreadRadius: 2,
-                blurRadius: 4,
-                offset: Offset(0, 1),
-              ),
-            ],
-            color: Theme.of(context).primaryColor,
-          ),
-          child: NavigationBar(
-            // 바텀 네비게이션
-
-            height: 60.0,
-            labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-            backgroundColor: Theme.of(context).primaryColor,
-            onDestinationSelected: (int index) {
-              setState(() {
-                currentPageIndex = index;
-              });
-            },
-            indicatorColor: Colors.transparent,
-            selectedIndex: currentPageIndex,
-            destinations: <Widget>[
-              NavigationDestination(
-                selectedIcon: Badge(
-                    textColor: Theme.of(context).cardColor,
-                    backgroundColor: Colors.transparent,
-                    label: const Text('1'),
-                    child: SvgPicture.asset('assets/menu/chatButtonOn.svg')),
-                icon: Badge(
-                    textColor: Theme.of(context).cardColor,
-                    backgroundColor: Colors.transparent,
-                    label: const Text('1'),
-                    child: SvgPicture.asset('assets/menu/chatButtonUn.svg')),
-                label: '채팅',
-              ),
-              NavigationDestination(
-                selectedIcon: Badge(
-                    textColor: Theme.of(context).cardColor,
-                    backgroundColor: Colors.transparent,
-                    label: const Text('2'),
-                    child: SvgPicture.asset('assets/menu/favoriteOn.svg')),
-                icon: Badge(
-                    textColor: Theme.of(context).cardColor,
-                    backgroundColor: Colors.transparent,
-                    label: const Text('2'),
-                    child: SvgPicture.asset('assets/menu/favoriteUn.svg')),
-                label: '즐겨찾기',
-              ),
-              NavigationDestination(
-                selectedIcon: SvgPicture.asset('assets/menu/PTOn.svg'),
-                icon: SvgPicture.asset('assets/menu/PTUn.svg'),
-                label: '트레이닝',
-              ),
-              NavigationDestination(
-                selectedIcon: SvgPicture.asset('assets/menu/MyOn.svg'),
-                icon: SvgPicture.asset('assets/menu/MyUn.svg'),
-                label: 'My',
-              ),
-            ],
-          ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 20,
         ),
+        child: BottomAppBar(
+            elevation: 0,
+            color: Colors.transparent,
+            child: Container(
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 205, 205, 206),
+                    blurRadius: 2,
+                    spreadRadius: 2,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+                color: Color(0xff807FFF),
+                borderRadius: BorderRadius.all(Radius.elliptical(20, 20)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 0,
+                  vertical: 9,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    NavTab(
+                      isSelected: currentPageIndex == 0,
+                      icon: SvgPicture.asset('assets/menu/chatButtonOn.svg'),
+                      // 자식에서 함수를 전달해 부모속성을 변겨할 수 있음
+                      // 그리고 setState를 통해 화면을 다시 그림
+                      tap: () => _onTab(0),
+                    ),
+                    NavTab(
+                      isSelected: currentPageIndex == 1,
+                      icon: SvgPicture.asset('assets/menu/favoriteOn.svg'),
+                      tap: () => _onTab(1),
+                    ),
+                    NavTab(
+                      isSelected: currentPageIndex == 2,
+                      icon: SvgPicture.asset('assets/menu/PTOn.svg'),
+                      tap: () => _onTab(2),
+                    ),
+                    NavTab(
+                      isSelected: currentPageIndex == 3,
+                      icon: SvgPicture.asset('assets/menu/MyOn.svg'),
+                      tap: () => _onTab(3),
+                    ),
+                  ],
+                ),
+              ),
+            )),
       ),
     );
   }

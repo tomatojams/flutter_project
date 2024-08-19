@@ -18,8 +18,16 @@ class _StfScreenState extends State<StfScreen> {
   }
 
   @override
+  void dispose() {
+    print(_clicks);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center( // 가로 센터만 잡음 세로센터는 Column에서 잡아야함
+    print("StfScreen build");
+    return Center(
+      // 가로 센터만 잡음 세로센터는 Column에서 잡아야함
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('$_clicks'),
         TextButton(onPressed: _incrementCounter, child: const Text('Click me'))
