@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../constants/gaps.dart';
 import 'post_video_button.dart';
-import 'stf_screen.dart';
+
 import 'widgets/nav_tab.dart';
 
 class NaviState extends StatefulWidget {
@@ -17,25 +14,6 @@ class NaviState extends StatefulWidget {
 
 class _NaviStateState extends State<NaviState> {
   int _selectedIndex = 0;
-
-  final screens = [
-    // 서로 다른 웨젯이라면 다른 키를 가지고 있어야함
-    StfScreen(
-      key: GlobalKey(),
-    ),
-    StfScreen(
-      key: GlobalKey(),
-    ),
-    StfScreen(
-      key: GlobalKey(),
-    ),
-    StfScreen(
-      key: GlobalKey(),
-    ),
-    StfScreen(
-      key: GlobalKey(),
-    ),
-  ];
 
   void _onTab(int index) {
     setState(() {
@@ -66,19 +44,19 @@ class _NaviStateState extends State<NaviState> {
           Offstage(
             // Offstage는 화면에 보이지 않게 할 수 있음
             offstage: _selectedIndex != 0,
-            child: const StfScreen(),
+            child: Container(),
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const StfScreen(),
+            child: Container(),
           ),
           Offstage(
             offstage: _selectedIndex != 2,
-            child: const StfScreen(),
+            child: Container(),
           ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const StfScreen(),
+            child: Container(),
           ),
         ],
       ),

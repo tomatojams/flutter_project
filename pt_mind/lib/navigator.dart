@@ -55,7 +55,11 @@ class _NaviStateState extends State<NaviState> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: _navIndex[currentPageIndex],
+            // IndexedStack은 상태를 유지할 수 있음 여러 위젯을 겹쳐놓고 그 중 하나만 보여주는 위젯
+            child: IndexedStack(
+              index: currentPageIndex,
+              children: _navIndex,
+            ),
           ),
           Positioned(
             bottom: 20, // 메뉴바의 위치를 화면 하단에서 20픽셀 위로 설정

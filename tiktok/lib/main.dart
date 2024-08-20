@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok/features/main_navigation/navigator.dart';
 
 import 'features/authentication/sign_up_screen.dart';
+import 'features/main_navigation/bottom_appbar.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -38,8 +39,9 @@ class TikTokApp extends StatelessWidget {
           ),
         ),
       ),
+      // home: const BottomAppBarDemo(),
       // home: const InterestsScreen(),
-      home: NaviState(),
+      home: const NaviState(),
     );
   }
 }
